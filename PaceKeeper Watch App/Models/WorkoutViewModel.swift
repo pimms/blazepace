@@ -1,12 +1,34 @@
 import Foundation
 import Combine
 
+protocol WorkoutManaging {
+    func pauseWorkout()
+    func endWorkout()
+}
+
+protocol WorkoutViewModelDelegate: AnyObject {
+    func workoutViewModelPauseWorkout()
+    func workoutViewModelEndWorkout()
+}
+
 class WorkoutViewModel: ObservableObject {
     @Published var targetPace: TargetPace?
     @Published var currentPace: Pace?
     @Published var averagePace: Pace?
     @Published var heartRate: Int?
     @Published var distance: Measurement<UnitLength>?
+
+    weak var delegate: WorkoutViewModelDelegate?
+}
+
+extension WorkoutViewModel: WorkoutManaging {
+    func pauseWorkout() {
+        fatalError("TODO: Pause workout")
+    }
+
+    func endWorkout() {
+        fatalError("TODO: End workout")
+    }
 }
 
 extension WorkoutViewModel {
