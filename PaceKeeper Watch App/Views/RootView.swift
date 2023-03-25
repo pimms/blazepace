@@ -2,6 +2,7 @@ import Foundation
 import SwiftUI
 
 struct RootView: View {
+    @ObservedObject var workoutController = WorkoutController.shared
     @State var navigation: [Navigation] = []
     @State var healthKitError: Bool = false
 

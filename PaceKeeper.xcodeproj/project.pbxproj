@@ -20,6 +20,8 @@
 		F526A51C29CEF91D004EE912 /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F526A51B29CEF91D004EE912 /* Navigation.swift */; };
 		F526A51E29CEF944004EE912 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F526A51D29CEF944004EE912 /* RootView.swift */; };
 		F526A52029CEFEBE004EE912 /* PermissionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F526A51F29CEFEBE004EE912 /* PermissionHelper.swift */; };
+		F526A52529CF018F004EE912 /* WorkoutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F526A52429CF018F004EE912 /* WorkoutController.swift */; };
+		F526A52729CF0591004EE912 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = F526A52629CF0591004EE912 /* Log.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +64,9 @@
 		F526A51D29CEF944004EE912 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		F526A51F29CEFEBE004EE912 /* PermissionHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionHelper.swift; sourceTree = "<group>"; };
 		F526A52129CF0101004EE912 /* PaceKeeper Watch App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "PaceKeeper Watch App.entitlements"; sourceTree = "<group>"; };
+		F526A52229CF014B004EE912 /* PaceKeeper-Watch-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "PaceKeeper-Watch-App-Info.plist"; sourceTree = SOURCE_ROOT; };
+		F526A52429CF018F004EE912 /* WorkoutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutController.swift; sourceTree = "<group>"; };
+		F526A52629CF0591004EE912 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,12 +101,14 @@
 			isa = PBXGroup;
 			children = (
 				F526A52129CF0101004EE912 /* PaceKeeper Watch App.entitlements */,
-				F526A51829CEF6BA004EE912 /* Helpers */,
-				F526A51529CEF492004EE912 /* Views */,
-				F526A51029CEF395004EE912 /* Models */,
+				F526A52229CF014B004EE912 /* PaceKeeper-Watch-App-Info.plist */,
 				F51A739D29CEE3ED00079140 /* PaceKeeperApp.swift */,
 				F51A73A129CEE3EE00079140 /* Assets.xcassets */,
+				F526A52329CF017E004EE912 /* Controllers */,
+				F526A51829CEF6BA004EE912 /* Helpers */,
+				F526A51029CEF395004EE912 /* Models */,
 				F51A73A329CEE3EE00079140 /* Preview Content */,
+				F526A51529CEF492004EE912 /* Views */,
 			);
 			path = "PaceKeeper Watch App";
 			sourceTree = "<group>";
@@ -140,8 +147,17 @@
 			children = (
 				F526A51929CEF6C3004EE912 /* PaceFormatter.swift */,
 				F526A51F29CEFEBE004EE912 /* PermissionHelper.swift */,
+				F526A52629CF0591004EE912 /* Log.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		F526A52329CF017E004EE912 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F526A52429CF018F004EE912 /* WorkoutController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -244,10 +260,12 @@
 			files = (
 				F526A51729CEF4A0004EE912 /* SetupView.swift in Sources */,
 				F51A73A029CEE3ED00079140 /* MainView.swift in Sources */,
+				F526A52729CF0591004EE912 /* Log.swift in Sources */,
 				F526A52029CEFEBE004EE912 /* PermissionHelper.swift in Sources */,
 				F51A739E29CEE3ED00079140 /* PaceKeeperApp.swift in Sources */,
 				F526A51C29CEF91D004EE912 /* Navigation.swift in Sources */,
 				F526A50F29CEF378004EE912 /* RunViewModel.swift in Sources */,
+				F526A52529CF018F004EE912 /* WorkoutController.swift in Sources */,
 				F526A51E29CEF944004EE912 /* RootView.swift in Sources */,
 				F526A51229CEF3A5004EE912 /* TargetPace.swift in Sources */,
 				F526A51A29CEF6C3004EE912 /* PaceFormatter.swift in Sources */,
@@ -387,6 +405,7 @@
 				DEVELOPMENT_TEAM = WSQ25TFDK3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "PaceKeeper-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = PaceKeeper;
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "This is needed in order to display workout metrics.";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "This is needed in order to record workouts.";
@@ -420,6 +439,7 @@
 				DEVELOPMENT_TEAM = WSQ25TFDK3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "PaceKeeper-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = PaceKeeper;
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "This is needed in order to display workout metrics.";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "This is needed in order to record workouts.";
