@@ -21,7 +21,7 @@ struct WorkoutManagementView: View {
                     WorkoutButton(
                         sfSymbol: "play.fill",
                         color: .green,
-                        onClick: { viewModel.pauseWorkout() })
+                        onClick: { viewModel.resumeWorkout() })
                 }
             }
         }

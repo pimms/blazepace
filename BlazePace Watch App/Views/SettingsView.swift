@@ -31,8 +31,8 @@ struct SettingsView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                 Text("ⓒ Joakim Stien\n\n" +
                      "BlazePace is open source, and contributions and feedback is welcome at github:\npimms/blazepace\n\n" +
-                     "🐦 @pimms\n\n" +
-                     "🔥🦿❤️"
+                     "🐦 @pimms\n" +
+                     "🔥❤️"
                 )
                 .multilineTextAlignment(.leading)
                 .frame(maxWidth: .infinity, alignment: .leading)

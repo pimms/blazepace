@@ -30,6 +30,7 @@ class PaceAlertController {
     }
 
     private func triggerPaceNotification() {
+        guard viewModel.isActive else { return }
         switch viewModel.paceRelativeToTarget {
         case .inRange:
             break
