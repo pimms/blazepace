@@ -13,6 +13,8 @@ struct RootView: View {
                     switch navigation {
                     case .setup:
                         SetupView(onStart: startWorkout(with:))
+                    case .settings:
+                        SettingsView()
                     }
                 }
                 .alert("Failed to acquire HealthKit permissions", isPresented: $healthKitError) {

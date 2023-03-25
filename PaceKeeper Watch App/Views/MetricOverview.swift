@@ -111,7 +111,6 @@ struct MetricOverviewPreview: PreviewProvider {
     static func viewModel(target: Int, current: Int) -> WorkoutViewModel {
         let viewModel = WorkoutViewModel()
         viewModel.currentPace = Pace(secondsPerKilometer: current)
-        viewModel.averagePace = Pace(secondsPerKilometer: current)
         viewModel.distance = Measurement(value: 7049, unit: .meters)
         viewModel.heartRate = 140
         viewModel.targetPace = TargetPace(secondsPerKilometer: target, range: 10)

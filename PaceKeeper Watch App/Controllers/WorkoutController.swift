@@ -1,11 +1,14 @@
 import Foundation
 import HealthKit
+import Combine
 
 @MainActor
 class WorkoutController: NSObject, ObservableObject {
     static let shared = WorkoutController()
 
     @Published var viewModel: WorkoutViewModel?
+
+    private var paceAlertController: PaceAlertController?
 
     private let healthStore = HKHealthStore()
     private let log = Log(name: "WorkoutController")
@@ -53,13 +56,17 @@ class WorkoutController: NSObject, ObservableObject {
 
         state = .active(session: session, builder: builder)
         await MainActor.run {
-            viewModel = WorkoutViewModel()
+            let vm = WorkoutViewModel()
+            vm.delegate = self
+            self.paceAlertController = PaceAlertController(viewModel: vm)
+            self.viewModel = vm
             viewModel?.delegate = self
         }
 
         log.info("Starting workout")
         return true
     }
+    private var subscriptions: Set<AnyCancellable> = []
 
     func endWorkout() async {
         log.info("Ending workout")
@@ -75,6 +82,7 @@ class WorkoutController: NSObject, ObservableObject {
             log.error("Failed to finish workout: \(error)")
         }
 
+        paceAlertController = nil
         viewModel = nil
         state = .inactive
     }

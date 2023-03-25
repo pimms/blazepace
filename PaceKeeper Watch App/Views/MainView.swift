@@ -2,7 +2,10 @@ import SwiftUI
 
 struct MainView: View {
     var body: some View {
-        NavigationLink("Setup", value: Navigation.setup)
+        VStack {
+            NavigationLink("Setup", value: Navigation.setup)
+            NavigationLink("Settings", value: Navigation.settings)
+        }
     }
 }
 

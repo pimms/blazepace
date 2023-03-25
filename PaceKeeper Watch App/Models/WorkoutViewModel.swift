@@ -14,7 +14,6 @@ protocol WorkoutViewModelDelegate: AnyObject {
 class WorkoutViewModel: ObservableObject {
     @Published var targetPace: TargetPace?
     @Published var currentPace: Pace?
-    @Published var averagePace: Pace?
     @Published var heartRate: Int?
     @Published var distance: Measurement<UnitLength>?
 

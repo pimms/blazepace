@@ -25,6 +25,9 @@
 		F526A52929CF0A47004EE912 /* MetricOverview.swift in Sources */ = {isa = PBXBuildFile; fileRef = F526A52829CF0A47004EE912 /* MetricOverview.swift */; };
 		F526A52B29CF8E00004EE912 /* WorkoutTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F526A52A29CF8E00004EE912 /* WorkoutTabView.swift */; };
 		F526A52D29CF8F49004EE912 /* WorkoutManagementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F526A52C29CF8F49004EE912 /* WorkoutManagementView.swift */; };
+		F526A52F29CF9F0F004EE912 /* PaceAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F526A52E29CF9F0F004EE912 /* PaceAlertController.swift */; };
+		F526A53129CFA553004EE912 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F526A53029CFA553004EE912 /* SettingsView.swift */; };
+		F526A53329CFA5B7004EE912 /* AppStorageKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = F526A53229CFA5B7004EE912 /* AppStorageKey.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +76,9 @@
 		F526A52829CF0A47004EE912 /* MetricOverview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricOverview.swift; sourceTree = "<group>"; };
 		F526A52A29CF8E00004EE912 /* WorkoutTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutTabView.swift; sourceTree = "<group>"; };
 		F526A52C29CF8F49004EE912 /* WorkoutManagementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutManagementView.swift; sourceTree = "<group>"; };
+		F526A52E29CF9F0F004EE912 /* PaceAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaceAlertController.swift; sourceTree = "<group>"; };
+		F526A53029CFA553004EE912 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		F526A53229CFA5B7004EE912 /* AppStorageKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStorageKey.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +153,7 @@
 				F526A52829CF0A47004EE912 /* MetricOverview.swift */,
 				F526A52A29CF8E00004EE912 /* WorkoutTabView.swift */,
 				F526A52C29CF8F49004EE912 /* WorkoutManagementView.swift */,
+				F526A53029CFA553004EE912 /* SettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -157,6 +164,7 @@
 				F526A51929CEF6C3004EE912 /* PaceFormatter.swift */,
 				F526A51F29CEFEBE004EE912 /* PermissionHelper.swift */,
 				F526A52629CF0591004EE912 /* Log.swift */,
+				F526A53229CFA5B7004EE912 /* AppStorageKey.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -165,6 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				F526A52429CF018F004EE912 /* WorkoutController.swift */,
+				F526A52E29CF9F0F004EE912 /* PaceAlertController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -272,13 +281,16 @@
 				F526A52929CF0A47004EE912 /* MetricOverview.swift in Sources */,
 				F526A52729CF0591004EE912 /* Log.swift in Sources */,
 				F526A52029CEFEBE004EE912 /* PermissionHelper.swift in Sources */,
+				F526A53129CFA553004EE912 /* SettingsView.swift in Sources */,
 				F51A739E29CEE3ED00079140 /* PaceKeeperApp.swift in Sources */,
 				F526A51C29CEF91D004EE912 /* Navigation.swift in Sources */,
 				F526A52D29CF8F49004EE912 /* WorkoutManagementView.swift in Sources */,
 				F526A50F29CEF378004EE912 /* WorkoutViewModel.swift in Sources */,
+				F526A52F29CF9F0F004EE912 /* PaceAlertController.swift in Sources */,
 				F526A52529CF018F004EE912 /* WorkoutController.swift in Sources */,
 				F526A51E29CEF944004EE912 /* RootView.swift in Sources */,
 				F526A51229CEF3A5004EE912 /* TargetPace.swift in Sources */,
+				F526A53329CFA5B7004EE912 /* AppStorageKey.swift in Sources */,
 				F526A51A29CEF6C3004EE912 /* PaceFormatter.swift in Sources */,
 				F526A52B29CF8E00004EE912 /* WorkoutTabView.swift in Sources */,
 				F526A51429CEF3F8004EE912 /* Pace.swift in Sources */,
