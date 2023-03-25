@@ -1,5 +1,6 @@
 import Foundation
 import SwiftUI
+import WatchKit
 
 struct WorkoutTabView: View {
     @ObservedObject var viewModel: WorkoutViewModel
@@ -9,9 +10,10 @@ struct WorkoutTabView: View {
         TabView(selection: $selection) {
             WorkoutManagementView(viewModel: viewModel)
                 .tag(0)
-
             MetricOverview(viewModel: viewModel)
                 .tag(1)
+            NowPlayingView()
+                .tag(2)
         }
     }
 }
