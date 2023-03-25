@@ -4,8 +4,10 @@ import SwiftUI
 struct SetupView: View {
     var onStart: (TargetPace) -> Void
 
-    @State private var pace: Int = 300
-    @State private var delta: Int = 10
+    @AppStorage(AppStorageKey.defaultPace)
+    private var pace: Int = 300
+    @AppStorage(AppStorageKey.defaultPaceRange)
+    private var delta: Int = 10
 
     var body: some View {
         ScrollView {

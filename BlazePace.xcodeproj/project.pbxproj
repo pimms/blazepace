@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F51A739929CEE3ED00079140 /* PaceKeeper Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = F51A739829CEE3ED00079140 /* PaceKeeper Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		F51A739E29CEE3ED00079140 /* PaceKeeperApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51A739D29CEE3ED00079140 /* PaceKeeperApp.swift */; };
+		F51A739929CEE3ED00079140 /* BlazePace Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = F51A739829CEE3ED00079140 /* BlazePace Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		F51A739E29CEE3ED00079140 /* BlazePaceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51A739D29CEE3ED00079140 /* BlazePaceApp.swift */; };
 		F51A73A029CEE3ED00079140 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51A739F29CEE3ED00079140 /* MainView.swift */; };
 		F51A73A229CEE3EE00079140 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F51A73A129CEE3EE00079140 /* Assets.xcassets */; };
 		F51A73A529CEE3EE00079140 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F51A73A429CEE3EE00079140 /* Preview Assets.xcassets */; };
@@ -47,7 +47,7 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
-				F51A739929CEE3ED00079140 /* PaceKeeper Watch App.app in Embed Watch Content */,
+				F51A739929CEE3ED00079140 /* BlazePace Watch App.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -55,9 +55,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		F51A739229CEE3ED00079140 /* PaceKeeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PaceKeeper.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		F51A739829CEE3ED00079140 /* PaceKeeper Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PaceKeeper Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		F51A739D29CEE3ED00079140 /* PaceKeeperApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaceKeeperApp.swift; sourceTree = "<group>"; };
+		F51A739229CEE3ED00079140 /* BlazePace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlazePace.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F51A739829CEE3ED00079140 /* BlazePace Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BlazePace Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F51A739D29CEE3ED00079140 /* BlazePaceApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlazePaceApp.swift; sourceTree = "<group>"; };
 		F51A739F29CEE3ED00079140 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		F51A73A129CEE3EE00079140 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F51A73A429CEE3EE00079140 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -69,8 +69,8 @@
 		F526A51B29CEF91D004EE912 /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
 		F526A51D29CEF944004EE912 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		F526A51F29CEFEBE004EE912 /* PermissionHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionHelper.swift; sourceTree = "<group>"; };
-		F526A52129CF0101004EE912 /* PaceKeeper Watch App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "PaceKeeper Watch App.entitlements"; sourceTree = "<group>"; };
-		F526A52229CF014B004EE912 /* PaceKeeper-Watch-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "PaceKeeper-Watch-App-Info.plist"; sourceTree = SOURCE_ROOT; };
+		F526A52129CF0101004EE912 /* BlazePace Watch App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "BlazePace Watch App.entitlements"; sourceTree = "<group>"; };
+		F526A52229CF014B004EE912 /* BlazePace-Watch-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BlazePace-Watch-App-Info.plist"; sourceTree = SOURCE_ROOT; };
 		F526A52429CF018F004EE912 /* WorkoutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutController.swift; sourceTree = "<group>"; };
 		F526A52629CF0591004EE912 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		F526A52829CF0A47004EE912 /* MetricOverview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricOverview.swift; sourceTree = "<group>"; };
@@ -95,7 +95,7 @@
 		F51A738B29CEE3ED00079140 = {
 			isa = PBXGroup;
 			children = (
-				F51A739C29CEE3ED00079140 /* PaceKeeper Watch App */,
+				F51A739C29CEE3ED00079140 /* BlazePace Watch App */,
 				F51A739329CEE3ED00079140 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -103,18 +103,18 @@
 		F51A739329CEE3ED00079140 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F51A739229CEE3ED00079140 /* PaceKeeper.app */,
-				F51A739829CEE3ED00079140 /* PaceKeeper Watch App.app */,
+				F51A739229CEE3ED00079140 /* BlazePace.app */,
+				F51A739829CEE3ED00079140 /* BlazePace Watch App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		F51A739C29CEE3ED00079140 /* PaceKeeper Watch App */ = {
+		F51A739C29CEE3ED00079140 /* BlazePace Watch App */ = {
 			isa = PBXGroup;
 			children = (
-				F526A52129CF0101004EE912 /* PaceKeeper Watch App.entitlements */,
-				F526A52229CF014B004EE912 /* PaceKeeper-Watch-App-Info.plist */,
-				F51A739D29CEE3ED00079140 /* PaceKeeperApp.swift */,
+				F526A52129CF0101004EE912 /* BlazePace Watch App.entitlements */,
+				F526A52229CF014B004EE912 /* BlazePace-Watch-App-Info.plist */,
+				F51A739D29CEE3ED00079140 /* BlazePaceApp.swift */,
 				F51A73A129CEE3EE00079140 /* Assets.xcassets */,
 				F526A52329CF017E004EE912 /* Controllers */,
 				F526A51829CEF6BA004EE912 /* Helpers */,
@@ -122,7 +122,7 @@
 				F51A73A329CEE3EE00079140 /* Preview Content */,
 				F526A51529CEF492004EE912 /* Views */,
 			);
-			path = "PaceKeeper Watch App";
+			path = "BlazePace Watch App";
 			sourceTree = "<group>";
 		};
 		F51A73A329CEE3EE00079140 /* Preview Content */ = {
@@ -181,9 +181,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F51A739129CEE3ED00079140 /* PaceKeeper */ = {
+		F51A739129CEE3ED00079140 /* BlazePace */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F51A73AC29CEE3EE00079140 /* Build configuration list for PBXNativeTarget "PaceKeeper" */;
+			buildConfigurationList = F51A73AC29CEE3EE00079140 /* Build configuration list for PBXNativeTarget "BlazePace" */;
 			buildPhases = (
 				F51A739029CEE3ED00079140 /* Resources */,
 				F51A73AB29CEE3EE00079140 /* Embed Watch Content */,
@@ -193,14 +193,14 @@
 			dependencies = (
 				F51A739B29CEE3ED00079140 /* PBXTargetDependency */,
 			);
-			name = PaceKeeper;
+			name = BlazePace;
 			productName = PaceKeeper;
-			productReference = F51A739229CEE3ED00079140 /* PaceKeeper.app */;
+			productReference = F51A739229CEE3ED00079140 /* BlazePace.app */;
 			productType = "com.apple.product-type.application.watchapp2-container";
 		};
-		F51A739729CEE3ED00079140 /* PaceKeeper Watch App */ = {
+		F51A739729CEE3ED00079140 /* BlazePace Watch App */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F51A73A829CEE3EE00079140 /* Build configuration list for PBXNativeTarget "PaceKeeper Watch App" */;
+			buildConfigurationList = F51A73A829CEE3EE00079140 /* Build configuration list for PBXNativeTarget "BlazePace Watch App" */;
 			buildPhases = (
 				F51A739429CEE3ED00079140 /* Sources */,
 				F51A739529CEE3ED00079140 /* Frameworks */,
@@ -210,9 +210,9 @@
 			);
 			dependencies = (
 			);
-			name = "PaceKeeper Watch App";
+			name = "BlazePace Watch App";
 			productName = "PaceKeeper Watch App";
-			productReference = F51A739829CEE3ED00079140 /* PaceKeeper Watch App.app */;
+			productReference = F51A739829CEE3ED00079140 /* BlazePace Watch App.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -246,8 +246,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F51A739129CEE3ED00079140 /* PaceKeeper */,
-				F51A739729CEE3ED00079140 /* PaceKeeper Watch App */,
+				F51A739129CEE3ED00079140 /* BlazePace */,
+				F51A739729CEE3ED00079140 /* BlazePace Watch App */,
 			);
 		};
 /* End PBXProject section */
@@ -282,7 +282,7 @@
 				F526A52729CF0591004EE912 /* Log.swift in Sources */,
 				F526A52029CEFEBE004EE912 /* PermissionHelper.swift in Sources */,
 				F526A53129CFA553004EE912 /* SettingsView.swift in Sources */,
-				F51A739E29CEE3ED00079140 /* PaceKeeperApp.swift in Sources */,
+				F51A739E29CEE3ED00079140 /* BlazePaceApp.swift in Sources */,
 				F526A51C29CEF91D004EE912 /* Navigation.swift in Sources */,
 				F526A52D29CF8F49004EE912 /* WorkoutManagementView.swift in Sources */,
 				F526A50F29CEF378004EE912 /* WorkoutViewModel.swift in Sources */,
@@ -302,7 +302,7 @@
 /* Begin PBXTargetDependency section */
 		F51A739B29CEE3ED00079140 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = F51A739729CEE3ED00079140 /* PaceKeeper Watch App */;
+			target = F51A739729CEE3ED00079140 /* BlazePace Watch App */;
 			targetProxy = F51A739A29CEE3ED00079140 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -422,15 +422,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "PaceKeeper Watch App/PaceKeeper Watch App.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "BlazePace Watch App/BlazePace Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"PaceKeeper Watch App/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"BlazePace Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = WSQ25TFDK3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "PaceKeeper-Watch-App-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = PaceKeeper;
+				INFOPLIST_FILE = "BlazePace-Watch-App-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = BlazePace;
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "This is needed in order to display workout metrics.";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "This is needed in order to record workouts.";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
@@ -440,7 +440,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = no.jstien.pacekeeper.PaceKeeper.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = no.jstien.blazepaze.watchos;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -456,15 +456,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "PaceKeeper Watch App/PaceKeeper Watch App.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "BlazePace Watch App/BlazePace Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"PaceKeeper Watch App/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"BlazePace Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = WSQ25TFDK3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "PaceKeeper-Watch-App-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = PaceKeeper;
+				INFOPLIST_FILE = "BlazePace-Watch-App-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = BlazePace;
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "This is needed in order to display workout metrics.";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "This is needed in order to record workouts.";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
@@ -474,7 +474,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = no.jstien.pacekeeper.PaceKeeper.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = no.jstien.blazepaze.watchos;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -493,9 +493,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = WSQ25TFDK3;
-				INFOPLIST_KEY_CFBundleDisplayName = PaceKeeper;
+				INFOPLIST_KEY_CFBundleDisplayName = BlazePace;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = no.jstien.pacekeeper.PaceKeeper;
+				PRODUCT_BUNDLE_IDENTIFIER = no.jstien.blazepace.watchos;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
@@ -509,9 +509,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = WSQ25TFDK3;
-				INFOPLIST_KEY_CFBundleDisplayName = PaceKeeper;
+				INFOPLIST_KEY_CFBundleDisplayName = BlazePace;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = no.jstien.pacekeeper.PaceKeeper;
+				PRODUCT_BUNDLE_IDENTIFIER = no.jstien.blazepace.watchos;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
@@ -531,7 +531,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F51A73A829CEE3EE00079140 /* Build configuration list for PBXNativeTarget "PaceKeeper Watch App" */ = {
+		F51A73A829CEE3EE00079140 /* Build configuration list for PBXNativeTarget "BlazePace Watch App" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F51A73A929CEE3EE00079140 /* Debug */,
@@ -540,7 +540,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F51A73AC29CEE3EE00079140 /* Build configuration list for PBXNativeTarget "PaceKeeper" */ = {
+		F51A73AC29CEE3EE00079140 /* Build configuration list for PBXNativeTarget "BlazePace" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F51A73AD29CEE3EE00079140 /* Debug */,
