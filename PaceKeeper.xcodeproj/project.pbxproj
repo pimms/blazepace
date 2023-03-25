@@ -12,7 +12,7 @@
 		F51A73A029CEE3ED00079140 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51A739F29CEE3ED00079140 /* MainView.swift */; };
 		F51A73A229CEE3EE00079140 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F51A73A129CEE3EE00079140 /* Assets.xcassets */; };
 		F51A73A529CEE3EE00079140 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F51A73A429CEE3EE00079140 /* Preview Assets.xcassets */; };
-		F526A50F29CEF378004EE912 /* RunViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F526A50E29CEF378004EE912 /* RunViewModel.swift */; };
+		F526A50F29CEF378004EE912 /* WorkoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F526A50E29CEF378004EE912 /* WorkoutViewModel.swift */; };
 		F526A51229CEF3A5004EE912 /* TargetPace.swift in Sources */ = {isa = PBXBuildFile; fileRef = F526A51129CEF3A5004EE912 /* TargetPace.swift */; };
 		F526A51429CEF3F8004EE912 /* Pace.swift in Sources */ = {isa = PBXBuildFile; fileRef = F526A51329CEF3F8004EE912 /* Pace.swift */; };
 		F526A51729CEF4A0004EE912 /* SetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F526A51629CEF4A0004EE912 /* SetupView.swift */; };
@@ -22,6 +22,7 @@
 		F526A52029CEFEBE004EE912 /* PermissionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F526A51F29CEFEBE004EE912 /* PermissionHelper.swift */; };
 		F526A52529CF018F004EE912 /* WorkoutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F526A52429CF018F004EE912 /* WorkoutController.swift */; };
 		F526A52729CF0591004EE912 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = F526A52629CF0591004EE912 /* Log.swift */; };
+		F526A52929CF0A47004EE912 /* MetricOverview.swift in Sources */ = {isa = PBXBuildFile; fileRef = F526A52829CF0A47004EE912 /* MetricOverview.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,7 +56,7 @@
 		F51A739F29CEE3ED00079140 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		F51A73A129CEE3EE00079140 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F51A73A429CEE3EE00079140 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		F526A50E29CEF378004EE912 /* RunViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunViewModel.swift; sourceTree = "<group>"; };
+		F526A50E29CEF378004EE912 /* WorkoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutViewModel.swift; sourceTree = "<group>"; };
 		F526A51129CEF3A5004EE912 /* TargetPace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetPace.swift; sourceTree = "<group>"; };
 		F526A51329CEF3F8004EE912 /* Pace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pace.swift; sourceTree = "<group>"; };
 		F526A51629CEF4A0004EE912 /* SetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupView.swift; sourceTree = "<group>"; };
@@ -67,6 +68,7 @@
 		F526A52229CF014B004EE912 /* PaceKeeper-Watch-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "PaceKeeper-Watch-App-Info.plist"; sourceTree = SOURCE_ROOT; };
 		F526A52429CF018F004EE912 /* WorkoutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutController.swift; sourceTree = "<group>"; };
 		F526A52629CF0591004EE912 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		F526A52829CF0A47004EE912 /* MetricOverview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricOverview.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,7 +126,7 @@
 		F526A51029CEF395004EE912 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				F526A50E29CEF378004EE912 /* RunViewModel.swift */,
+				F526A50E29CEF378004EE912 /* WorkoutViewModel.swift */,
 				F526A51129CEF3A5004EE912 /* TargetPace.swift */,
 				F526A51329CEF3F8004EE912 /* Pace.swift */,
 				F526A51B29CEF91D004EE912 /* Navigation.swift */,
@@ -138,6 +140,7 @@
 				F51A739F29CEE3ED00079140 /* MainView.swift */,
 				F526A51629CEF4A0004EE912 /* SetupView.swift */,
 				F526A51D29CEF944004EE912 /* RootView.swift */,
+				F526A52829CF0A47004EE912 /* MetricOverview.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -260,11 +263,12 @@
 			files = (
 				F526A51729CEF4A0004EE912 /* SetupView.swift in Sources */,
 				F51A73A029CEE3ED00079140 /* MainView.swift in Sources */,
+				F526A52929CF0A47004EE912 /* MetricOverview.swift in Sources */,
 				F526A52729CF0591004EE912 /* Log.swift in Sources */,
 				F526A52029CEFEBE004EE912 /* PermissionHelper.swift in Sources */,
 				F51A739E29CEE3ED00079140 /* PaceKeeperApp.swift in Sources */,
 				F526A51C29CEF91D004EE912 /* Navigation.swift in Sources */,
-				F526A50F29CEF378004EE912 /* RunViewModel.swift in Sources */,
+				F526A50F29CEF378004EE912 /* WorkoutViewModel.swift in Sources */,
 				F526A52529CF018F004EE912 /* WorkoutController.swift in Sources */,
 				F526A51E29CEF944004EE912 /* RootView.swift in Sources */,
 				F526A51229CEF3A5004EE912 /* TargetPace.swift in Sources */,
