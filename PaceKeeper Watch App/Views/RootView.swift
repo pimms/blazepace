@@ -8,11 +8,11 @@ struct RootView: View {
 
     var body: some View {
         NavigationStack(path: $navigation) {
-            contentView
+            contentView()
                 .navigationDestination(for: Navigation.self) { navigation in
                     switch navigation {
                     case .setup:
-                        SetupView()
+                        SetupView(onStart: startWorkout(with:))
                     }
                 }
                 .alert("Failed to acquire HealthKit permissions", isPresented: $healthKitError) {
@@ -28,8 +28,25 @@ struct RootView: View {
         })
     }
 
-    var contentView: some View {
-        MainView()
+    private func startWorkout(with targetPace: TargetPace) {
+        Task {
+            let didStart = await workoutController.startWorkout()
+            guard didStart else { return }
+            guard let viewModel = workoutController.viewModel else {
+                fatalError("Inconsistency: no view model on WorkoutController")
+            }
+            viewModel.targetPace = targetPace
+            navigation = []
+        }
+    }
+
+    @ViewBuilder
+    func contentView() -> some View {
+        if let viewModel = workoutController.viewModel {
+            WorkoutTabView(viewModel: viewModel)
+        } else {
+            MainView()
+        }
     }
 }
 

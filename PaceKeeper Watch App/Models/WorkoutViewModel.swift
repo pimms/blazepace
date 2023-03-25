@@ -19,15 +19,17 @@ class WorkoutViewModel: ObservableObject {
     @Published var distance: Measurement<UnitLength>?
 
     weak var delegate: WorkoutViewModelDelegate?
+
+    private let log = Log(name: "WorkoutViewModel")
 }
 
 extension WorkoutViewModel: WorkoutManaging {
     func pauseWorkout() {
-        fatalError("TODO: Pause workout")
+        delegate?.workoutViewModelPauseWorkout()
     }
 
     func endWorkout() {
-        fatalError("TODO: End workout")
+        delegate?.workoutViewModelEndWorkout()
     }
 }
 

@@ -2,6 +2,8 @@ import Foundation
 import SwiftUI
 
 struct SetupView: View {
+    var onStart: (TargetPace) -> Void
+
     @State private var pace: Int = 300
     @State private var delta: Int = 10
 
@@ -21,18 +23,22 @@ struct SetupView: View {
                 
                 Text("\(PaceFormatter.minuteString(fromSeconds: pace - delta)) - \(PaceFormatter.minuteString(fromSeconds: pace + delta))")
                 
-                Button(action: {}) {
+                Button(action: { startButtonClicked() }) {
                     Text("Start")
                 }
             }
         }
         .navigationTitle("Setup")
+    }
 
+    private func startButtonClicked() {
+        let targetPace = TargetPace(secondsPerKilometer: pace, range: delta)
+        onStart(targetPace)
     }
 }
 
 struct ConfigViewPreviews: PreviewProvider {
     static var previews: some View {
-        SetupView()
+        SetupView(onStart: { _ in })
     }
 }

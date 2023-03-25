@@ -1,8 +1,11 @@
 import Foundation
 import HealthKit
 
+@MainActor
 class WorkoutController: NSObject, ObservableObject {
     static let shared = WorkoutController()
+
+    @Published var viewModel: WorkoutViewModel?
 
     private let healthStore = HKHealthStore()
     private let log = Log(name: "WorkoutController")
@@ -46,11 +49,20 @@ class WorkoutController: NSObject, ObservableObject {
             return false
         }
 
+        log.info("Workout setup OK")
+
         state = .active(session: session, builder: builder)
+        await MainActor.run {
+            viewModel = WorkoutViewModel()
+            viewModel?.delegate = self
+        }
+
+        log.info("Starting workout")
         return true
     }
 
     func endWorkout() async {
+        log.info("Ending workout")
         guard case .active(let session, let builder) = state else {
             fatalError("Workout not active")
         }
@@ -63,7 +75,20 @@ class WorkoutController: NSObject, ObservableObject {
             log.error("Failed to finish workout: \(error)")
         }
 
+        viewModel = nil
         state = .inactive
+    }
+}
+
+extension WorkoutController: WorkoutViewModelDelegate {
+    func workoutViewModelPauseWorkout() {
+        log.info("TODO: Add support for pausing workouts")
+    }
+
+    func workoutViewModelEndWorkout() {
+        Task {
+            await endWorkout()
+        }
     }
 }
 
@@ -92,7 +117,37 @@ extension WorkoutController: HKLiveWorkoutBuilderDelegate {
         for type in collectedTypes {
             guard let quantityType = type as? HKQuantityType else { continue }
 
-            let statistics = workoutBuilder.statistics(for: quantityType)
+            DispatchQueue.main.async {
+                switch quantityType {
+                case HKQuantityType(.distanceWalkingRunning):
+                    self.log.debug("Updating distance")
+                    let statistics = workoutBuilder.statistics(for: quantityType)
+
+                    if let meters = statistics?.sumQuantity()?.doubleValue(for: .meter()) {
+                        self.viewModel?.distance = Measurement(value: meters, unit: .meters)
+                    }
+
+                    if let mostRecent = statistics?.mostRecentQuantity(),
+                       let interval = statistics?.mostRecentQuantityDateInterval(),
+                       interval.duration > 0 {
+                        let distance = mostRecent.doubleValue(for: .meter())
+                        let metersPerSecond = distance / interval.duration
+                        let pace = 1 / (metersPerSecond / 1000)
+                        let paceInt = Int(pace)
+                        self.viewModel?.currentPace = Pace(secondsPerKilometer: paceInt)
+                    }
+                case HKQuantityType(.heartRate):
+                    self.log.debug("Updating HR")
+                    let statistics = workoutBuilder.statistics(for: quantityType)
+                    let quantity = statistics?.mostRecentQuantity()
+                    if let heartRate = quantity?.doubleValue(for: .hertz()) {
+                        self.viewModel?.heartRate = Int(heartRate)
+                    }
+                default:
+                    self.log.debug("Unhandled HKQuantityType: \(quantityType)")
+                    break
+                }
+            }
         }
     }
 
