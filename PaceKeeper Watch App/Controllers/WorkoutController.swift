@@ -141,7 +141,7 @@ extension WorkoutController: HKLiveWorkoutBuilderDelegate {
                     let statistics = workoutBuilder.statistics(for: quantityType)
                     let quantity = statistics?.mostRecentQuantity()
                     if let heartRate = quantity?.doubleValue(for: .hertz()) {
-                        self.viewModel?.heartRate = Int(heartRate)
+                        self.viewModel?.heartRate = Int(heartRate * 60.0)
                     }
                 default:
                     self.log.debug("Unhandled HKQuantityType: \(quantityType)")
