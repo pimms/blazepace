@@ -90,7 +90,13 @@ class WorkoutController: NSObject, ObservableObject {
 
 extension WorkoutController: WorkoutViewModelDelegate {
     func workoutViewModelPauseWorkout() {
-        log.info("TODO: Add support for pausing workouts")
+        guard case .active(session: let session, builder: _) = state else { return }
+        session.pause()
+    }
+
+    func workoutViewModelResumeWorkout() {
+        guard case .active(session: let session, builder: _) = state else { return }
+        session.resume()
     }
 
     func workoutViewModelEndWorkout() {
@@ -103,15 +109,17 @@ extension WorkoutController: WorkoutViewModelDelegate {
 extension WorkoutController: HKWorkoutSessionDelegate {
     func workoutSession(_ workoutSession: HKWorkoutSession, didChangeTo toState: HKWorkoutSessionState, from fromState: HKWorkoutSessionState, date: Date) {
         log.debug("HKWorkoutSession changed state to \(toState)")
-        switch toState {
-        case .ended:
-            log.info("TODO: Handle ended session")
-        case .paused:
-            log.info("TODO: Handle paused session")
-        case .running:
-            log.info("TODO: Handle active session")
-        default:
-            break
+        DispatchQueue.main.async {
+            switch toState {
+            case .ended:
+                self.viewModel?.isActive = false
+            case .paused:
+                self.viewModel?.isActive = false
+            case .running:
+                self.viewModel?.isActive = true
+            default:
+                break
+            }
         }
     }
 

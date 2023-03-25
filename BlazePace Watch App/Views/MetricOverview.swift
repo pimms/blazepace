@@ -4,31 +4,47 @@ import SwiftUI
 struct MetricOverview: View {
     @ObservedObject var viewModel: WorkoutViewModel
     var body: some View {
-        VStack(spacing: 0) {
-            SingleMetricView(
-                sfSymbolName: "speedometer",
-                value: currentPaceString,
-                subtitle: currentPaceSubtitle,
-                color: .black)
-            .foregroundColor(.red)
-            .background(content: {
-                if viewModel.isInTargetPace {
-                    Color.green.ignoresSafeArea(.all).cornerRadius(5)
-                    EmptyView()
-                } else {
-                    Color.red.ignoresSafeArea(.all).cornerRadius(5)
-                }
-            })
-            SingleMetricView(
-                sfSymbolName: "heart.fill",
-                value: heartRateString,
-                subtitle: "HR",
-                color: .primary)
-            SingleMetricView(
-                sfSymbolName: "road.lanes.curved.right",
-                value: distanceString,
-                subtitle: "km",
-                color: .primary)
+        ScrollView {
+            VStack(spacing: 0) {
+                SingleMetricView(
+                    sfSymbolName: "speedometer",
+                    value: currentPaceString,
+                    subtitle: currentPaceSubtitle,
+                    color: .black)
+                .foregroundColor(.red)
+                .background(content: {
+                    if viewModel.isInTargetPace {
+                        Color.green.ignoresSafeArea(.all).cornerRadius(5)
+                        EmptyView()
+                    } else {
+                        Color.red.ignoresSafeArea(.all).cornerRadius(5)
+                    }
+                })
+                SingleMetricView(
+                    sfSymbolName: "heart.fill",
+                    value: heartRateString,
+                    subtitle: "HR",
+                    color: .primary)
+                SingleMetricView(
+                    sfSymbolName: "road.lanes.curved.right",
+                    value: distanceString,
+                    subtitle: "km",
+                    color: .primary)
+            }
+        }
+        .overlay(alignment: .bottom, content: { pauseToast })
+    }
+
+    @ViewBuilder
+    private var pauseToast: some View {
+        if !viewModel.isActive {
+            Text("Workout paused")
+                .ignoresSafeArea(.all)
+                .frame(maxWidth: .infinity)
+                .background(Color.yellow)
+                .foregroundColor(.black)
+        } else {
+            EmptyView()
         }
     }
 
@@ -114,6 +130,7 @@ struct MetricOverviewPreview: PreviewProvider {
         viewModel.distance = Measurement(value: 7049, unit: .meters)
         viewModel.heartRate = 140
         viewModel.targetPace = TargetPace(secondsPerKilometer: target, range: 10)
+        viewModel.isActive = true
         return viewModel
     }
 

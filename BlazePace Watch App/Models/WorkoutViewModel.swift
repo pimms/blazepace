@@ -1,13 +1,9 @@
 import Foundation
 import Combine
 
-protocol WorkoutManaging {
-    func pauseWorkout()
-    func endWorkout()
-}
-
 protocol WorkoutViewModelDelegate: AnyObject {
     func workoutViewModelPauseWorkout()
+    func workoutViewModelResumeWorkout()
     func workoutViewModelEndWorkout()
 }
 
@@ -17,14 +13,18 @@ class WorkoutViewModel: ObservableObject {
     @Published var heartRate: Int?
     @Published var distance: Measurement<UnitLength>?
 
+    @Published var isActive: Bool = false
+
     weak var delegate: WorkoutViewModelDelegate?
 
     private let log = Log(name: "WorkoutViewModel")
-}
 
-extension WorkoutViewModel: WorkoutManaging {
     func pauseWorkout() {
         delegate?.workoutViewModelPauseWorkout()
+    }
+
+    func resumeWorkout() {
+        delegate?.workoutViewModelResumeWorkout()
     }
 
     func endWorkout() {

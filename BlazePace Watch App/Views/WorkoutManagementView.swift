@@ -2,7 +2,7 @@ import Foundation
 import SwiftUI
 
 struct WorkoutManagementView: View {
-    let viewModel: any WorkoutManaging
+    @ObservedObject var viewModel: WorkoutViewModel
 
     var body: some View {
         VStack {
@@ -11,10 +11,18 @@ struct WorkoutManagementView: View {
                     sfSymbol: "xmark",
                     color: .red,
                     onClick: { viewModel.endWorkout() })
-                WorkoutButton(
-                    sfSymbol: "pause",
-                    color: .yellow,
-                    onClick: { viewModel.pauseWorkout() })
+
+                if viewModel.isActive {
+                    WorkoutButton(
+                        sfSymbol: "pause",
+                        color: .yellow,
+                        onClick: { viewModel.pauseWorkout() })
+                } else {
+                    WorkoutButton(
+                        sfSymbol: "play.fill",
+                        color: .green,
+                        onClick: { viewModel.pauseWorkout() })
+                }
             }
         }
     }
@@ -51,12 +59,16 @@ private struct WorkoutButtonStyle: ButtonStyle {
 }
 
 struct WorkoutManagementViewPreview: PreviewProvider {
-    private struct MockWorkoutManaging: WorkoutManaging {
-        func pauseWorkout() {}
-        func endWorkout() {}
+    static func viewModel(active: Bool) -> WorkoutViewModel {
+        let vm = WorkoutViewModel()
+        vm.isActive = active
+        return vm
     }
 
     static var previews: some View {
-        WorkoutManagementView(viewModel: MockWorkoutManaging())
+        Group {
+            WorkoutManagementView(viewModel: viewModel(active: false))
+            WorkoutManagementView(viewModel: viewModel(active: true))
+        }
     }
 }
