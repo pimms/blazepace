@@ -3,6 +3,7 @@ import SwiftUI
 
 struct RootView: View {
     @State var navigation: [Navigation] = []
+    @State var healthKitError: Bool = false
 
     var body: some View {
         NavigationStack(path: $navigation) {
@@ -13,7 +14,17 @@ struct RootView: View {
                         SetupView()
                     }
                 }
+                .alert("Failed to acquire HealthKit permissions", isPresented: $healthKitError) {
+                    Button("OK", role: .cancel) {
+                        healthKitError = false
+                    }
+                }
         }
+        .onAppear(perform: {
+            PermissionHelper.shared.requestHealthKitPermissions(onError: { error in
+                healthKitError = true
+            })
+        })
     }
 
     var contentView: some View {
