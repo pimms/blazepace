@@ -2,21 +2,12 @@ import Foundation
 import SwiftUI
 
 struct SettingsView: View {
-    @AppStorage(AppStorageKey.paceNotifications)
-    private var paceNotifications: Bool = true
-
     @AppStorage(AppStorageKey.paceNotificationInterval)
     private var paceNotificationInterval: TimeInterval = 1
 
     var body: some View {
         ScrollView {
             VStack {
-                Toggle(isOn: $paceNotifications) {
-                    Text("Pace notifications")
-                }
-
-                Spacer(minLength: 8)
-
                 Text("Pace notification interval")
                     .frame(maxWidth: .infinity, alignment: .leading)
                 Stepper(value: $paceNotificationInterval, in: 0.5...10, step: 0.25) {

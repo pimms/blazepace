@@ -8,16 +8,21 @@ protocol WorkoutViewModelDelegate: AnyObject {
 }
 
 class WorkoutViewModel: ObservableObject {
-    @Published var targetPace: TargetPace?
+    @Published var targetPace: TargetPace
     @Published var currentPace: Pace?
     @Published var heartRate: Int?
     @Published var distance: Measurement<UnitLength>?
 
     @Published var isActive: Bool = false
+    @Published var playNotifications: Bool = true
 
     weak var delegate: WorkoutViewModelDelegate?
 
     private let log = Log(name: "WorkoutViewModel")
+
+    init(targetPace: TargetPace) {
+        self._targetPace = .init(initialValue: targetPace)
+    }
 
     func pauseWorkout() {
         delegate?.workoutViewModelPauseWorkout()
@@ -40,11 +45,11 @@ extension WorkoutViewModel {
     }
 
     var paceRelativeToTarget: PaceRelativeToTarget {
-        guard let targetPace, let currentPace else { return .tooSlow }
+        guard let currentPace else { return .tooSlow }
 
-        if currentPace.secondsPerKilometer < targetPace.secondsPerKilometer - targetPace.range {
+        if currentPace.secondsPerKilometer < targetPace.lowerBound {
             return .tooFast
-        } else if currentPace.secondsPerKilometer > targetPace.secondsPerKilometer + targetPace.range {
+        } else if currentPace.secondsPerKilometer > targetPace.upperBound {
             return .tooSlow
         } else {
             return .inRange

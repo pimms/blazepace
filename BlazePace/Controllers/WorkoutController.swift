@@ -22,11 +22,11 @@ class WorkoutController: NSObject, ObservableObject {
 
     private override init() {}
 
-    func startWorkout(_ type: WorkoutType) async -> Bool {
+    func startWorkout(_ startData: WorkoutStartData) async -> Bool {
         guard case .inactive = state else { fatalError("A workout is already active") }
 
         let configuration = HKWorkoutConfiguration()
-        configuration.activityType = type.healthKitType
+        configuration.activityType = startData.workoutType.healthKitType
         configuration.locationType = .outdoor
 
         let session: HKWorkoutSession
@@ -56,7 +56,7 @@ class WorkoutController: NSObject, ObservableObject {
 
         state = .active(session: session, builder: builder)
         await MainActor.run {
-            let vm = WorkoutViewModel()
+            let vm = WorkoutViewModel(targetPace: startData.targetPace)
             vm.delegate = self
             self.paceAlertController = PaceAlertController(viewModel: vm)
             self.viewModel = vm

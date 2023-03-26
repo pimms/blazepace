@@ -5,26 +5,76 @@ struct WorkoutManagementView: View {
     @ObservedObject var viewModel: WorkoutViewModel
 
     var body: some View {
-        VStack {
-            HStack {
-                WorkoutButton(
-                    sfSymbol: "xmark",
-                    color: .red,
-                    onClick: { viewModel.endWorkout() })
+        ScrollView {
+            VStack {
+                HStack {
+                    WorkoutButton(
+                        sfSymbol: "xmark",
+                        color: .red,
+                        onClick: { viewModel.endWorkout() })
 
-                if viewModel.isActive {
-                    WorkoutButton(
-                        sfSymbol: "pause",
-                        color: .yellow,
-                        onClick: { viewModel.pauseWorkout() })
-                } else {
-                    WorkoutButton(
-                        sfSymbol: "play.fill",
-                        color: .green,
-                        onClick: { viewModel.resumeWorkout() })
+                    if viewModel.isActive {
+                        WorkoutButton(
+                            sfSymbol: "pause",
+                            color: .yellow,
+                            onClick: { viewModel.pauseWorkout() })
+                    } else {
+                        WorkoutButton(
+                            sfSymbol: "play.fill",
+                            color: .green,
+                            onClick: { viewModel.resumeWorkout() })
+                    }
                 }
+
+                HStack {
+                    WorkoutButton(
+                        sfSymbol: viewModel.playNotifications ? "bell.fill" : "bell.slash",
+                        color: .blue,
+                        onClick: muteButtonClicked)
+
+                }
+
+                NavigationLink(value: Navigation.editTargetPace) {
+                    VStack {
+                        Text("Edit target")
+                            .bold()
+                        Text("\(PaceFormatter.minuteString(fromSeconds: viewModel.targetPace.lowerBound)) - \(PaceFormatter.minuteString(fromSeconds: viewModel.targetPace.upperBound))")
+                            .fontWeight(.light)
+                    }
+                }
+                .frame(height: 64)
+                .foregroundColor(.black)
+                .background(Color.green.cornerRadius(8))
             }
+            .padding(.horizontal, 20)
         }
+    }
+
+    private func muteButtonClicked() {
+        viewModel.playNotifications.toggle()
+    }
+}
+
+struct EditViewModelsTargetPaceView: View {
+    @ObservedObject var viewModel: WorkoutViewModel
+    @State private var pace: Int
+    @State private var delta: Int
+
+    init(viewModel: WorkoutViewModel) {
+        self.viewModel = viewModel
+        _pace = .init(initialValue: viewModel.targetPace.secondsPerKilometer)
+        _delta = .init(initialValue: viewModel.targetPace.range)
+    }
+
+    var body: some View {
+        EditTargetPaceView(pace: $pace, delta: $delta)
+            .onChange(of: pace, perform: { _ in valueChanged() })
+            .onChange(of: delta, perform: { _ in valueChanged() })
+    }
+
+    private func valueChanged() {
+        let targetPace = TargetPace(secondsPerKilometer: pace, range: delta)
+        viewModel.targetPace = targetPace
     }
 }
 
@@ -38,7 +88,7 @@ private struct WorkoutButton: View {
             Image(systemName: sfSymbol)
                 .resizable()
                 .bold()
-                .frame(maxWidth: 32, maxHeight: 32)
+                .frame(maxWidth: 24, maxHeight: 24)
                 .aspectRatio(contentMode: .fit)
         }
         .buttonStyle(WorkoutButtonStyle(background: color.opacity(0.4), foreground: color))
@@ -53,6 +103,7 @@ private struct WorkoutButtonStyle: ButtonStyle {
         configuration
             .label
             .padding(20)
+            .frame(maxWidth: .infinity)
             .background(background.cornerRadius(8))
             .foregroundColor(foreground)
     }
@@ -60,7 +111,7 @@ private struct WorkoutButtonStyle: ButtonStyle {
 
 struct WorkoutManagementViewPreview: PreviewProvider {
     static func viewModel(active: Bool) -> WorkoutViewModel {
-        let vm = WorkoutViewModel()
+        let vm = WorkoutViewModel(targetPace: TargetPace(secondsPerKilometer: 300, range: 10))
         vm.isActive = active
         return vm
     }

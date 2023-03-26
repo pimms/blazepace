@@ -22,6 +22,9 @@ struct SetupView: View {
                 Text("\(workoutType.rawValue)\n\(PaceFormatter.minuteString(fromSeconds: pace - delta)) - \(PaceFormatter.minuteString(fromSeconds: pace + delta))")
                     .multilineTextAlignment(.center)
                 Spacer(minLength: 12)
+                Text("You can change the target pace in the middle of the workout.")
+                    .multilineTextAlignment(.center)
+                Spacer(minLength: 12)
 
                 Button(action: { startButtonClicked() }) {
                     Text("🔥 Start! 🔥")

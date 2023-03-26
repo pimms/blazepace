@@ -15,6 +15,12 @@ struct RootView: View {
                         SetupView(onStart: startWorkout(with:))
                     case .settings:
                         SettingsView()
+                    case .editTargetPace:
+                        if let viewModel = workoutController.viewModel {
+                            EditViewModelsTargetPaceView(viewModel: viewModel)
+                        } else {
+                            Text("Internal error 😭")
+                        }
                     }
                 }
                 .alert("Failed to acquire HealthKit permissions", isPresented: $healthKitError) {
@@ -32,7 +38,7 @@ struct RootView: View {
 
     private func startWorkout(with startData: WorkoutStartData) {
         Task {
-            let didStart = await workoutController.startWorkout(startData.workoutType)
+            let didStart = await workoutController.startWorkout(startData)
             guard didStart else { return }
             guard let viewModel = workoutController.viewModel else {
                 fatalError("Inconsistency: no view model on WorkoutController")

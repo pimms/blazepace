@@ -10,27 +10,21 @@ class PaceAlertController {
     private var subscriptions: Set<AnyCancellable> = []
     private var timer: Timer?
 
-    @AppStorage(AppStorageKey.paceNotifications)
-    private var enablePaceNotifications: Bool = true
     @AppStorage(AppStorageKey.paceNotificationInterval)
     private var paceNotificationInterval: Int = 2
 
     init(viewModel: WorkoutViewModel) {
         self.viewModel = viewModel
 
-        if enablePaceNotifications {
-            log.debug("Pace notifications enabled at \(paceNotificationInterval)s interval")
-            let interval = TimeInterval(paceNotificationInterval)
-            timer = Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { [weak self] _ in
-                self?.triggerPaceNotification()
-            }
-        } else {
-            log.debug("Pace notifications disabled")
+        log.debug("Pace notifications enabled at \(paceNotificationInterval)s interval")
+        let interval = TimeInterval(paceNotificationInterval)
+        timer = Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { [weak self] _ in
+            self?.triggerPaceNotification()
         }
     }
 
     private func triggerPaceNotification() {
-        guard viewModel.isActive else { return }
+        guard viewModel.isActive, viewModel.playNotifications else { return }
         switch viewModel.paceRelativeToTarget {
         case .inRange:
             break
