@@ -5,19 +5,22 @@ struct WorkoutTypeToggle: View {
     @Binding var workoutType: WorkoutType
 
     var body: some View {
-        HStack(spacing: 0) {
-            Button(action: { workoutType = .running }, label: {
-                VStack {
-                    Image(systemName: "figure.run")
-                    Text("run")
-                }
-            }).buttonStyle(ToggleButtonStyle(roundCorners: .left, isSelected: workoutType == .running))
-            Button(action: { workoutType = .walking }, label: {
-                VStack {
-                    Image(systemName: "figure.walk")
-                    Text("walk")
-                }
-            }).buttonStyle(ToggleButtonStyle(roundCorners: .right, isSelected: workoutType == .walking))
+        VStack {
+            Text("Workout type").bold()
+            HStack(spacing: 0) {
+                Button(action: { workoutType = .running }, label: {
+                    VStack {
+                        Image(systemName: "figure.run")
+                        Text("run")
+                    }
+                }).buttonStyle(ToggleButtonStyle(roundCorners: .left, isSelected: workoutType == .running))
+                Button(action: { workoutType = .walking }, label: {
+                    VStack {
+                        Image(systemName: "figure.walk")
+                        Text("walk")
+                    }
+                }).buttonStyle(ToggleButtonStyle(roundCorners: .right, isSelected: workoutType == .walking))
+            }
         }
     }
 }

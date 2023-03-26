@@ -14,17 +14,8 @@ struct SetupView: View {
     var body: some View {
         ScrollView {
             VStack {
-                Text("Pace").frame(maxWidth: .infinity, alignment: .leading)
-                Stepper(value: $pace, in: 120...800, step: 5) {
-                    Text(PaceFormatter.minuteString(fromSeconds: pace))
-                        .font(.title3)
-                }
-                
-                Text("Delta").frame(maxWidth: .infinity, alignment: .leading)
-                Stepper(value: $delta, in: 1...30) {
-                    Text("± \(delta)s").font(.title3)
-                }
-
+                EditTargetPaceView(pace: $pace, delta: $delta)
+                Spacer(minLength: 12)
                 WorkoutTypeToggle(workoutType: $workoutType)
 
                 Spacer(minLength: 16)
@@ -33,7 +24,7 @@ struct SetupView: View {
                 Spacer(minLength: 12)
 
                 Button(action: { startButtonClicked() }) {
-                    Text("Start")
+                    Text("🔥 Start! 🔥")
                 }
             }
         }
@@ -44,6 +35,28 @@ struct SetupView: View {
         let targetPace = TargetPace(secondsPerKilometer: pace, range: delta)
         let startData = WorkoutStartData(workoutType: workoutType, targetPace: targetPace)
         onStart(startData)
+    }
+}
+
+struct EditTargetPaceView: View {
+    @Binding var pace: Int
+    @Binding var delta: Int
+
+    var body: some View {
+        VStack {
+            Text("Pace").bold()
+            Stepper(value: $pace, in: 120...800, step: 5) {
+                Text(PaceFormatter.minuteString(fromSeconds: pace))
+                    .font(.title3)
+            }
+
+            Spacer(minLength: 12)
+
+            Text("Delta").bold()
+            Stepper(value: $delta, in: 1...30) {
+                Text("± \(delta)s").font(.title3)
+            }
+        }
     }
 }
 
