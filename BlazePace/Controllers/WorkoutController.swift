@@ -22,11 +22,11 @@ class WorkoutController: NSObject, ObservableObject {
 
     private override init() {}
 
-    func startWorkout() async -> Bool {
+    func startWorkout(_ type: WorkoutType) async -> Bool {
         guard case .inactive = state else { fatalError("A workout is already active") }
 
         let configuration = HKWorkoutConfiguration()
-        configuration.activityType = .running
+        configuration.activityType = type.healthKitType
         configuration.locationType = .outdoor
 
         let session: HKWorkoutSession
