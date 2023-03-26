@@ -1,6 +1,6 @@
 import Foundation
 
-struct TargetPace {
+struct TargetPace: Hashable {
     let secondsPerKilometer: Int
     let range: Int
 

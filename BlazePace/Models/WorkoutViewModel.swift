@@ -4,15 +4,16 @@ import Combine
 protocol WorkoutViewModelDelegate: AnyObject {
     func workoutViewModelPauseWorkout()
     func workoutViewModelResumeWorkout()
-    func workoutViewModelEndWorkout()
+    func workoutViewModelEndWorkout() async -> WorkoutSummary?
 }
 
 class WorkoutViewModel: ObservableObject {
+    let workoutType: WorkoutType
+
     @Published var targetPace: TargetPace
     @Published var currentPace: Pace?
     @Published var heartRate: Int?
     @Published var distance: Measurement<UnitLength>?
-
     @Published var isActive: Bool = false
     @Published var playNotifications: Bool = true
 
@@ -20,7 +21,8 @@ class WorkoutViewModel: ObservableObject {
 
     private let log = Log(name: "WorkoutViewModel")
 
-    init(targetPace: TargetPace) {
+    init(workoutType: WorkoutType, targetPace: TargetPace) {
+        self.workoutType = workoutType
         self._targetPace = .init(initialValue: targetPace)
     }
 
@@ -32,8 +34,8 @@ class WorkoutViewModel: ObservableObject {
         delegate?.workoutViewModelResumeWorkout()
     }
 
-    func endWorkout() {
-        delegate?.workoutViewModelEndWorkout()
+    func endWorkout() async -> WorkoutSummary? {
+        await delegate?.workoutViewModelEndWorkout()
     }
 }
 

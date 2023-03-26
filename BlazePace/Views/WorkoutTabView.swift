@@ -19,7 +19,7 @@ struct WorkoutTabView: View {
 }
 
 struct WorkoutTabViewPreview: PreviewProvider {
-    static let viewModel = WorkoutViewModel(targetPace: TargetPace(secondsPerKilometer: 300, range: 10))
+    static let viewModel = WorkoutViewModel(workoutType: .running, targetPace: TargetPace(secondsPerKilometer: 300, range: 10))
 
     static var previews: some View {
         WorkoutTabView(viewModel: viewModel)

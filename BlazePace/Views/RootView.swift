@@ -17,10 +17,12 @@ struct RootView: View {
                         SettingsView()
                     case .editTargetPace:
                         if let viewModel = workoutController.viewModel {
-                            EditViewModelsTargetPaceView(viewModel: viewModel)
+                            EditTargetPaceMidWorkoutView(viewModel: viewModel)
                         } else {
                             Text("Internal error 😭")
                         }
+                    case .summary(let summary):
+                        fatalError("TODO")
                     }
                 }
                 .alert("Failed to acquire HealthKit permissions", isPresented: $healthKitError) {

@@ -11,7 +11,7 @@ struct WorkoutManagementView: View {
                     WorkoutButton(
                         sfSymbol: "xmark",
                         color: .red,
-                        onClick: { viewModel.endWorkout() })
+                        onClick: { /* TODO */ Task { _ = await viewModel.endWorkout() } })
 
                     if viewModel.isActive {
                         WorkoutButton(
@@ -55,7 +55,7 @@ struct WorkoutManagementView: View {
     }
 }
 
-struct EditViewModelsTargetPaceView: View {
+struct EditTargetPaceMidWorkoutView: View {
     @ObservedObject var viewModel: WorkoutViewModel
     @State private var pace: Int
     @State private var delta: Int
@@ -67,9 +67,13 @@ struct EditViewModelsTargetPaceView: View {
     }
 
     var body: some View {
-        EditTargetPaceView(pace: $pace, delta: $delta)
-            .onChange(of: pace, perform: { _ in valueChanged() })
-            .onChange(of: delta, perform: { _ in valueChanged() })
+        ScrollView {
+            Spacer()
+            EditTargetPaceView(pace: $pace, delta: $delta)
+                .onChange(of: pace, perform: { _ in valueChanged() })
+                .onChange(of: delta, perform: { _ in valueChanged() })
+        }
+        .navigationTitle("Edit pace")
     }
 
     private func valueChanged() {
@@ -111,7 +115,7 @@ private struct WorkoutButtonStyle: ButtonStyle {
 
 struct WorkoutManagementViewPreview: PreviewProvider {
     static func viewModel(active: Bool) -> WorkoutViewModel {
-        let vm = WorkoutViewModel(targetPace: TargetPace(secondsPerKilometer: 300, range: 10))
+        let vm = WorkoutViewModel(workoutType: .running, targetPace: TargetPace(secondsPerKilometer: 300, range: 10))
         vm.isActive = active
         return vm
     }
@@ -120,6 +124,8 @@ struct WorkoutManagementViewPreview: PreviewProvider {
         Group {
             WorkoutManagementView(viewModel: viewModel(active: false))
             WorkoutManagementView(viewModel: viewModel(active: true))
+
+            EditTargetPaceMidWorkoutView(viewModel: viewModel(active: true))
         }
     }
 }

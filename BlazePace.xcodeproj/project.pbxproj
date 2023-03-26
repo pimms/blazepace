@@ -32,6 +32,7 @@
 		F5FAACDB29D0308C00A47C34 /* WorkoutType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5FAACDA29D0308C00A47C34 /* WorkoutType.swift */; };
 		F5FAACDE29D0338600A47C34 /* View+roundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5FAACDD29D0338600A47C34 /* View+roundedCorners.swift */; };
 		F5FAACE029D038AA00A47C34 /* WorkoutStartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5FAACDF29D038AA00A47C34 /* WorkoutStartData.swift */; };
+		F5FAACE229D04C1E00A47C34 /* WorkoutSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5FAACE129D04C1D00A47C34 /* WorkoutSummary.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +88,7 @@
 		F5FAACDA29D0308C00A47C34 /* WorkoutType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutType.swift; sourceTree = "<group>"; };
 		F5FAACDD29D0338600A47C34 /* View+roundedCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+roundedCorners.swift"; sourceTree = "<group>"; };
 		F5FAACDF29D038AA00A47C34 /* WorkoutStartData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutStartData.swift; sourceTree = "<group>"; };
+		F5FAACE129D04C1D00A47C34 /* WorkoutSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutSummary.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +153,7 @@
 				F526A51B29CEF91D004EE912 /* Navigation.swift */,
 				F5FAACDA29D0308C00A47C34 /* WorkoutType.swift */,
 				F5FAACDF29D038AA00A47C34 /* WorkoutStartData.swift */,
+				F5FAACE129D04C1D00A47C34 /* WorkoutSummary.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -312,6 +315,7 @@
 				F526A53129CFA553004EE912 /* SettingsView.swift in Sources */,
 				F51A739E29CEE3ED00079140 /* BlazePaceApp.swift in Sources */,
 				F526A51C29CEF91D004EE912 /* Navigation.swift in Sources */,
+				F5FAACE229D04C1E00A47C34 /* WorkoutSummary.swift in Sources */,
 				F526A52D29CF8F49004EE912 /* WorkoutManagementView.swift in Sources */,
 				F526A50F29CEF378004EE912 /* WorkoutViewModel.swift in Sources */,
 				F5FAACDE29D0338600A47C34 /* View+roundedCorners.swift in Sources */,

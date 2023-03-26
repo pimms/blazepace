@@ -125,7 +125,7 @@ private struct SingleMetricView: View {
 
 struct MetricOverviewPreview: PreviewProvider {
     static func viewModel(target: Int, current: Int) -> WorkoutViewModel {
-        let viewModel = WorkoutViewModel(targetPace: TargetPace(secondsPerKilometer: target, range: 10))
+        let viewModel = WorkoutViewModel(workoutType: .running, targetPace: TargetPace(secondsPerKilometer: target, range: 10))
         viewModel.currentPace = Pace(secondsPerKilometer: current)
         viewModel.distance = Measurement(value: 7049, unit: .meters)
         viewModel.heartRate = 140
@@ -141,7 +141,7 @@ struct MetricOverviewPreview: PreviewProvider {
                 .previewDisplayName("Too fast")
             MetricOverview(viewModel: viewModel(target: 300, current: 315))
                 .previewDisplayName("Too slow")
-            MetricOverview(viewModel: WorkoutViewModel(targetPace: TargetPace(secondsPerKilometer: 300, range: 10)))
+            MetricOverview(viewModel: WorkoutViewModel(workoutType: .running, targetPace: TargetPace(secondsPerKilometer: 300, range: 10)))
                 .previewDisplayName("Empty")
         }
     }

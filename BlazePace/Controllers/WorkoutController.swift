@@ -22,6 +22,8 @@ class WorkoutController: NSObject, ObservableObject {
 
     private override init() {}
 
+    // MARK: - Internal methods
+
     func startWorkout(_ startData: WorkoutStartData) async -> Bool {
         guard case .inactive = state else { fatalError("A workout is already active") }
 
@@ -56,7 +58,7 @@ class WorkoutController: NSObject, ObservableObject {
 
         state = .active(session: session, builder: builder)
         await MainActor.run {
-            let vm = WorkoutViewModel(targetPace: startData.targetPace)
+            let vm = WorkoutViewModel(workoutType: startData.workoutType, targetPace: startData.targetPace)
             vm.delegate = self
             self.paceAlertController = PaceAlertController(viewModel: vm)
             self.viewModel = vm
@@ -66,11 +68,12 @@ class WorkoutController: NSObject, ObservableObject {
         log.info("Starting workout")
         return true
     }
-    private var subscriptions: Set<AnyCancellable> = []
 
-    func endWorkout() async {
+    // MARK: - Private methods
+
+    private func endWorkout() async -> WorkoutSummary? {
         log.info("Ending workout")
-        guard case .active(let session, let builder) = state else {
+        guard case .active(let session, let builder) = state, let viewModel else {
             fatalError("Workout not active")
         }
 
@@ -83,8 +86,33 @@ class WorkoutController: NSObject, ObservableObject {
         }
 
         paceAlertController = nil
-        viewModel = nil
+        self.viewModel = nil
         state = .inactive
+
+        return buildSummary(from: viewModel, elapsedTime: builder.elapsedTime)
+    }
+
+    private func buildSummary(from viewModel: WorkoutViewModel, elapsedTime: TimeInterval) -> WorkoutSummary {
+        let averagePace: Pace
+        if let distance = viewModel.distance {
+            let kilometers = distance.converted(to: .kilometers).value
+            if kilometers == 0 {
+                averagePace = Pace(secondsPerKilometer: 0)
+            } else {
+                let pace = Int(elapsedTime / kilometers)
+                averagePace = Pace(secondsPerKilometer: pace)
+            }
+        } else {
+            averagePace = Pace(secondsPerKilometer: 0)
+        }
+
+        let summary = WorkoutSummary(
+            workoutType: viewModel.workoutType,
+            distance: viewModel.distance ?? .init(value: 0, unit: .meters),
+            elapsedTime: elapsedTime,
+            averagePace: averagePace,
+            targetPace: viewModel.targetPace)
+        return summary
     }
 }
 
@@ -99,10 +127,8 @@ extension WorkoutController: WorkoutViewModelDelegate {
         session.resume()
     }
 
-    func workoutViewModelEndWorkout() {
-        Task {
-            await endWorkout()
-        }
+    func workoutViewModelEndWorkout() async -> WorkoutSummary? {
+        await endWorkout()
     }
 }
 

@@ -1,5 +1,5 @@
 import Foundation
 
-struct Pace {
+struct Pace: Hashable {
     let secondsPerKilometer: Int
 }
