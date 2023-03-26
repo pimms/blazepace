@@ -150,7 +150,7 @@ extension WorkoutController: HKWorkoutSessionDelegate {
     }
 
     func workoutSession(_ workoutSession: HKWorkoutSession, didFailWithError error: Error) {
-        log.info("TODO: Handle failed session")
+        log.error("Workout error: \(error)")
     }
 }
 

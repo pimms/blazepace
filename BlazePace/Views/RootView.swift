@@ -22,7 +22,7 @@ struct RootView: View {
                             Text("Internal error 😭")
                         }
                     case .summary(let summary):
-                        fatalError("TODO")
+                        SummaryView(summary: summary, navigationStack: $navigation)
                     }
                 }
                 .alert("Failed to acquire HealthKit permissions", isPresented: $healthKitError) {
@@ -53,7 +53,7 @@ struct RootView: View {
     @ViewBuilder
     func contentView() -> some View {
         if let viewModel = workoutController.viewModel {
-            WorkoutTabView(viewModel: viewModel)
+            WorkoutTabView(viewModel: viewModel, navigationStack: $navigation)
         } else {
             MainView()
         }

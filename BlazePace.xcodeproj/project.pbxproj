@@ -33,6 +33,7 @@
 		F5FAACDE29D0338600A47C34 /* View+roundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5FAACDD29D0338600A47C34 /* View+roundedCorners.swift */; };
 		F5FAACE029D038AA00A47C34 /* WorkoutStartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5FAACDF29D038AA00A47C34 /* WorkoutStartData.swift */; };
 		F5FAACE229D04C1E00A47C34 /* WorkoutSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5FAACE129D04C1D00A47C34 /* WorkoutSummary.swift */; };
+		F5FAACE429D0525A00A47C34 /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5FAACE329D0525A00A47C34 /* SummaryView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +90,7 @@
 		F5FAACDD29D0338600A47C34 /* View+roundedCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+roundedCorners.swift"; sourceTree = "<group>"; };
 		F5FAACDF29D038AA00A47C34 /* WorkoutStartData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutStartData.swift; sourceTree = "<group>"; };
 		F5FAACE129D04C1D00A47C34 /* WorkoutSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutSummary.swift; sourceTree = "<group>"; };
+		F5FAACE329D0525A00A47C34 /* SummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +171,7 @@
 				F526A52A29CF8E00004EE912 /* WorkoutTabView.swift */,
 				F526A52C29CF8F49004EE912 /* WorkoutManagementView.swift */,
 				F526A53029CFA553004EE912 /* SettingsView.swift */,
+				F5FAACE329D0525A00A47C34 /* SummaryView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -312,6 +315,7 @@
 				F526A52929CF0A47004EE912 /* MetricOverview.swift in Sources */,
 				F526A52729CF0591004EE912 /* Log.swift in Sources */,
 				F526A52029CEFEBE004EE912 /* PermissionHelper.swift in Sources */,
+				F5FAACE429D0525A00A47C34 /* SummaryView.swift in Sources */,
 				F526A53129CFA553004EE912 /* SettingsView.swift in Sources */,
 				F51A739E29CEE3ED00079140 /* BlazePaceApp.swift in Sources */,
 				F526A51C29CEF91D004EE912 /* Navigation.swift in Sources */,

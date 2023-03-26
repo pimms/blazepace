@@ -3,6 +3,7 @@ import SwiftUI
 
 struct WorkoutManagementView: View {
     @ObservedObject var viewModel: WorkoutViewModel
+    @Binding var navigationStack: [Navigation]
 
     var body: some View {
         ScrollView {
@@ -11,7 +12,7 @@ struct WorkoutManagementView: View {
                     WorkoutButton(
                         sfSymbol: "xmark",
                         color: .red,
-                        onClick: { /* TODO */ Task { _ = await viewModel.endWorkout() } })
+                        onClick: { endWorkout() })
 
                     if viewModel.isActive {
                         WorkoutButton(
@@ -47,6 +48,14 @@ struct WorkoutManagementView: View {
                 .background(Color.green.cornerRadius(8))
             }
             .padding(.horizontal, 20)
+        }
+    }
+
+    private func endWorkout() {
+        Task {
+            if let summary = await viewModel.endWorkout() {
+                navigationStack.append(.summary(summary))
+            }
         }
     }
 
@@ -122,8 +131,8 @@ struct WorkoutManagementViewPreview: PreviewProvider {
 
     static var previews: some View {
         Group {
-            WorkoutManagementView(viewModel: viewModel(active: false))
-            WorkoutManagementView(viewModel: viewModel(active: true))
+            WorkoutManagementView(viewModel: viewModel(active: false), navigationStack: .constant([]))
+            WorkoutManagementView(viewModel: viewModel(active: true), navigationStack: .constant([]))
 
             EditTargetPaceMidWorkoutView(viewModel: viewModel(active: true))
         }
