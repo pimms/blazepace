@@ -156,39 +156,48 @@ extension WorkoutController: HKWorkoutSessionDelegate {
 
 extension WorkoutController: HKLiveWorkoutBuilderDelegate {
     func workoutBuilder(_ workoutBuilder: HKLiveWorkoutBuilder, didCollectDataOf collectedTypes: Set<HKSampleType>) {
-        for type in collectedTypes {
-            guard let quantityType = type as? HKQuantityType else { continue }
+        let distanceType = HKQuantityType(.distanceWalkingRunning)
+        let heartRateType = HKQuantityType(.heartRate)
 
-            DispatchQueue.main.async {
-                switch quantityType {
-                case HKQuantityType(.distanceWalkingRunning):
-                    self.log.debug("Updating distance")
-                    let statistics = workoutBuilder.statistics(for: quantityType)
+        if collectedTypes.contains(distanceType) {
+            let startDate = Date().addingTimeInterval(-30)
+            let endDate = Date()
+            let predicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: [])
 
-                    if let meters = statistics?.sumQuantity()?.doubleValue(for: .meter()) {
-                        self.viewModel?.distance = Measurement(value: meters, unit: .meters)
-                    }
+            let query = HKSampleQuery(sampleType: distanceType, predicate: predicate, limit: HKObjectQueryNoLimit, sortDescriptors: nil) { (query, samples, error) in
+                guard let samples = samples?.compactMap({ $0 as? HKQuantitySample }), samples.count > 0 else { return }
 
-                    if let mostRecent = statistics?.mostRecentQuantity(),
-                       let interval = statistics?.mostRecentQuantityDateInterval(),
-                       interval.duration > 0 {
-                        let distance = mostRecent.doubleValue(for: .meter())
-                        let metersPerSecond = distance / interval.duration
-                        let pace = 1 / (metersPerSecond / 1000)
-                        let paceInt = Int(pace)
-                        self.viewModel?.currentPace = Pace(secondsPerKilometer: paceInt)
-                    }
-                case HKQuantityType(.heartRate):
-                    self.log.debug("Updating HR")
-                    let statistics = workoutBuilder.statistics(for: quantityType)
-                    let quantity = statistics?.mostRecentQuantity()
-                    if let heartRate = quantity?.doubleValue(for: .hertz()) {
-                        self.viewModel?.heartRate = Int(heartRate * 60.0)
-                    }
-                default:
-                    self.log.debug("Unhandled HKQuantityType: \(quantityType)")
-                    break
+                let seconds = samples.map({ $0.endDate.timeIntervalSince($0.startDate) }).reduce(0, +)
+                let meters = samples.map({ $0.quantity.doubleValue(for: .meter()) }).reduce(0, +)
+                let metersPerSecond = meters / seconds
+                let pace = 1 / (metersPerSecond / 1000)
+                DispatchQueue.main.async {
+                    self.viewModel?.currentPace = Pace(secondsPerKilometer: Int(pace))
                 }
+
+                /*
+                do {
+                    let debugPaces = samples.map({ sample -> (TimeInterval, Double, Double) in
+                        let seconds = sample.endDate.timeIntervalSince(sample.startDate)
+                        let meters = sample.quantity.doubleValue(for: .meter())
+                        let metersPerSecond = meters / seconds
+                        let pace = 1 / (metersPerSecond / 1000)
+                        return (seconds, meters, pace)
+                    }).map({ "[(\($0.0)s, \($0.1)m) \(PaceFormatter.minuteString(fromSeconds: Int($0.2)))]" })
+                    let avg = PaceFormatter.minuteString(fromSeconds: Int(pace))
+
+                    self.log.debug("AVG: \(avg). Values: \(debugPaces)")
+                }
+                */
+            }
+            healthStore.execute(query)
+        }
+
+        if collectedTypes.contains(heartRateType) {
+            let statistics = workoutBuilder.statistics(for: heartRateType)
+            let quantity = statistics?.mostRecentQuantity()
+            if let heartRate = quantity?.doubleValue(for: .hertz()) {
+                self.viewModel?.heartRate = Int(heartRate * 60.0)
             }
         }
     }
