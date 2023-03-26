@@ -28,7 +28,6 @@
 		F526A52F29CF9F0F004EE912 /* PaceAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F526A52E29CF9F0F004EE912 /* PaceAlertController.swift */; };
 		F526A53129CFA553004EE912 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F526A53029CFA553004EE912 /* SettingsView.swift */; };
 		F526A53329CFA5B7004EE912 /* AppStorageKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = F526A53229CFA5B7004EE912 /* AppStorageKey.swift */; };
-		F532B68F29D09EA400A947BA /* PaceSmoother.swift in Sources */ = {isa = PBXBuildFile; fileRef = F532B68E29D09EA400A947BA /* PaceSmoother.swift */; };
 		F5FAACD929D02DB700A47C34 /* WorkoutTypeToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5FAACD829D02DB700A47C34 /* WorkoutTypeToggle.swift */; };
 		F5FAACDB29D0308C00A47C34 /* WorkoutType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5FAACDA29D0308C00A47C34 /* WorkoutType.swift */; };
 		F5FAACDE29D0338600A47C34 /* View+roundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5FAACDD29D0338600A47C34 /* View+roundedCorners.swift */; };
@@ -86,7 +85,6 @@
 		F526A52E29CF9F0F004EE912 /* PaceAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaceAlertController.swift; sourceTree = "<group>"; };
 		F526A53029CFA553004EE912 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		F526A53229CFA5B7004EE912 /* AppStorageKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStorageKey.swift; sourceTree = "<group>"; };
-		F532B68E29D09EA400A947BA /* PaceSmoother.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaceSmoother.swift; sourceTree = "<group>"; };
 		F5FAACD829D02DB700A47C34 /* WorkoutTypeToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutTypeToggle.swift; sourceTree = "<group>"; };
 		F5FAACDA29D0308C00A47C34 /* WorkoutType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutType.swift; sourceTree = "<group>"; };
 		F5FAACDD29D0338600A47C34 /* View+roundedCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+roundedCorners.swift"; sourceTree = "<group>"; };
@@ -194,7 +192,6 @@
 			children = (
 				F526A52429CF018F004EE912 /* WorkoutController.swift */,
 				F526A52E29CF9F0F004EE912 /* PaceAlertController.swift */,
-				F532B68E29D09EA400A947BA /* PaceSmoother.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -335,7 +332,6 @@
 				F526A53329CFA5B7004EE912 /* AppStorageKey.swift in Sources */,
 				F526A51A29CEF6C3004EE912 /* PaceFormatter.swift in Sources */,
 				F5FAACD929D02DB700A47C34 /* WorkoutTypeToggle.swift in Sources */,
-				F532B68F29D09EA400A947BA /* PaceSmoother.swift in Sources */,
 				F526A52B29CF8E00004EE912 /* WorkoutTabView.swift in Sources */,
 				F526A51429CEF3F8004EE912 /* Pace.swift in Sources */,
 			);
