@@ -69,8 +69,8 @@
 		F526A51B29CEF91D004EE912 /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
 		F526A51D29CEF944004EE912 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		F526A51F29CEFEBE004EE912 /* PermissionHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionHelper.swift; sourceTree = "<group>"; };
-		F526A52129CF0101004EE912 /* BlazePace Watch App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "BlazePace Watch App.entitlements"; sourceTree = "<group>"; };
-		F526A52229CF014B004EE912 /* BlazePace-Watch-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BlazePace-Watch-App-Info.plist"; sourceTree = SOURCE_ROOT; };
+		F526A52129CF0101004EE912 /* BlazePace.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BlazePace.entitlements; sourceTree = "<group>"; };
+		F526A52229CF014B004EE912 /* BlazePace-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BlazePace-Info.plist"; sourceTree = SOURCE_ROOT; };
 		F526A52429CF018F004EE912 /* WorkoutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutController.swift; sourceTree = "<group>"; };
 		F526A52629CF0591004EE912 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		F526A52829CF0A47004EE912 /* MetricOverview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricOverview.swift; sourceTree = "<group>"; };
@@ -95,7 +95,7 @@
 		F51A738B29CEE3ED00079140 = {
 			isa = PBXGroup;
 			children = (
-				F51A739C29CEE3ED00079140 /* BlazePace Watch App */,
+				F51A739C29CEE3ED00079140 /* BlazePace */,
 				F51A739329CEE3ED00079140 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -109,11 +109,11 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		F51A739C29CEE3ED00079140 /* BlazePace Watch App */ = {
+		F51A739C29CEE3ED00079140 /* BlazePace */ = {
 			isa = PBXGroup;
 			children = (
-				F526A52129CF0101004EE912 /* BlazePace Watch App.entitlements */,
-				F526A52229CF014B004EE912 /* BlazePace-Watch-App-Info.plist */,
+				F526A52129CF0101004EE912 /* BlazePace.entitlements */,
+				F526A52229CF014B004EE912 /* BlazePace-Info.plist */,
 				F51A739D29CEE3ED00079140 /* BlazePaceApp.swift */,
 				F51A73A129CEE3EE00079140 /* Assets.xcassets */,
 				F526A52329CF017E004EE912 /* Controllers */,
@@ -122,7 +122,7 @@
 				F51A73A329CEE3EE00079140 /* Preview Content */,
 				F526A51529CEF492004EE912 /* Views */,
 			);
-			path = "BlazePace Watch App";
+			path = BlazePace;
 			sourceTree = "<group>";
 		};
 		F51A73A329CEE3EE00079140 /* Preview Content */ = {
@@ -147,6 +147,7 @@
 		F526A51529CEF492004EE912 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F5FAACD729D02D0A00A47C34 /* ComponentViews */,
 				F51A739F29CEE3ED00079140 /* MainView.swift */,
 				F526A51629CEF4A0004EE912 /* SetupView.swift */,
 				F526A51D29CEF944004EE912 /* RootView.swift */,
@@ -176,6 +177,13 @@
 				F526A52E29CF9F0F004EE912 /* PaceAlertController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		F5FAACD729D02D0A00A47C34 /* ComponentViews */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ComponentViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,7 +241,7 @@
 					};
 				};
 			};
-			buildConfigurationList = F51A738F29CEE3ED00079140 /* Build configuration list for PBXProject "PaceKeeper" */;
+			buildConfigurationList = F51A738F29CEE3ED00079140 /* Build configuration list for PBXProject "BlazePace" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -422,14 +430,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "BlazePace Watch App/BlazePace Watch App.entitlements";
+				CODE_SIGN_ENTITLEMENTS = BlazePace/BlazePace.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"BlazePace Watch App/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"BlazePace/Preview Content\"";
 				DEVELOPMENT_TEAM = WSQ25TFDK3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "BlazePace-Watch-App-Info.plist";
+				INFOPLIST_FILE = "BlazePace-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = BlazePace;
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "This is needed in order to display workout metrics.";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "This is needed in order to record workouts.";
@@ -456,14 +464,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "BlazePace Watch App/BlazePace Watch App.entitlements";
+				CODE_SIGN_ENTITLEMENTS = BlazePace/BlazePace.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"BlazePace Watch App/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"BlazePace/Preview Content\"";
 				DEVELOPMENT_TEAM = WSQ25TFDK3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "BlazePace-Watch-App-Info.plist";
+				INFOPLIST_FILE = "BlazePace-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = BlazePace;
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "This is needed in order to display workout metrics.";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "This is needed in order to record workouts.";
@@ -522,7 +530,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F51A738F29CEE3ED00079140 /* Build configuration list for PBXProject "PaceKeeper" */ = {
+		F51A738F29CEE3ED00079140 /* Build configuration list for PBXProject "BlazePace" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F51A73A629CEE3EE00079140 /* Debug */,
