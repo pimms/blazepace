@@ -480,7 +480,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = no.jstien.blazepaze.watchos;
+				PRODUCT_BUNDLE_IDENTIFIER = no.jstien.blazepace.watchos;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -514,7 +514,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = no.jstien.blazepaze.watchos;
+				PRODUCT_BUNDLE_IDENTIFIER = no.jstien.blazepace.watchos;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -535,7 +535,7 @@
 				DEVELOPMENT_TEAM = WSQ25TFDK3;
 				INFOPLIST_KEY_CFBundleDisplayName = BlazePace;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = no.jstien.blazepace.watchos;
+				PRODUCT_BUNDLE_IDENTIFIER = no.jstien.blazepace;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
@@ -551,7 +551,7 @@
 				DEVELOPMENT_TEAM = WSQ25TFDK3;
 				INFOPLIST_KEY_CFBundleDisplayName = BlazePace;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = no.jstien.blazepace.watchos;
+				PRODUCT_BUNDLE_IDENTIFIER = no.jstien.blazepace;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
