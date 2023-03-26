@@ -9,6 +9,8 @@ class WorkoutController: NSObject, ObservableObject {
     @Published var viewModel: WorkoutViewModel?
 
     private var paceAlertController: PaceAlertController?
+    private var paceSmoother: PaceSmoother?
+    private var paceSmootherSubscription: AnyCancellable?
 
     private let healthStore = HKHealthStore()
     private let log = Log(name: "WorkoutController")
@@ -63,6 +65,13 @@ class WorkoutController: NSObject, ObservableObject {
             self.paceAlertController = PaceAlertController(viewModel: vm)
             self.viewModel = vm
             viewModel?.delegate = self
+
+            let smoother = PaceSmoother()
+            paceSmootherSubscription = smoother.$smoothedPace.sink(receiveValue: { [weak viewModel] pace in
+                viewModel?.currentPace = pace
+            })
+
+            self.paceSmoother = smoother
         }
 
         log.info("Starting workout")
@@ -86,6 +95,8 @@ class WorkoutController: NSObject, ObservableObject {
         }
 
         paceAlertController = nil
+        paceSmootherSubscription = nil
+        paceSmoother = nil
         self.viewModel = nil
         state = .inactive
 
@@ -163,6 +174,7 @@ extension WorkoutController: HKLiveWorkoutBuilderDelegate {
                 switch quantityType {
                 case HKQuantityType(.distanceWalkingRunning):
                     self.log.debug("Updating distance")
+
                     let statistics = workoutBuilder.statistics(for: quantityType)
 
                     if let meters = statistics?.sumQuantity()?.doubleValue(for: .meter()) {
@@ -173,10 +185,7 @@ extension WorkoutController: HKLiveWorkoutBuilderDelegate {
                        let interval = statistics?.mostRecentQuantityDateInterval(),
                        interval.duration > 0 {
                         let distance = mostRecent.doubleValue(for: .meter())
-                        let metersPerSecond = distance / interval.duration
-                        let pace = 1 / (metersPerSecond / 1000)
-                        let paceInt = Int(pace)
-                        self.viewModel?.currentPace = Pace(secondsPerKilometer: paceInt)
+                        self.paceSmoother?.addEntry(date: interval.end, deltaTime: interval.duration, distance: distance)
                     }
                 case HKQuantityType(.heartRate):
                     self.log.debug("Updating HR")
