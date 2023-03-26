@@ -3,8 +3,15 @@ import SwiftUI
 struct MainView: View {
     var body: some View {
         VStack {
-            NavigationLink("Start!", value: Navigation.setup)
+            Text("🔥BlazePace🔥")
+                .font(.title2)
+                .allowsTightening(true)
+            NavigationLink("Start", value: Navigation.setup)
+                .background(Color.green.cornerRadius(8))
+                .foregroundColor(.black)
             NavigationLink("Settings", value: Navigation.settings)
+                .background(Color.secondary.cornerRadius(8))
+                .foregroundColor(.black)
         }
     }
 }
