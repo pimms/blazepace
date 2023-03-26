@@ -12,8 +12,6 @@ class PermissionHelper {
         let typesToRead: Set = [
             HKQuantityType.quantityType(forIdentifier: .heartRate)!,
             HKQuantityType.quantityType(forIdentifier: .distanceWalkingRunning)!,
-            HKQuantityType.quantityType(forIdentifier: .runningSpeed)!,
-            HKQuantityType.quantityType(forIdentifier: .walkingSpeed)!,
         ]
 
         let healthStore = HKHealthStore()
