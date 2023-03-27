@@ -164,6 +164,9 @@ extension WorkoutController: HKLiveWorkoutBuilderDelegate {
             let endDate = Date()
             let predicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: [])
 
+            let statistics = workoutBuilder.statistics(for: distanceType)
+            let totalDistanceMeters = statistics?.sumQuantity()?.doubleValue(for: .meter())
+
             let query = HKSampleQuery(sampleType: distanceType, predicate: predicate, limit: HKObjectQueryNoLimit, sortDescriptors: nil) { (query, samples, error) in
                 guard let samples = samples?.compactMap({ $0 as? HKQuantitySample }), samples.count > 0 else { return }
 
@@ -173,6 +176,10 @@ extension WorkoutController: HKLiveWorkoutBuilderDelegate {
                 let pace = 1 / (metersPerSecond / 1000)
                 DispatchQueue.main.async {
                     self.viewModel?.currentPace = Pace(secondsPerKilometer: Int(pace))
+
+                    if let totalDistanceMeters {
+                        self.viewModel?.distance = Measurement(value: totalDistanceMeters, unit: .meters)
+                    }
                 }
 
                 /*
