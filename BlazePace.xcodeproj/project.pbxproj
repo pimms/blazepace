@@ -473,6 +473,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = BlazePace;
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "This is needed in order to display workout metrics.";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "This is needed in order to record workouts.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This is needed in order to record workout location data.";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKWatchOnly = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -507,6 +508,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = BlazePace;
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "This is needed in order to display workout metrics.";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "This is needed in order to record workouts.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This is needed in order to record workout location data.";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKWatchOnly = YES;
 				LD_RUNPATH_SEARCH_PATHS = (

@@ -5,6 +5,7 @@ struct RootView: View {
     @ObservedObject var workoutController = WorkoutController.shared
     @State var navigation: [Navigation] = []
     @State var healthKitError: Bool = false
+    @State var coreLocationError: Bool = false
 
     var body: some View {
         NavigationStack(path: $navigation) {
@@ -30,10 +31,19 @@ struct RootView: View {
                         healthKitError = false
                     }
                 }
+                .alert("Failed to acquire location permissions. Workout data will be imprecise.", isPresented: $coreLocationError) {
+                    Button("OK", role: .cancel) {
+                        coreLocationError = false
+                    }
+                }
         }
         .onAppear(perform: {
             PermissionHelper.shared.requestHealthKitPermissions(onError: { error in
                 healthKitError = true
+            })
+
+            PermissionHelper.shared.requestLocationPermission(onError: {
+                coreLocationError = true
             })
         })
     }
