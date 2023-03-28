@@ -36,7 +36,13 @@ class PaceController: NSObject {
         cleanEntries()
 
         let sum = entries.map({ $0.pace }).reduce(0, +)
-        let pace = sum / Double(entries.count)
+        let pace: Double
+
+        if entries.count > 0, sum > 0 {
+            pace = sum / Double(entries.count)
+        } else {
+            pace = 0
+        }
 
         DispatchQueue.main.async {
             self.viewModel.currentPace = Pace(secondsPerKilometer: Int(pace))
