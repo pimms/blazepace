@@ -32,7 +32,10 @@ struct WorkoutManagementView: View {
                         sfSymbol: viewModel.playNotifications ? "bell.fill" : "bell.slash",
                         color: .blue,
                         onClick: muteButtonClicked)
-
+                    WorkoutButton(
+                        sfSymbol: "gearshape.fill",
+                        color: .gray,
+                        onClick: { navigationStack.append(.settings) })
                 }
 
                 NavigationLink(value: Navigation.editTargetPace) {
