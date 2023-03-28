@@ -8,7 +8,7 @@ struct SetupView: View {
     private var pace: Int = 300
     @AppStorage(AppStorageKey.defaultPaceRange)
     private var delta: Int = 10
-    @State
+    @AppStorage(AppStorageKey.defaultWorkoutType)
     private var workoutType: WorkoutType = .running
 
     var body: some View {
