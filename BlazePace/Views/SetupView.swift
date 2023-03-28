@@ -13,8 +13,8 @@ struct SetupView: View {
 
     init(onStart: @escaping (WorkoutStartData) -> Void) {
         self.onStart = onStart
-        let defaultWorkoutType = UserDefaults.standard.object(forKey: AppStorageKey.defaultWorkoutType) as? WorkoutType
-        _workoutType = .init(initialValue: defaultWorkoutType ?? .running)
+        let defaultWorkoutType = UserDefaults.standard.string(forKey: AppStorageKey.defaultWorkoutType) ?? ""
+        _workoutType = .init(initialValue: WorkoutType(rawValue: defaultWorkoutType) ?? .running)
     }
 
     var body: some View {
@@ -41,7 +41,7 @@ struct SetupView: View {
     }
 
     private func startButtonClicked() {
-        UserDefaults.standard.set(workoutType, forKey: AppStorageKey.defaultWorkoutType)
+        UserDefaults.standard.set(workoutType.rawValue, forKey: AppStorageKey.defaultWorkoutType)
         let targetPace = TargetPace(secondsPerKilometer: pace, range: delta)
         let startData = WorkoutStartData(workoutType: workoutType, targetPace: targetPace)
         onStart(startData)
