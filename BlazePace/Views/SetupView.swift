@@ -8,8 +8,14 @@ struct SetupView: View {
     private var pace: Int = 300
     @AppStorage(AppStorageKey.defaultPaceRange)
     private var delta: Int = 10
-    @AppStorage(AppStorageKey.defaultWorkoutType)
-    private var workoutType: WorkoutType = .running
+    @State
+    private var workoutType: WorkoutType
+
+    init(onStart: @escaping (WorkoutStartData) -> Void) {
+        self.onStart = onStart
+        let defaultWorkoutType = UserDefaults.standard.object(forKey: AppStorageKey.defaultWorkoutType) as? WorkoutType
+        _workoutType = .init(initialValue: defaultWorkoutType ?? .running)
+    }
 
     var body: some View {
         ScrollView {
