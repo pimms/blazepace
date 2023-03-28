@@ -30,6 +30,7 @@
 		F526A53329CFA5B7004EE912 /* AppStorageKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = F526A53229CFA5B7004EE912 /* AppStorageKey.swift */; };
 		F532B69529D358CF00A947BA /* LocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F532B69429D358CF00A947BA /* LocationController.swift */; };
 		F532B69829D36AC500A947BA /* SpeechSynthesizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F532B69729D36AC500A947BA /* SpeechSynthesizer.swift */; };
+		F533841029D36E50007503AD /* PaceAlertType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F533840F29D36E50007503AD /* PaceAlertType.swift */; };
 		F5FAACD929D02DB700A47C34 /* WorkoutTypeToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5FAACD829D02DB700A47C34 /* WorkoutTypeToggle.swift */; };
 		F5FAACDB29D0308C00A47C34 /* WorkoutType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5FAACDA29D0308C00A47C34 /* WorkoutType.swift */; };
 		F5FAACDE29D0338600A47C34 /* View+roundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5FAACDD29D0338600A47C34 /* View+roundedCorners.swift */; };
@@ -90,6 +91,7 @@
 		F532B69429D358CF00A947BA /* LocationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationController.swift; sourceTree = "<group>"; };
 		F532B69629D364F600A947BA /* Oslo_maraton_.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Oslo_maraton_.gpx; sourceTree = "<group>"; };
 		F532B69729D36AC500A947BA /* SpeechSynthesizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechSynthesizer.swift; sourceTree = "<group>"; };
+		F533840F29D36E50007503AD /* PaceAlertType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaceAlertType.swift; sourceTree = "<group>"; };
 		F5FAACD829D02DB700A47C34 /* WorkoutTypeToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutTypeToggle.swift; sourceTree = "<group>"; };
 		F5FAACDA29D0308C00A47C34 /* WorkoutType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutType.swift; sourceTree = "<group>"; };
 		F5FAACDD29D0338600A47C34 /* View+roundedCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+roundedCorners.swift"; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 				F5FAACDA29D0308C00A47C34 /* WorkoutType.swift */,
 				F5FAACDF29D038AA00A47C34 /* WorkoutStartData.swift */,
 				F5FAACE129D04C1D00A47C34 /* WorkoutSummary.swift */,
+				F533840F29D36E50007503AD /* PaceAlertType.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -344,6 +347,7 @@
 				F5FAACD929D02DB700A47C34 /* WorkoutTypeToggle.swift in Sources */,
 				F526A52B29CF8E00004EE912 /* WorkoutTabView.swift in Sources */,
 				F526A51429CEF3F8004EE912 /* Pace.swift in Sources */,
+				F533841029D36E50007503AD /* PaceAlertType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

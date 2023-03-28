@@ -2,7 +2,8 @@ import Foundation
 import SwiftUI
 
 struct AppStorageKey {
-    static let paceNotificationInterval = "paceNotificationInterval"
+    static let paceAlertInterval = "paceNotificationInterval"
+    static let paceAlertType = "paceAlertType"
 
     static let defaultPace = "defaultPace"
     static let defaultPaceRange = "defaultPaceRange"

@@ -1,7 +1,7 @@
 import Foundation
 import HealthKit
 
-enum WorkoutType: String, Hashable, Codable {
+enum WorkoutType: String, Hashable {
     case running = "Running"
     case walking = "Walking"
 

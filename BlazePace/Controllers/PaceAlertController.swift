@@ -10,7 +10,7 @@ class PaceAlertController {
     private var subscriptions: Set<AnyCancellable> = []
     private var timer: Timer?
 
-    @AppStorage(AppStorageKey.paceNotificationInterval)
+    @AppStorage(AppStorageKey.paceAlertInterval)
     private var paceNotificationInterval: Int = 2
 
     init(viewModel: WorkoutViewModel) {
