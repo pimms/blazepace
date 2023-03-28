@@ -14,11 +14,15 @@ class PermissionHelper: NSObject {
     func requestHealthKitPermissions(onError: @escaping (Error) -> Void) {
         let typesToShare: Set = [
             HKQuantityType.workoutType(),
+            HKSeriesType.workoutRoute(),
+            HKSeriesType.workoutType(),
         ]
 
         let typesToRead: Set = [
             HKQuantityType.quantityType(forIdentifier: .heartRate)!,
             HKQuantityType.quantityType(forIdentifier: .distanceWalkingRunning)!,
+            HKSeriesType.workoutRoute(),
+            HKSeriesType.workoutType(),
         ]
 
         healthStore.requestAuthorization(toShare: typesToShare, read: typesToRead) { (success, error) in

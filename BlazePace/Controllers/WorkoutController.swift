@@ -8,7 +8,7 @@ class WorkoutController: NSObject, ObservableObject {
         let session: HKWorkoutSession
         let builder: HKLiveWorkoutBuilder
         let paceAlertController: PaceAlertController
-        let paceController: PaceController
+        let locationController: LocationController
     }
 
     static let shared = WorkoutController()
@@ -66,7 +66,7 @@ class WorkoutController: NSObject, ObservableObject {
             session: session,
             builder: builder,
             paceAlertController: PaceAlertController(viewModel: viewModel),
-            paceController: PaceController(viewModel: viewModel))
+            locationController: LocationController(viewModel: viewModel, healthStore: healthStore))
 
         log.info("Starting workout")
         return true
@@ -82,10 +82,15 @@ class WorkoutController: NSObject, ObservableObject {
         }
 
         activeSessionObjects.session.end()
+        activeSessionObjects.locationController.workoutPaused()
 
         do {
             try await activeSessionObjects.builder.endCollection(at: Date())
-            try await activeSessionObjects.builder.finishWorkout()
+            if let workout = try await activeSessionObjects.builder.finishWorkout() {
+                try await activeSessionObjects.locationController.saveRoute(to: workout)
+            } else {
+                log.error("Failed to retrieve HKWorkout from workout builder")
+            }
         } catch {
             log.error("Failed to finish workout: \(error)")
         }
@@ -144,8 +149,10 @@ extension WorkoutController: HKWorkoutSessionDelegate {
             case .ended:
                 self.viewModel?.isActive = false
             case .paused:
+                self.activeSessionObjects?.locationController.workoutPaused()
                 self.viewModel?.isActive = false
             case .running:
+                self.activeSessionObjects?.locationController.workoutStarted()
                 self.viewModel?.isActive = true
             default:
                 break
@@ -175,7 +182,7 @@ extension WorkoutController: HKLiveWorkoutBuilderDelegate {
                 guard let samples = samples?.compactMap({ $0 as? HKQuantitySample }), samples.count > 0 else { return }
 
                 DispatchQueue.main.async {
-                    if self.activeSessionObjects?.paceController.isAuthorized == false {
+                    if self.activeSessionObjects?.locationController.isAuthorized == false {
                         // The HK pace is very imprecise, only use if CL is unauthorized.
                         let seconds = samples.map({ $0.endDate.timeIntervalSince($0.startDate) }).reduce(0, +)
                         let meters = samples.map({ $0.quantity.doubleValue(for: .meter()) }).reduce(0, +)

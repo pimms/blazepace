@@ -1,7 +1,8 @@
 import Foundation
 import CoreLocation
+import HealthKit
 
-class PaceController: NSObject {
+class LocationController: NSObject {
     private struct Entry {
         let date: Date
         let pace: Double
@@ -12,11 +13,15 @@ class PaceController: NSObject {
     private let log = Log(name: "PaceController")
     private let coreLocationManager = CLLocationManager()
     private let viewModel: WorkoutViewModel
+    private let routeBuilder: HKWorkoutRouteBuilder
 
     private var entries: [Entry] = []
+    private var updateRoute = false
 
-    init(viewModel: WorkoutViewModel) {
+    init(viewModel: WorkoutViewModel, healthStore: HKHealthStore) {
         self.viewModel = viewModel
+        self.routeBuilder = HKWorkoutRouteBuilder(healthStore: healthStore, device: nil)
+
         switch coreLocationManager.authorizationStatus {
         case .authorizedAlways, .authorizedWhenInUse:
             log.info("Authorized")
@@ -31,6 +36,22 @@ class PaceController: NSObject {
         coreLocationManager.delegate = self
         coreLocationManager.startUpdatingLocation()
     }
+
+    // MARK: - Internal methods
+
+    func workoutStarted() {
+        updateRoute = true
+    }
+
+    func workoutPaused() {
+        updateRoute = false
+    }
+
+    func saveRoute(to workout: HKWorkout) async throws {
+        try await routeBuilder.finishRoute(with: workout, metadata: nil)
+    }
+
+    // MARK: - Private methods
 
     private func updatePace() {
         cleanEntries()
@@ -60,13 +81,26 @@ class PaceController: NSObject {
     }
 }
 
-extension PaceController: CLLocationManagerDelegate {
+extension LocationController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.last, location.speed >= 0 else { return }
+        let filtered = locations.filter({ location in
+            return location.speed >= 0 && location.speedAccuracy >= 0 && location.horizontalAccuracy <= 50
+        })
 
-        let pace = 1 / (location.speed / 1000)
-        let entry = Entry(date: Date(), pace: pace)
-        entries.append(entry)
+        guard filtered.count > 0 else { return }
+
+        if updateRoute {
+            routeBuilder.insertRouteData(filtered, completion: { success, error in
+                if !success, let error {
+                    self.log.error("Failed to insert route data: \(error)")
+                }
+            })
+        }
+
+        entries.append(contentsOf: filtered.map({
+            let pace = 1 / ($0.speed / 1000)
+            return Entry(date: $0.timestamp, pace: pace)
+        }))
 
         updatePace()
     }
