@@ -41,6 +41,7 @@ struct SetupView: View {
     }
 
     private func startButtonClicked() {
+        UserDefaults.standard.set(workoutType, forKey: AppStorageKey.defaultWorkoutType)
         let targetPace = TargetPace(secondsPerKilometer: pace, range: delta)
         let startData = WorkoutStartData(workoutType: workoutType, targetPace: targetPace)
         onStart(startData)
