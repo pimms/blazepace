@@ -25,10 +25,25 @@ class PaceAlertController {
     init(viewModel: WorkoutViewModel) {
         self.viewModel = viewModel
 
-        log.debug("Pace notifications enabled at \(paceNotificationInterval)s interval")
-        let interval = TimeInterval(paceNotificationInterval)
-        timer = Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { [weak self] _ in
-            self?.triggerPaceNotification()
+        viewModel.$currentPace
+            .compactMap(({ $0 }))
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] pace in
+                self?.onPaceUpdated(pace)
+            })
+            .store(in: &subscriptions)
+    }
+
+    private func onPaceUpdated(_ pace: Pace) {
+        // We already have a timer active. It will notify the user.
+        if timer != nil { return }
+
+        guard viewModel.isActive, viewModel.playNotifications else { return }
+        switch viewModel.paceRelativeToTarget {
+        case .inRange:
+            break
+        case .tooSlow, .tooFast:
+            triggerPaceNotification()
         }
     }
 
@@ -36,7 +51,8 @@ class PaceAlertController {
         guard viewModel.isActive, viewModel.playNotifications else { return }
         switch viewModel.paceRelativeToTarget {
         case .inRange:
-            break
+            timer?.invalidate()
+            timer = nil
         case .tooSlow:
             switch paceAlertType {
             case .ding:
@@ -44,6 +60,7 @@ class PaceAlertController {
             case .speech:
                 speechSynthesizer.speak("Too slow.")
             }
+            startTimer()
         case .tooFast:
             switch paceAlertType {
             case .ding:
@@ -51,6 +68,14 @@ class PaceAlertController {
             case .speech:
                 speechSynthesizer.speak("Too fast.")
             }
+            startTimer()
+        }
+    }
+
+    private func startTimer() {
+        let interval = TimeInterval(paceNotificationInterval)
+        timer = Timer.scheduledTimer(withTimeInterval: interval, repeats: false) { [weak self] _ in
+            self?.triggerPaceNotification()
         }
     }
 }

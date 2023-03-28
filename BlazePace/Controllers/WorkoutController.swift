@@ -57,7 +57,8 @@ class WorkoutController: NSObject, ObservableObject {
 
         await MainActor.run {
             viewModel = WorkoutViewModel(workoutType: startData.workoutType, targetPace: startData.targetPace)
-            viewModel!.delegate = self
+            viewModel?.isActive = true
+            viewModel?.delegate = self
         }
 
         guard let viewModel else { fatalError("Inconsistency") }
@@ -68,6 +69,7 @@ class WorkoutController: NSObject, ObservableObject {
             paceAlertController: PaceAlertController(viewModel: viewModel),
             locationController: LocationController(viewModel: viewModel, healthStore: healthStore))
 
+        viewModel.isActive = true
         log.info("Starting workout")
         return true
     }
