@@ -41,9 +41,9 @@ class WorkoutController: NSObject, ObservableObject {
             return false
         }
 
-        builder.dataSource = HKLiveWorkoutDataSource(healthStore: healthStore, workoutConfiguration: configuration)
         session.delegate = self
         builder.delegate = self
+        builder.dataSource = HKLiveWorkoutDataSource(healthStore: healthStore, workoutConfiguration: configuration)
 
         do {
             session.startActivity(with: Date())

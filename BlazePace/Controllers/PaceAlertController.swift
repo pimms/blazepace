@@ -9,9 +9,18 @@ class PaceAlertController {
     private let viewModel: WorkoutViewModel
     private var subscriptions: Set<AnyCancellable> = []
     private var timer: Timer?
+    private lazy var speechSynthesizer = SpeechSynthesizer()
 
     @AppStorage(AppStorageKey.paceAlertInterval)
     private var paceNotificationInterval: Int = 2
+
+    private var paceAlertType: PaceAlertType {
+        if let stringValue = UserDefaults.standard.string(forKey: AppStorageKey.paceAlertType),
+           let paceAlertType = PaceAlertType(rawValue: stringValue) {
+            return paceAlertType
+        }
+        return .ding
+    }
 
     init(viewModel: WorkoutViewModel) {
         self.viewModel = viewModel
@@ -29,9 +38,19 @@ class PaceAlertController {
         case .inRange:
             break
         case .tooSlow:
-            WKInterfaceDevice.current().play(.directionDown)
+            switch paceAlertType {
+            case .ding:
+                WKInterfaceDevice.current().play(.directionDown)
+            case .speech:
+                speechSynthesizer.speak("Too slow.")
+            }
         case .tooFast:
-            WKInterfaceDevice.current().play(.directionUp)
+            switch paceAlertType {
+            case .ding:
+                WKInterfaceDevice.current().play(.directionUp)
+            case .speech:
+                speechSynthesizer.speak("Too fast.")
+            }
         }
     }
 }
