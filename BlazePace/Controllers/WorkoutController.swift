@@ -196,7 +196,9 @@ extension WorkoutController: HKLiveWorkoutBuilderDelegate {
             let statistics = workoutBuilder.statistics(for: heartRateType)
             let quantity = statistics?.mostRecentQuantity()
             if let heartRate = quantity?.doubleValue(for: .hertz()) {
-                self.viewModel?.heartRate = Int(heartRate * 60.0)
+                DispatchQueue.main.async {
+                    self.viewModel?.heartRate = Int(heartRate * 60.0)
+                }
             }
         }
     }
