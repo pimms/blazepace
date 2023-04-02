@@ -10,7 +10,7 @@ class DiagRepository: DiagRepositoryProtocol {
     }
 
     func references() async -> [DiagReference] {
-        guard let data = manager.contents(atPath: referenceFilePath.absoluteString) else {
+        guard let data = manager.contents(atPath: referenceFilePath.path()) else {
             log.debug("No ref index")
             return []
         }
@@ -26,7 +26,7 @@ class DiagRepository: DiagRepositoryProtocol {
     }
 
     func summary(for reference: DiagReference) async throws -> DiagSummary? {
-        guard let data = manager.contents(atPath: reference.filePath.absoluteString) else {
+        guard let data = manager.contents(atPath: reference.filePath.path()) else {
             return nil
         }
 
@@ -40,10 +40,7 @@ class DiagRepository: DiagRepositoryProtocol {
         }
     }
 
-    func addSummary(_ summary: DiagSummary, reference: DiagReference) async {
-        var refs = await references()
-        refs.insert(reference, at: 0)
-
+    func addSummary(_ summary: DiagSummary, title: String, description: String) async {
         do {
             let encoder = JSONEncoder()
 
@@ -51,6 +48,10 @@ class DiagRepository: DiagRepositoryProtocol {
             let summaryPath = manager.temporaryDirectory.appendingPathComponent(id, conformingTo: .plainText)
             let summaryData = try encoder.encode(summary)
             try summaryData.write(to: summaryPath)
+
+            var refs = await references()
+            let reference = DiagReference(title: title, description: description, filePath: summaryPath)
+            refs.insert(reference, at: 0)
 
             let refData = try encoder.encode(refs)
             try refData.write(to: referenceFilePath)
@@ -63,7 +64,7 @@ class DiagRepository: DiagRepositoryProtocol {
         let tempDir = manager.temporaryDirectory
         let files: [String]
         do {
-            files = try manager.contentsOfDirectory(atPath: tempDir.absoluteString)
+            files = try manager.contentsOfDirectory(atPath: tempDir.path())
         } catch {
             log.error("failed to delete all: \(error)")
             return
@@ -72,7 +73,7 @@ class DiagRepository: DiagRepositoryProtocol {
         for file in files {
             let path = tempDir.appending(path: file)
             do {
-                try manager.removeItem(atPath: path.absoluteString)
+                try manager.removeItem(atPath: path.path())
             } catch {
                 log.error("failed to delete file '\(file)': \(error)")
             }

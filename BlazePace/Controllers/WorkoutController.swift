@@ -9,6 +9,7 @@ class WorkoutController: NSObject, ObservableObject {
         let builder: HKLiveWorkoutBuilder
         let paceAlertController: PaceAlertController
         let locationController: LocationController
+        let diagBuilder: DiagBuilder
     }
 
     static let shared = WorkoutController()
@@ -18,6 +19,7 @@ class WorkoutController: NSObject, ObservableObject {
     private let healthStore = HKHealthStore()
     private let log = Log(name: "WorkoutController")
     private var activeSessionObjects: ActiveSessionObjects?
+
 
     private override init() {}
 
@@ -63,11 +65,16 @@ class WorkoutController: NSObject, ObservableObject {
 
         guard let viewModel else { fatalError("Inconsistency") }
 
+        let diagBuilder = DiagBuilder()
+
         activeSessionObjects = ActiveSessionObjects(
             session: session,
             builder: builder,
             paceAlertController: PaceAlertController(viewModel: viewModel),
-            locationController: LocationController(viewModel: viewModel, healthStore: healthStore))
+            locationController: LocationController(viewModel: viewModel, healthStore: healthStore),
+            diagBuilder: diagBuilder)
+
+        activeSessionObjects?.locationController.onNewLocation = diagBuilder.addLocation
 
         viewModel.isActive = true
         log.info("Starting workout")
@@ -100,7 +107,9 @@ class WorkoutController: NSObject, ObservableObject {
         self.viewModel = nil
         self.activeSessionObjects = nil
 
-        return buildSummary(from: viewModel, elapsedTime: activeSessionObjects.builder.elapsedTime)
+        let summary = buildSummary(from: viewModel, elapsedTime: activeSessionObjects.builder.elapsedTime)
+        activeSessionObjects.diagBuilder.finalize(with: summary)
+        return summary
     }
 
     private func buildSummary(from viewModel: WorkoutViewModel, elapsedTime: TimeInterval) -> WorkoutSummary {

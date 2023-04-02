@@ -36,6 +36,7 @@
 		F5C3B14B29D964B70080E653 /* DiagRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C3B14A29D964B70080E653 /* DiagRepositoryProtocol.swift */; };
 		F5C3B14D29D964DE0080E653 /* DiagSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C3B14C29D964DE0080E653 /* DiagSummary.swift */; };
 		F5C3B14F29D9683E0080E653 /* DiagRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C3B14E29D9683E0080E653 /* DiagRepository.swift */; };
+		F5C3B15129D9722E0080E653 /* DiagBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C3B15029D9722E0080E653 /* DiagBuilder.swift */; };
 		F5FAACD929D02DB700A47C34 /* WorkoutTypeToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5FAACD829D02DB700A47C34 /* WorkoutTypeToggle.swift */; };
 		F5FAACDB29D0308C00A47C34 /* WorkoutType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5FAACDA29D0308C00A47C34 /* WorkoutType.swift */; };
 		F5FAACDE29D0338600A47C34 /* View+roundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5FAACDD29D0338600A47C34 /* View+roundedCorners.swift */; };
@@ -102,6 +103,7 @@
 		F5C3B14A29D964B70080E653 /* DiagRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagRepositoryProtocol.swift; sourceTree = "<group>"; };
 		F5C3B14C29D964DE0080E653 /* DiagSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagSummary.swift; sourceTree = "<group>"; };
 		F5C3B14E29D9683E0080E653 /* DiagRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagRepository.swift; sourceTree = "<group>"; };
+		F5C3B15029D9722E0080E653 /* DiagBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagBuilder.swift; sourceTree = "<group>"; };
 		F5FAACD829D02DB700A47C34 /* WorkoutTypeToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutTypeToggle.swift; sourceTree = "<group>"; };
 		F5FAACDA29D0308C00A47C34 /* WorkoutType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutType.swift; sourceTree = "<group>"; };
 		F5FAACDD29D0338600A47C34 /* View+roundedCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+roundedCorners.swift"; sourceTree = "<group>"; };
@@ -142,12 +144,12 @@
 		F51A739C29CEE3ED00079140 /* BlazePace */ = {
 			isa = PBXGroup;
 			children = (
-				F5C3B14729D964780080E653 /* Diagnostics */,
 				F526A52129CF0101004EE912 /* BlazePace.entitlements */,
 				F526A52229CF014B004EE912 /* BlazePace-Info.plist */,
 				F51A739D29CEE3ED00079140 /* BlazePaceApp.swift */,
 				F51A73A129CEE3EE00079140 /* Assets.xcassets */,
 				F526A52329CF017E004EE912 /* Controllers */,
+				F5C3B14729D964780080E653 /* Diagnostics */,
 				F5FAACDC29D0337B00A47C34 /* Extensions */,
 				F526A51829CEF6BA004EE912 /* Helpers */,
 				F526A51029CEF395004EE912 /* Models */,
@@ -226,6 +228,7 @@
 				F5C3B14A29D964B70080E653 /* DiagRepositoryProtocol.swift */,
 				F5C3B14C29D964DE0080E653 /* DiagSummary.swift */,
 				F5C3B14E29D9683E0080E653 /* DiagRepository.swift */,
+				F5C3B15029D9722E0080E653 /* DiagBuilder.swift */,
 			);
 			path = Diagnostics;
 			sourceTree = "<group>";
@@ -375,6 +378,7 @@
 				F5C3B14429D960880080E653 /* DebugView.swift in Sources */,
 				F526A52B29CF8E00004EE912 /* WorkoutTabView.swift in Sources */,
 				F526A51429CEF3F8004EE912 /* Pace.swift in Sources */,
+				F5C3B15129D9722E0080E653 /* DiagBuilder.swift in Sources */,
 				F533841029D36E50007503AD /* PaceAlertType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

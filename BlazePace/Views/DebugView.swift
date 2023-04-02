@@ -83,7 +83,7 @@ struct DebugViewPreview: PreviewProvider {
             ]
         }
         func summary(for reference: DiagReference) async throws -> DiagSummary? { nil }
-        func addSummary(_ summary: DiagSummary, reference: DiagReference) async { }
+        func addSummary(_ summary: DiagSummary, title: String, description: String) async { }
         func deleteAll() async { }
     }
 

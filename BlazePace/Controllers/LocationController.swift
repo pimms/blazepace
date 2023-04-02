@@ -9,6 +9,7 @@ class LocationController: NSObject {
     }
 
     let isAuthorized: Bool
+    var onNewLocation: ((CLLocation) -> Void)?
 
     private let log = Log(name: "PaceController")
     private let coreLocationManager = CLLocationManager()
@@ -88,6 +89,10 @@ extension LocationController: CLLocationManagerDelegate {
         })
 
         guard filtered.count > 0 else { return }
+
+        for loc in filtered {
+            onNewLocation?(loc)
+        }
 
         if updateRoute {
             routeBuilder.insertRouteData(filtered, completion: { success, error in

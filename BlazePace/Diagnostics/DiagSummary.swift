@@ -7,8 +7,8 @@ struct DiagSummary: Codable {
         let t: TimeInterval
     }
 
-    let title: String
-    let startTime: Date
-    let endTime: Date
-    var entries: [Entry]
+    var title: String = ""
+    var startTime: Date = Date()
+    var endTime: Date = Date()
+    var entries: [Entry] = []
 }
