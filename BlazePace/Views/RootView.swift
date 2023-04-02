@@ -24,6 +24,8 @@ struct RootView: View {
                         }
                     case .summary(let summary):
                         SummaryView(summary: summary, navigationStack: $navigation)
+                    case .debug:
+                        DebugView(repository: DiagRepository())
                     }
                 }
                 .alert("Failed to acquire HealthKit permissions", isPresented: $healthKitError) {

@@ -5,4 +5,5 @@ enum Navigation: Hashable {
     case settings
     case editTargetPace
     case summary(WorkoutSummary)
+    case debug
 }
