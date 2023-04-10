@@ -85,7 +85,7 @@ class LocationController: NSObject {
 extension LocationController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let filtered = locations.filter({ location in
-            return location.speed >= 0 && location.speedAccuracy >= 0 && location.horizontalAccuracy <= 50
+            return location.speed > 0 && location.speedAccuracy > 0 && location.horizontalAccuracy <= 50
         })
 
         guard filtered.count > 0 else { return }
