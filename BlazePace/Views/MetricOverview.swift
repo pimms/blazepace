@@ -3,36 +3,46 @@ import SwiftUI
 
 struct MetricOverview: View {
     @ObservedObject var viewModel: WorkoutViewModel
+
     var body: some View {
         ScrollView {
-            VStack(spacing: 0) {
-                SingleMetricView(
-                    sfSymbolName: "speedometer",
-                    value: currentPaceString,
-                    subtitle: currentPaceSubtitle,
-                    color: .black)
-                .foregroundColor(.red)
-                .background(content: {
-                    if viewModel.isInTargetPace {
-                        Color.green.ignoresSafeArea(.all).cornerRadius(5)
-                        EmptyView()
-                    } else {
-                        Color.red.ignoresSafeArea(.all).cornerRadius(5)
-                    }
-                })
-                SingleMetricView(
-                    sfSymbolName: "heart.fill",
-                    value: heartRateString,
-                    subtitle: "HR",
-                    color: .primary)
-                SingleMetricView(
-                    sfSymbolName: "road.lanes.curved.right",
-                    value: distanceString,
-                    subtitle: "km",
-                    color: .primary)
+            TimelineView(PeriodicTimelineSchedule(from: viewModel.startDate, by: 1)) { context in
+                VStack(spacing: 0) {
+                    SingleMetricView(
+                        sfSymbolName: "stopwatch",
+                        value: "\(PaceFormatter.durationString(from: Int(Date().timeIntervalSince(viewModel.startDate))))",
+                        subtitle: nil,
+                        color: viewModel.isInTargetPace ? .yellow : .primary)
+
+                    SingleMetricView(
+                        sfSymbolName: "speedometer",
+                        value: currentPaceString,
+                        subtitle: currentPaceSubtitle,
+                        color: viewModel.isInTargetPace ? .green : .black)
+                    .fontWeight(viewModel.isInTargetPace ? .regular : .semibold)
+                    .background(content: {
+                        if viewModel.isInTargetPace {
+                            Color.clear.ignoresSafeArea(.all).cornerRadius(5)
+                            EmptyView()
+                        } else {
+                            Color.red.ignoresSafeArea(.all).cornerRadius(5)
+                        }
+                    })
+                    SingleMetricView(
+                        sfSymbolName: "heart.fill",
+                        value: heartRateString,
+                        subtitle: "HR",
+                        color: viewModel.isInTargetPace ? .red : .primary)
+                    SingleMetricView(
+                        sfSymbolName: "road.lanes.curved.right",
+                        value: distanceString,
+                        subtitle: "km",
+                        color: viewModel.isInTargetPace ? .blue : .primary)
+                }
             }
         }
         .overlay(alignment: .bottom, content: { pauseToast })
+        .scenePadding()
     }
 
     @ViewBuilder
@@ -89,24 +99,28 @@ struct MetricOverview: View {
 }
 
 private struct SingleMetricView: View {
-    let sfSymbolName: String
+    let sfSymbolName: String?
     let value: String?
-    let subtitle: String
+    let subtitle: String?
     let color: Color
 
     var body: some View {
         HStack {
-            Image(systemName: sfSymbolName)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(maxWidth: 24, maxHeight: 24)
+            if let sfSymbolName {
+                Image(systemName: sfSymbolName)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(maxWidth: 24, maxHeight: 24)
+            }
             HStack(alignment: .lastTextBaseline) {
                 Text(valueAsString)
                     .font(.title)
-                Text(subtitle)
-                    .font(.caption2.leading(.tight))
-                    .fontWeight(.light)
-                    .multilineTextAlignment(.leading)
+                if let subtitle {
+                    Text(subtitle)
+                        .font(.caption2.leading(.tight))
+                        .fontWeight(.light)
+                        .multilineTextAlignment(.leading)
+                }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
         }
@@ -123,9 +137,41 @@ private struct SingleMetricView: View {
     }
 }
 
+/// Thanks to WWDC21, "Build a workout app for Apple watch"
+private class ElapsedTimeFormatter: Formatter {
+    let componentsFormatter: DateComponentsFormatter = {
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.minute, .second]
+        formatter.zeroFormattingBehavior = .pad
+        return formatter
+    }()
+    var showSubseconds = true
+
+    override func string(for value: Any?) -> String? {
+        guard let time = value as? TimeInterval else {
+            return nil
+        }
+
+        guard let formattedString = componentsFormatter.string(from: time) else {
+            return nil
+        }
+
+        if showSubseconds {
+            let hundredths = Int((time.truncatingRemainder(dividingBy: 1)) * 100)
+            let decimalSeparator = Locale.current.decimalSeparator ?? "."
+            return String(format: "%@%@%0.2d", formattedString, decimalSeparator, hundredths)
+        }
+
+        return formattedString
+    }
+}
+
 struct MetricOverviewPreview: PreviewProvider {
     static func viewModel(target: Int, current: Int) -> WorkoutViewModel {
-        let viewModel = WorkoutViewModel(workoutType: .running, targetPace: TargetPace(secondsPerKilometer: target, range: 10))
+        let viewModel = WorkoutViewModel(
+            workoutType: .running,
+            startDate: Date(),
+            targetPace: TargetPace(secondsPerKilometer: target, range: 10))
         viewModel.currentPace = Pace(secondsPerKilometer: current)
         viewModel.distance = Measurement(value: 7049, unit: .meters)
         viewModel.heartRate = 140
@@ -141,7 +187,9 @@ struct MetricOverviewPreview: PreviewProvider {
                 .previewDisplayName("Too fast")
             MetricOverview(viewModel: viewModel(target: 300, current: 315))
                 .previewDisplayName("Too slow")
-            MetricOverview(viewModel: WorkoutViewModel(workoutType: .running, targetPace: TargetPace(secondsPerKilometer: 300, range: 10)))
+            MetricOverview(viewModel: WorkoutViewModel(workoutType: .running,
+                                                       startDate: Date(),
+                                                       targetPace: TargetPace(secondsPerKilometer: 300, range: 10)))
                 .previewDisplayName("Empty")
         }
     }

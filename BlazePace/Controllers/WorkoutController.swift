@@ -58,7 +58,10 @@ class WorkoutController: NSObject, ObservableObject {
         log.info("Workout setup OK")
 
         await MainActor.run {
-            viewModel = WorkoutViewModel(workoutType: startData.workoutType, targetPace: startData.targetPace)
+            viewModel = WorkoutViewModel(
+                workoutType: startData.workoutType,
+                startDate: builder.startDate ?? Date(),
+                targetPace: startData.targetPace)
             viewModel?.isActive = true
             viewModel?.delegate = self
         }
@@ -215,8 +218,14 @@ extension WorkoutController: HKLiveWorkoutBuilderDelegate {
             let quantity = statistics?.mostRecentQuantity()
             if let heartRate = quantity?.doubleValue(for: .hertz()) {
                 DispatchQueue.main.async {
+                    self.viewModel?.lastHeartrateUpdate = Date()
                     self.viewModel?.heartRate = Int(heartRate * 60.0)
                 }
+            }
+        } else if let lastHeartRateUpdate = viewModel?.lastHeartrateUpdate, Date().timeIntervalSince(lastHeartRateUpdate) > 5 {
+            DispatchQueue.main.async {
+                self.viewModel?.lastHeartrateUpdate = nil
+                self.viewModel?.heartRate = nil
             }
         }
     }

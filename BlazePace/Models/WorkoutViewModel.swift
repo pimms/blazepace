@@ -9,6 +9,8 @@ protocol WorkoutViewModelDelegate: AnyObject {
 
 class WorkoutViewModel: ObservableObject {
     let workoutType: WorkoutType
+    let startDate: Date
+    var lastHeartrateUpdate: Date?
 
     @Published var targetPace: TargetPace
     @Published var currentPace: Pace?
@@ -21,8 +23,9 @@ class WorkoutViewModel: ObservableObject {
 
     private let log = Log(name: "WorkoutViewModel")
 
-    init(workoutType: WorkoutType, targetPace: TargetPace) {
+    init(workoutType: WorkoutType, startDate: Date, targetPace: TargetPace) {
         self.workoutType = workoutType
+        self.startDate = startDate
         self._targetPace = .init(initialValue: targetPace)
     }
 

@@ -127,7 +127,10 @@ private struct WorkoutButtonStyle: ButtonStyle {
 
 struct WorkoutManagementViewPreview: PreviewProvider {
     static func viewModel(active: Bool) -> WorkoutViewModel {
-        let vm = WorkoutViewModel(workoutType: .running, targetPace: TargetPace(secondsPerKilometer: 300, range: 10))
+        let vm = WorkoutViewModel(
+            workoutType: .running,
+            startDate: Date(),
+            targetPace: TargetPace(secondsPerKilometer: 300, range: 10))
         vm.isActive = active
         return vm
     }
