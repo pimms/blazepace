@@ -55,8 +55,19 @@ class LocationController: NSObject {
     // MARK: - Private methods
 
     private func updatePace() {
-        cleanEntries()
+        cleanEntries(ageThreshold: 15)
 
+        let now = Date()
+        let currentPace = pace(for: entries.filter({ now.timeIntervalSince($0.date) < 5 }))
+        let rollingPace = pace(for: entries)
+
+        DispatchQueue.main.async {
+            self.viewModel.currentPace = currentPace
+            self.viewModel.recentRollingAveragePace = rollingPace
+        }
+    }
+
+    private func pace(for entries: [Entry]) -> Pace {
         let sum = entries.map({ $0.pace }).reduce(0, +)
         let pace: Double
 
@@ -66,13 +77,11 @@ class LocationController: NSObject {
             pace = 0
         }
 
-        DispatchQueue.main.async {
-            self.viewModel.currentPace = Pace(secondsPerKilometer: Int(pace))
-        }
+        return Pace(secondsPerKilometer: Int(pace))
     }
 
-    private func cleanEntries() {
-        let cutoff = Date().addingTimeInterval(-10)
+    private func cleanEntries(ageThreshold: TimeInterval) {
+        let cutoff = Date().addingTimeInterval(-ageThreshold)
         var index = 0
         while index < entries.count && entries[index].date < cutoff {
             index += 1
@@ -85,7 +94,7 @@ class LocationController: NSObject {
 extension LocationController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let filtered = locations.filter({ location in
-            return location.speed > 0 && location.speedAccuracy > 0 && location.horizontalAccuracy <= 50
+            return location.speed > 0 && location.speedAccuracy >= 0 && location.horizontalAccuracy <= 50
         })
 
         guard filtered.count > 0 else { return }

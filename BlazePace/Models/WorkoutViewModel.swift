@@ -14,6 +14,7 @@ class WorkoutViewModel: ObservableObject {
 
     @Published var targetPace: TargetPace
     @Published var currentPace: Pace?
+    @Published var recentRollingAveragePace: Pace?
     @Published var heartRate: Int?
     @Published var distance: Measurement<UnitLength>?
     @Published var isActive: Bool = false
@@ -49,6 +50,22 @@ extension WorkoutViewModel {
         case inRange
     }
 
+    enum PaceAlert: Equatable {
+        case tooSlowAlert
+        case tooFastAlert
+
+        static func == (lhs: Self, rhs: PaceRelativeToTarget) -> Bool {
+            switch (lhs, rhs) {
+            case (.tooSlowAlert, .tooSlow):
+                return true
+            case (.tooFastAlert, .tooFast):
+                return true
+            default:
+                return false
+            }
+        }
+    }
+
     var paceRelativeToTarget: PaceRelativeToTarget {
         guard let currentPace else { return .tooSlow }
 
@@ -58,6 +75,19 @@ extension WorkoutViewModel {
             return .tooSlow
         } else {
             return .inRange
+        }
+    }
+
+    var currentPaceAlert: PaceAlert? {
+        guard let recentRollingAveragePace else { return nil }
+        guard let currentPace else { return nil }
+
+        if recentRollingAveragePace.secondsPerKilometer < targetPace.lowerBound && currentPace.secondsPerKilometer < targetPace.lowerBound {
+            return .tooFastAlert
+        } else if recentRollingAveragePace.secondsPerKilometer > targetPace.upperBound && currentPace.secondsPerKilometer > targetPace.upperBound {
+            return .tooSlowAlert
+        } else {
+            return nil
         }
     }
 

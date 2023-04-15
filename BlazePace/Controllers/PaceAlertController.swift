@@ -25,35 +25,38 @@ class PaceAlertController {
     init(viewModel: WorkoutViewModel) {
         self.viewModel = viewModel
 
-        viewModel.$currentPace
+        viewModel.$recentRollingAveragePace
             .compactMap(({ $0 }))
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] pace in
-                self?.onPaceUpdated(pace)
+                self?.onPaceUpdated()
             })
             .store(in: &subscriptions)
     }
 
-    private func onPaceUpdated(_ pace: Pace) {
+    private func onPaceUpdated() {
         // We already have a timer active. It will notify the user.
         if timer != nil { return }
 
         guard viewModel.isActive, viewModel.playNotifications else { return }
-        switch viewModel.paceRelativeToTarget {
-        case .inRange:
-            break
-        case .tooSlow, .tooFast:
+
+        if viewModel.currentPaceAlert != nil {
             triggerPaceNotification()
         }
     }
 
     private func triggerPaceNotification() {
         guard viewModel.isActive, viewModel.playNotifications else { return }
-        switch viewModel.paceRelativeToTarget {
-        case .inRange:
+
+        guard let paceAlert = viewModel.currentPaceAlert,
+              paceAlert == viewModel.paceRelativeToTarget else {
             timer?.invalidate()
             timer = nil
-        case .tooSlow:
+            return
+        }
+
+        switch paceAlert {
+        case .tooSlowAlert:
             switch paceAlertType {
             case .ding:
                 WKInterfaceDevice.current().play(.directionDown)
@@ -61,7 +64,7 @@ class PaceAlertController {
                 speechSynthesizer.speak("Too slow.")
             }
             startTimer()
-        case .tooFast:
+        case .tooFastAlert:
             switch paceAlertType {
             case .ding:
                 WKInterfaceDevice.current().play(.directionUp)
