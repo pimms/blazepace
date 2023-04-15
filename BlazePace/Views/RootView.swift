@@ -1,5 +1,6 @@
 import Foundation
 import SwiftUI
+import AVFoundation
 
 struct RootView: View {
     @ObservedObject var workoutController = WorkoutController.shared
@@ -47,6 +48,8 @@ struct RootView: View {
             PermissionHelper.shared.requestLocationPermission(onError: {
                 coreLocationError = true
             })
+
+            try? AVAudioSession.sharedInstance().setCategory(.playback, options: .duckOthers)
         })
     }
 

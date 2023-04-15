@@ -1,6 +1,7 @@
 import Foundation
 import HealthKit
 import CoreLocation
+import AVFoundation
 
 class PermissionHelper: NSObject {
     static let shared = PermissionHelper()
@@ -23,6 +24,7 @@ class PermissionHelper: NSObject {
             HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned)!,
             HKQuantityType.quantityType(forIdentifier: .distanceWalkingRunning)!,
             HKSeriesType.workoutRoute(),
+            HKSeriesType.workoutType(),
             HKObjectType.activitySummaryType()
         ]
 
