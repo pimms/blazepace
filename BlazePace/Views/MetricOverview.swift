@@ -7,12 +7,14 @@ struct MetricOverview: View {
 
     var body: some View {
         GeometryReader { geo in
+            let _ = print("JDBG \(geo.size)")
             TimelineView(PeriodicTimelineSchedule(from: viewModel.startDate, by: 1)) { _ in
                 metricsView()
             }
             .overlay(alignment: .bottom, content: { pauseToast })
             .onAppear {
-                self.compactEnvironment = geo.size.width < 160
+                compactEnvironment = geo.size.width < 160
+                print("JDBG: isCompact: \(compactEnvironment)")
             }
         }
     }
@@ -82,7 +84,7 @@ struct MetricOverview: View {
                 color: viewModel.isInTargetPace ? .green : .primary)
         }
         .scenePadding()
-        .font(compactEnvironment ? .title3 : .title)
+        .font(compactEnvironment ? .title3 : .largeTitle)
         .dynamicTypeSize(.medium)
     }
 
@@ -220,9 +222,11 @@ struct MetricOverviewPreview: PreviewProvider {
 
         switch alert {
         case .tooFastAlert:
-            viewModel.recentRollingAveragePace = Pace(secondsPerKilometer: target - 30)
+            viewModel.recentRollingAveragePace = Pace(secondsPerKilometer: target - 60)
+            viewModel.currentPace = Pace(secondsPerKilometer: target - 60)
         case .tooSlowAlert:
             viewModel.recentRollingAveragePace = Pace(secondsPerKilometer: target + 30)
+            viewModel.currentPace = Pace(secondsPerKilometer: target + 30)
         case nil:
             break
         }
@@ -238,9 +242,9 @@ struct MetricOverviewPreview: PreviewProvider {
                 .previewDisplayName("Too fast")
             MetricOverview(viewModel: viewModel(target: 300, current: 315, alert: nil))
                 .previewDisplayName("Too slow")
-            MetricOverview(viewModel: viewModel(target: 300, current: 315, alert: .tooFastAlert))
+            MetricOverview(viewModel: viewModel(target: 300, current: 0, alert: .tooFastAlert))
                 .previewDisplayName("Too fast (alert)")
-            MetricOverview(viewModel: viewModel(target: 300, current: 829, alert: .tooSlowAlert))
+            MetricOverview(viewModel: viewModel(target: 300, current: 0, alert: .tooSlowAlert))
                 .previewDisplayName("Too slow (alert)")
             MetricOverview(viewModel: WorkoutViewModel(workoutType: .running,
                                                        startDate: Date(),
