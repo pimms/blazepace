@@ -79,6 +79,7 @@ class WorkoutController: NSObject, ObservableObject {
             diagBuilder: diagBuilder)
 
         activeSessionObjects?.locationController.onNewLocation = diagBuilder.addLocation
+        activeSessionObjects?.locationController.workoutStarted()
 
         viewModel.isActive = true
         log.info("Starting workout")
