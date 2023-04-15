@@ -44,16 +44,10 @@ struct MetricOverview: View {
     private func defaultMetricsView() -> some View {
         VStack(spacing: 0) {
             SingleMetricView(
-                sfSymbolName: "stopwatch",
-                value: "\(PaceFormatter.durationString(from: Int(Date().timeIntervalSince(viewModel.startDate))))",
-                subtitle: nil,
-                color: viewModel.isInTargetPace ? .yellow : .primary)
-
-            SingleMetricView(
                 sfSymbolName: "speedometer",
                 value: currentPaceString,
                 subtitle: currentPaceSubtitle,
-                color: viewModel.isInTargetPace ? .green : .black)
+                color: .white)
             .fontWeight(viewModel.isInTargetPace ? .regular : .semibold)
             .background(content: {
                 if viewModel.isInTargetPace {
@@ -63,6 +57,13 @@ struct MetricOverview: View {
                     Color.red.ignoresSafeArea(.all).cornerRadius(5)
                 }
             })
+
+            SingleMetricView(
+                sfSymbolName: "stopwatch",
+                value: "\(PaceFormatter.durationString(from: Int(Date().timeIntervalSince(viewModel.startDate))))",
+                subtitle: nil,
+                color: viewModel.isInTargetPace ? .yellow : .primary)
+
             SingleMetricView(
                 sfSymbolName: "heart.fill",
                 value: heartRateString,
@@ -72,9 +73,10 @@ struct MetricOverview: View {
                 sfSymbolName: "road.lanes.curved.left",
                 value: distanceString,
                 subtitle: "km",
-                color: viewModel.isInTargetPace ? .blue : .primary)
+                color: viewModel.isInTargetPace ? .green : .primary)
         }
         .scenePadding()
+        .dynamicTypeSize(.medium)
     }
 
     @ViewBuilder
@@ -146,7 +148,7 @@ private struct SingleMetricView: View {
             }
             HStack(alignment: .lastTextBaseline) {
                 Text(valueAsString)
-                    .font(.title)
+                    .font(.largeTitle)
                 if let subtitle {
                     Text(subtitle)
                         .font(.caption2.leading(.tight))
