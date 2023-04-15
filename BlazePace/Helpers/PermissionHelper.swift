@@ -20,9 +20,10 @@ class PermissionHelper: NSObject {
 
         let typesToRead: Set = [
             HKQuantityType.quantityType(forIdentifier: .heartRate)!,
+            HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned)!,
             HKQuantityType.quantityType(forIdentifier: .distanceWalkingRunning)!,
             HKSeriesType.workoutRoute(),
-            HKSeriesType.workoutType(),
+            HKObjectType.activitySummaryType()
         ]
 
         healthStore.requestAuthorization(toShare: typesToShare, read: typesToRead) { (success, error) in

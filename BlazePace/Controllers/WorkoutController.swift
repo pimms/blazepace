@@ -48,8 +48,9 @@ class WorkoutController: NSObject, ObservableObject {
         builder.dataSource = HKLiveWorkoutDataSource(healthStore: healthStore, workoutConfiguration: configuration)
 
         do {
-            session.startActivity(with: Date())
-            try await builder.beginCollection(at: Date())
+            let startDate = Date()
+            session.startActivity(with: startDate)
+            try await builder.beginCollection(at: startDate)
         } catch {
             log.error("Failed to begin collection: \(error)")
             return false
