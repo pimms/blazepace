@@ -10,6 +10,8 @@ class DiagRepository: DiagRepositoryProtocol {
     }
 
     func references() async -> [DiagReference] {
+        return []
+        /*
         guard let data = manager.contents(atPath: referenceFilePath.path()) else {
             log.debug("No ref index")
             return []
@@ -23,9 +25,12 @@ class DiagRepository: DiagRepositoryProtocol {
             log.error("failed to load ref index: \(error)")
             return []
         }
+         */
     }
 
     func summary(for reference: DiagReference) async throws -> DiagSummary? {
+        return nil
+        /*
         guard let data = manager.contents(atPath: reference.filePath.path()) else {
             return nil
         }
@@ -38,9 +43,11 @@ class DiagRepository: DiagRepositoryProtocol {
             log.error("failed to load diag dummary: \(error)")
             return nil
         }
+         */
     }
 
     func addSummary(_ summary: DiagSummary, title: String, description: String) async {
+        /*
         do {
             let encoder = JSONEncoder()
 
@@ -58,6 +65,7 @@ class DiagRepository: DiagRepositoryProtocol {
         } catch {
             log.error("failed to save summary: \(error)")
         }
+         */
     }
 
     func deleteAll() async {
