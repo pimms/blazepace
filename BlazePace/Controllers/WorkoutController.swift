@@ -79,7 +79,6 @@ class WorkoutController: NSObject, ObservableObject {
             diagBuilder: diagBuilder)
 
         activeSessionObjects?.locationController.onNewLocation = diagBuilder.addLocation
-        activeSessionObjects?.locationController.workoutStarted()
 
         viewModel.isActive = true
         log.info("Starting workout")
@@ -165,10 +164,8 @@ extension WorkoutController: HKWorkoutSessionDelegate {
             case .ended:
                 self.viewModel?.isActive = false
             case .paused:
-                self.activeSessionObjects?.locationController.workoutPaused()
                 self.viewModel?.isActive = false
             case .running:
-                self.activeSessionObjects?.locationController.workoutStarted()
                 self.viewModel?.isActive = true
             default:
                 break

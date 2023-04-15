@@ -17,7 +17,6 @@ class LocationController: NSObject {
     private let routeBuilder: HKWorkoutRouteBuilder
 
     private var entries: [Entry] = []
-    private var updateRoute = false
 
     init(viewModel: WorkoutViewModel, healthStore: HKHealthStore) {
         self.viewModel = viewModel
@@ -39,14 +38,6 @@ class LocationController: NSObject {
     }
 
     // MARK: - Internal methods
-
-    func workoutStarted() {
-        updateRoute = true
-    }
-
-    func workoutPaused() {
-        updateRoute = false
-    }
 
     func saveRoute(to workout: HKWorkout) async throws {
         try await routeBuilder.finishRoute(with: workout, metadata: nil)
@@ -103,7 +94,7 @@ extension LocationController: CLLocationManagerDelegate {
             onNewLocation?(loc)
         }
 
-        if updateRoute {
+        if viewModel.isActive {
             routeBuilder.insertRouteData(filtered, completion: { success, error in
                 if !success, let error {
                     self.log.error("Failed to insert route data: \(error)")
