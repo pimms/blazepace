@@ -95,7 +95,6 @@ class WorkoutController: NSObject, ObservableObject {
         }
 
         activeSessionObjects.session.end()
-        activeSessionObjects.locationController.workoutPaused()
 
         do {
             try await activeSessionObjects.builder.endCollection(at: Date())
