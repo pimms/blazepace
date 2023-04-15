@@ -4,6 +4,7 @@ import SwiftUI
 struct WorkoutManagementView: View {
     @ObservedObject var viewModel: WorkoutViewModel
     @Binding var navigationStack: [Navigation]
+    var onWorkoutEnded: () -> Void
 
     var body: some View {
         ScrollView {
@@ -55,6 +56,7 @@ struct WorkoutManagementView: View {
     }
 
     private func endWorkout() {
+        onWorkoutEnded()
         Task {
             if let summary = await viewModel.endWorkout() {
                 navigationStack.append(.summary(summary))
@@ -137,8 +139,8 @@ struct WorkoutManagementViewPreview: PreviewProvider {
 
     static var previews: some View {
         Group {
-            WorkoutManagementView(viewModel: viewModel(active: false), navigationStack: .constant([]))
-            WorkoutManagementView(viewModel: viewModel(active: true), navigationStack: .constant([]))
+            WorkoutManagementView(viewModel: viewModel(active: false), navigationStack: .constant([]), onWorkoutEnded: {})
+            WorkoutManagementView(viewModel: viewModel(active: true), navigationStack: .constant([]), onWorkoutEnded: {})
 
             EditTargetPaceMidWorkoutView(viewModel: viewModel(active: true))
         }

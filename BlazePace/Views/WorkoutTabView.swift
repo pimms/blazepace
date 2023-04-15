@@ -7,15 +7,23 @@ struct WorkoutTabView: View {
     @Binding var navigationStack: [Navigation]
 
     @State private var selection = 1
+    @State private var workoutEnding = false
 
     var body: some View {
-        TabView(selection: $selection) {
-            WorkoutManagementView(viewModel: viewModel, navigationStack: $navigationStack)
+        if !workoutEnding {
+            TabView(selection: $selection) {
+                WorkoutManagementView(
+                    viewModel: viewModel,
+                    navigationStack: $navigationStack,
+                    onWorkoutEnded: { workoutEnding = true })
                 .tag(0)
-            MetricOverview(viewModel: viewModel)
-                .tag(1)
-            NowPlayingView()
-                .tag(2)
+                MetricOverview(viewModel: viewModel)
+                    .tag(1)
+                NowPlayingView()
+                    .tag(2)
+            }
+        } else {
+            SpinnerView(text: "Saving")
         }
     }
 }

@@ -10,6 +10,8 @@ struct SetupView: View {
     private var delta: Int = 10
     @State
     private var workoutType: WorkoutType
+    @State
+    private var hasStarted = false
 
     init(onStart: @escaping (WorkoutStartData) -> Void) {
         self.onStart = onStart
@@ -18,29 +20,36 @@ struct SetupView: View {
     }
 
     var body: some View {
-        ScrollView {
-            VStack {
-                EditTargetPaceView(pace: $pace, delta: $delta)
-                Spacer(minLength: 12)
-                WorkoutTypeToggle(workoutType: $workoutType)
+        let _ = print("rendering: \(hasStarted)")
+        if !hasStarted {
+            ScrollView {
+                VStack {
+                    EditTargetPaceView(pace: $pace, delta: $delta)
+                    Spacer(minLength: 12)
+                    WorkoutTypeToggle(workoutType: $workoutType)
 
-                Spacer(minLength: 16)
-                Text("\(workoutType.rawValue)\n\(PaceFormatter.minuteString(fromSeconds: pace - delta)) - \(PaceFormatter.minuteString(fromSeconds: pace + delta))")
-                    .multilineTextAlignment(.center)
-                Spacer(minLength: 12)
-                Text("You can change the target pace in the middle of the workout.")
-                    .multilineTextAlignment(.center)
-                Spacer(minLength: 12)
+                    Spacer(minLength: 16)
+                    Text("\(workoutType.rawValue)\n\(PaceFormatter.minuteString(fromSeconds: pace - delta)) - \(PaceFormatter.minuteString(fromSeconds: pace + delta))")
+                        .multilineTextAlignment(.center)
+                    Spacer(minLength: 12)
+                    Text("You can change the target pace in the middle of the workout.")
+                        .multilineTextAlignment(.center)
+                    Spacer(minLength: 12)
 
-                Button(action: { startButtonClicked() }) {
-                    Text("🔥 Start! 🔥")
+                    Button(action: { startButtonClicked() }) {
+                        Text("🔥 Start! 🔥")
+                    }
                 }
             }
+            .navigationTitle("Setup")
+        } else {
+            SpinnerView(text: "Starting")
         }
-        .navigationTitle("Setup")
     }
 
     private func startButtonClicked() {
+        hasStarted = true
+        print("STARTING (\(hasStarted))")
         UserDefaults.standard.set(workoutType.rawValue, forKey: AppStorageKey.defaultWorkoutType)
         let targetPace = TargetPace(secondsPerKilometer: pace, range: delta)
         let startData = WorkoutStartData(workoutType: workoutType, targetPace: targetPace)
