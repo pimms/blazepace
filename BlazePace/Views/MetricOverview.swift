@@ -3,12 +3,18 @@ import SwiftUI
 
 struct MetricOverview: View {
     @ObservedObject var viewModel: WorkoutViewModel
+    @State private var compactEnvironment = false
 
     var body: some View {
-        TimelineView(PeriodicTimelineSchedule(from: viewModel.startDate, by: 1)) { _ in
-            metricsView()
+        GeometryReader { geo in
+            TimelineView(PeriodicTimelineSchedule(from: viewModel.startDate, by: 1)) { _ in
+                metricsView()
+            }
+            .overlay(alignment: .bottom, content: { pauseToast })
+            .onAppear {
+                self.compactEnvironment = geo.size.width < 160
+            }
         }
-        .overlay(alignment: .bottom, content: { pauseToast })
     }
 
     @ViewBuilder
@@ -76,6 +82,7 @@ struct MetricOverview: View {
                 color: viewModel.isInTargetPace ? .green : .primary)
         }
         .scenePadding()
+        .font(compactEnvironment ? .title3 : .title)
         .dynamicTypeSize(.medium)
     }
 
@@ -148,7 +155,7 @@ private struct SingleMetricView: View {
             }
             HStack(alignment: .lastTextBaseline) {
                 Text(valueAsString)
-                    .font(.largeTitle)
+                    .allowsTightening(true)
                 if let subtitle {
                     Text(subtitle)
                         .font(.caption2.leading(.tight))
@@ -204,7 +211,7 @@ struct MetricOverviewPreview: PreviewProvider {
     static func viewModel(target: Int, current: Int, alert: WorkoutViewModel.PaceAlert?) -> WorkoutViewModel {
         let viewModel = WorkoutViewModel(
             workoutType: .running,
-            startDate: Date(),
+            startDate: Date().addingTimeInterval(-7200),
             targetPace: TargetPace(secondsPerKilometer: target, range: 10))
         viewModel.currentPace = Pace(secondsPerKilometer: current)
         viewModel.distance = Measurement(value: 7049, unit: .meters)
