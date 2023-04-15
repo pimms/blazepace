@@ -30,13 +30,13 @@ class PermissionHelper: NSObject {
 
         healthStore.requestAuthorization(toShare: typesToShare, read: typesToRead) { (success, error) in
             if success {
-                print("Successfully acquired HK permissions")
+                self.log.debug("Successfully acquired HK permissions")
             } else {
-                print("Failed to acquire HK permissions")
+                self.log.error("Failed to acquire HK permissions")
             }
 
             if let error {
-                print("Failed to acquire HK permissions: \(error)")
+                self.log.error("Failed to acquire HK permissions: \(error)")
                 onError(error)
             }
         }

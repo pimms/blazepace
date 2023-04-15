@@ -3,7 +3,6 @@ import SwiftUI
 struct MainView: View {
     var body: some View {
         GeometryReader { geo in
-            let _ = print("JDBG \(geo.size.width) \(WKInterfaceDevice.current().name)")
             ScrollView {
                 VStack {
                     Text("🔥BlazePace🔥")

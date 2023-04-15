@@ -7,14 +7,12 @@ struct MetricOverview: View {
 
     var body: some View {
         GeometryReader { geo in
-            let _ = print("JDBG \(geo.size)")
             TimelineView(PeriodicTimelineSchedule(from: viewModel.startDate, by: 1)) { _ in
                 metricsView()
             }
             .overlay(alignment: .bottom, content: { pauseToast })
             .onAppear {
                 compactEnvironment = geo.size.width < 160
-                print("JDBG: isCompact: \(compactEnvironment)")
             }
         }
     }
