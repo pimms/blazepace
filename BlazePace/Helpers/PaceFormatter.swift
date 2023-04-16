@@ -1,10 +1,20 @@
 import Foundation
 
 struct PaceFormatter {
+    static private let kmToMilesFactor: Double = 1.609344
+
     // Returns on the format "MM:ss"
-    static func minuteString(fromSeconds seconds: Int) -> String {
-        let min = seconds / 60
-        let sec = seconds % 60
+    static func paceString(fromSecondsPerKilometer seconds: Int) -> String {
+        let measurementAdjusted: Int
+        switch MeasurementSystem.current {
+        case .metric:
+            measurementAdjusted = seconds
+        case .freedomUnits🇺🇸🔫:
+            measurementAdjusted = Int(Double(seconds) * kmToMilesFactor)
+        }
+
+        let min = measurementAdjusted / 60
+        let sec = measurementAdjusted % 60
         return "\(min):\(sec < 10 ? "0" : "")\(sec)"
     }
 

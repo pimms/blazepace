@@ -14,13 +14,13 @@ struct SummaryView: View {
 
                 StringSummary(
                     title: "Target pace",
-                    value: "\(PaceFormatter.minuteString(fromSeconds: summary.targetPace.lowerBound)) - \(PaceFormatter.minuteString(fromSeconds: summary.targetPace.upperBound))")
+                    value: "\(PaceFormatter.paceString(fromSecondsPerKilometer: summary.targetPace.lowerBound)) - \(PaceFormatter.paceString(fromSecondsPerKilometer: summary.targetPace.upperBound))")
                 StringSummary(
                     title: "Average pace",
-                    value: PaceFormatter.minuteString(fromSeconds: summary.averagePace.secondsPerKilometer))
+                    value: PaceFormatter.paceString(fromSecondsPerKilometer: summary.averagePace.secondsPerKilometer))
                 StringSummary(
                     title: "Distance",
-                    value: String(format: "%.2f km", summary.distance.converted(to: .kilometers).value))
+                    value: distanceString)
                 StringSummary(
                     title: "Elapsed time",
                     value: PaceFormatter.durationString(from: Int(summary.elapsedTime)))
@@ -35,6 +35,15 @@ struct SummaryView: View {
             }
         }
         .navigationTitle("Summary")
+    }
+
+    private var distanceString: String {
+        switch MeasurementSystem.current {
+        case .metric:
+            return String(format: "%.2f km", summary.distance.converted(to: .kilometers).value)
+        case .freedomUnits🇺🇸🔫:
+            return String(format: "%.2f mi", summary.distance.converted(to: .miles).value)
+        }
     }
 }
 

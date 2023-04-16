@@ -43,7 +43,7 @@ struct WorkoutManagementView: View {
                     VStack {
                         Text("Edit target")
                             .bold()
-                        Text("\(PaceFormatter.minuteString(fromSeconds: viewModel.targetPace.lowerBound)) - \(PaceFormatter.minuteString(fromSeconds: viewModel.targetPace.upperBound))")
+                        Text("\(PaceFormatter.paceString(fromSecondsPerKilometer: viewModel.targetPace.lowerBound)) - \(PaceFormatter.paceString(fromSecondsPerKilometer: viewModel.targetPace.upperBound))")
                             .fontWeight(.light)
                     }
                 }

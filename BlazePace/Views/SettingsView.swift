@@ -6,10 +6,12 @@ struct SettingsView: View {
     private var paceNotificationInterval: TimeInterval = 5
 
     @State private var paceAlertType: PaceAlertType
+    @State private var measurementSystem: MeasurementSystem
 
     init() {
         let alertString = UserDefaults.standard.string(forKey: AppStorageKey.paceAlertType) ?? ""
         _paceAlertType = .init(initialValue: PaceAlertType(rawValue: alertString) ?? .ding)
+        _measurementSystem = .init(initialValue: MeasurementSystem.current)
     }
 
     var body: some View {
@@ -41,6 +43,20 @@ struct SettingsView: View {
                 .onChange(of: paceAlertType) { _ in
                     UserDefaults.standard.set(paceAlertType.rawValue, forKey: AppStorageKey.paceAlertType)
                 }
+
+                Picker(selection: $measurementSystem, content: {
+                    Text("Metric").tag(MeasurementSystem.metric)
+                    Text("Imperial").tag(MeasurementSystem.freedomUnits🇺🇸🔫)
+                }, label: {
+                    Text("Measurement system")
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .multilineTextAlignment(.leading)
+                })
+                .pickerStyle(.navigationLink)
+                .padding(.vertical)
+                .onChange(of: measurementSystem, perform: { _ in
+                    UserDefaults.standard.set(measurementSystem.rawValue, forKey: AppStorageKey.measurementSystem)
+                })
 
                 Spacer(minLength: 16)
 

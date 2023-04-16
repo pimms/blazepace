@@ -78,7 +78,7 @@ struct MetricOverview: View {
             SingleMetricView(
                 sfSymbolName: "road.lanes.curved.left",
                 value: distanceString,
-                subtitle: "km",
+                subtitle: distanceSubtitle,
                 color: viewModel.isInTargetPace ? .green : .primary)
         }
         .scenePadding()
@@ -109,7 +109,7 @@ struct MetricOverview: View {
 
     private var currentPaceString: String {
         if let pace = viewModel.currentPace {
-            return PaceFormatter.minuteString(fromSeconds: pace.secondsPerKilometer)
+            return PaceFormatter.paceString(fromSecondsPerKilometer: pace.secondsPerKilometer)
         } else {
             return "—"
         }
@@ -128,13 +128,29 @@ struct MetricOverview: View {
 
     private var distanceString: String {
         if var distance = viewModel.distance {
-            if distance.unit != .kilometers {
-                distance.convert(to: .kilometers)
+            switch MeasurementSystem.current {
+            case .metric:
+                if distance.unit != .kilometers {
+                    distance.convert(to: .kilometers)
+                }
+            case .freedomUnits🇺🇸🔫:
+                if distance.unit != .miles {
+                    distance.convert(to: .miles)
+                }
             }
 
             return String(format: "%.2f", distance.value)
         } else {
             return "—"
+        }
+    }
+
+    private var distanceSubtitle: String {
+        switch MeasurementSystem.current {
+        case .metric:
+            return "km"
+        case .freedomUnits🇺🇸🔫:
+            return "mi"
         }
     }
 }

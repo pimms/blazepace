@@ -8,4 +8,6 @@ struct AppStorageKey {
     static let defaultPace = "defaultPace"
     static let defaultPaceRange = "defaultPaceRange"
     static let defaultWorkoutType = "defaultWorkoutType"
+
+    static let measurementSystem = "measurementSystem"
 }

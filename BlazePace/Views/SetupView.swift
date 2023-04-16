@@ -27,7 +27,7 @@ struct SetupView: View {
                     WorkoutTypeToggle(workoutType: $workoutType)
 
                     Spacer(minLength: 16)
-                    Text("\(workoutType.rawValue)\n\(PaceFormatter.minuteString(fromSeconds: pace - delta)) - \(PaceFormatter.minuteString(fromSeconds: pace + delta))")
+                    Text("\(workoutType.rawValue)\n\(PaceFormatter.paceString(fromSecondsPerKilometer: pace - delta)) - \(PaceFormatter.paceString(fromSecondsPerKilometer: pace + delta))")
                         .multilineTextAlignment(.center)
                     Spacer(minLength: 12)
                     Text("You can change the target pace in the middle of the workout.")
@@ -62,14 +62,14 @@ struct EditTargetPaceView: View {
         VStack {
             Text("Pace").bold()
             Stepper(value: $pace, in: 120...900, step: 5) {
-                Text(PaceFormatter.minuteString(fromSeconds: pace))
+                Text(PaceFormatter.paceString(fromSecondsPerKilometer: pace))
                     .font(.title3)
             }
 
             Spacer(minLength: 12)
 
             Text("Delta").bold()
-            Stepper(value: $delta, in: 1...30) {
+            Stepper(value: $delta, in: 1...45) {
                 Text("± \(delta)s").font(.title3)
             }
         }
