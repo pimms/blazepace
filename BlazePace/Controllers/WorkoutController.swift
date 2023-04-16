@@ -201,6 +201,7 @@ extension WorkoutController: HKLiveWorkoutBuilderDelegate {
                         let metersPerSecond = meters / seconds
                         let pace = 1 / (metersPerSecond / 1000)
                         self.viewModel?.currentPace = Pace(secondsPerKilometer: Int(pace))
+                        self.viewModel?.recentRollingAveragePace = Pace(secondsPerKilometer: Int(pace))
                     }
 
                     if let totalDistanceMeters {

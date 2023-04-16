@@ -4,15 +4,13 @@ import CoreLocation
 import AVFoundation
 
 class PermissionHelper: NSObject {
-    static let shared = PermissionHelper()
-
     private let log = Log(name: "PermissionHelper")
     private let healthStore = HKHealthStore()
     private let locationManager = CLLocationManager()
 
-    private var locationPermissionErrorHandler: (() -> Void)?
+    private var locationPermissionClosure: ((Bool) -> Void)?
 
-    func requestHealthKitPermissions(onError: @escaping (Error) -> Void) {
+    func requestHealthKitPermissions() async -> Bool {
         let typesToShare: Set = [
             HKQuantityType.workoutType(),
             HKSeriesType.workoutRoute(),
@@ -28,25 +26,33 @@ class PermissionHelper: NSObject {
             HKObjectType.activitySummaryType()
         ]
 
-        healthStore.requestAuthorization(toShare: typesToShare, read: typesToRead) { (success, error) in
-            if success {
-                self.log.debug("Successfully acquired HK permissions")
-            } else {
-                self.log.error("Failed to acquire HK permissions")
-            }
+        return await withCheckedContinuation { continuation in
+            healthStore.requestAuthorization(toShare: typesToShare, read: typesToRead) { (success, error) in
+                if success {
+                    self.log.debug("Successfully acquired HK permissions")
+                } else {
+                    self.log.error("Failed to acquire HK permissions")
+                }
 
-            if let error {
-                self.log.error("Failed to acquire HK permissions: \(error)")
-                onError(error)
+                if let error {
+                    self.log.error("Failed to acquire HK permissions: \(error)")
+                    continuation.resume(returning: false)
+                } else {
+                    continuation.resume(returning: true)
+                }
             }
         }
     }
 
-    func requestLocationPermission(onError: @escaping () -> Void) {
-        locationPermissionErrorHandler = onError
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()
+    func requestLocationPermission() async -> Bool {
+        return await withCheckedContinuation { continuation in
+            locationPermissionClosure = { result in
+                continuation.resume(returning: result)
+            }
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.delegate = self
+            locationManager.requestWhenInUseAuthorization()
+        }
     }
 }
 
@@ -55,13 +61,16 @@ extension PermissionHelper: CLLocationManagerDelegate {
         switch manager.authorizationStatus {
         case .authorizedAlways:
             log.info("CoreLocation authorization status: always")
+            locationPermissionClosure?(true)
         case .authorizedWhenInUse:
             log.info("CoreLocation authorization status: when in use")
+            locationPermissionClosure?(true)
         case .denied:
             log.error("CoreLocation authorization status: denied")
-            locationPermissionErrorHandler?()
+            locationPermissionClosure?(false)
         default:
             log.error("CoreLocation authorization status: unknown (\(manager.authorizationStatus))")
+            locationPermissionClosure?(false)
         }
     }
 }

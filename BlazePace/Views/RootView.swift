@@ -41,15 +41,18 @@ struct RootView: View {
                 }
         }
         .onAppear(perform: {
-            PermissionHelper.shared.requestHealthKitPermissions(onError: { error in
-                healthKitError = true
-            })
-
-            PermissionHelper.shared.requestLocationPermission(onError: {
-                coreLocationError = true
-            })
-
             try? AVAudioSession.sharedInstance().setCategory(.playback, options: .duckOthers)
+
+            Task {
+                let permissionHelper = PermissionHelper()
+                if await !permissionHelper.requestHealthKitPermissions() {
+                    healthKitError = true
+                }
+
+                if await !permissionHelper.requestLocationPermission() {
+                    coreLocationError = true
+                }
+            }
         })
     }
 
