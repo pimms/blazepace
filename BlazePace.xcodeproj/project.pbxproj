@@ -33,12 +33,6 @@
 		F532B69529D358CF00A947BA /* LocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F532B69429D358CF00A947BA /* LocationController.swift */; };
 		F532B69829D36AC500A947BA /* SpeechSynthesizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F532B69729D36AC500A947BA /* SpeechSynthesizer.swift */; };
 		F533841029D36E50007503AD /* PaceAlertType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F533840F29D36E50007503AD /* PaceAlertType.swift */; };
-		F5C3B14429D960880080E653 /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C3B14329D960880080E653 /* DebugView.swift */; };
-		F5C3B14929D9648F0080E653 /* DiagReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C3B14829D9648F0080E653 /* DiagReference.swift */; };
-		F5C3B14B29D964B70080E653 /* DiagRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C3B14A29D964B70080E653 /* DiagRepositoryProtocol.swift */; };
-		F5C3B14D29D964DE0080E653 /* DiagSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C3B14C29D964DE0080E653 /* DiagSummary.swift */; };
-		F5C3B14F29D9683E0080E653 /* DiagRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C3B14E29D9683E0080E653 /* DiagRepository.swift */; };
-		F5C3B15129D9722E0080E653 /* DiagBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C3B15029D9722E0080E653 /* DiagBuilder.swift */; };
 		F5FAACD929D02DB700A47C34 /* WorkoutTypeToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5FAACD829D02DB700A47C34 /* WorkoutTypeToggle.swift */; };
 		F5FAACDB29D0308C00A47C34 /* WorkoutType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5FAACDA29D0308C00A47C34 /* WorkoutType.swift */; };
 		F5FAACDE29D0338600A47C34 /* View+roundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5FAACDD29D0338600A47C34 /* View+roundedCorners.swift */; };
@@ -102,12 +96,6 @@
 		F532B69629D364F600A947BA /* Oslo_maraton_.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Oslo_maraton_.gpx; sourceTree = "<group>"; };
 		F532B69729D36AC500A947BA /* SpeechSynthesizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechSynthesizer.swift; sourceTree = "<group>"; };
 		F533840F29D36E50007503AD /* PaceAlertType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaceAlertType.swift; sourceTree = "<group>"; };
-		F5C3B14329D960880080E653 /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
-		F5C3B14829D9648F0080E653 /* DiagReference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagReference.swift; sourceTree = "<group>"; };
-		F5C3B14A29D964B70080E653 /* DiagRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagRepositoryProtocol.swift; sourceTree = "<group>"; };
-		F5C3B14C29D964DE0080E653 /* DiagSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagSummary.swift; sourceTree = "<group>"; };
-		F5C3B14E29D9683E0080E653 /* DiagRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagRepository.swift; sourceTree = "<group>"; };
-		F5C3B15029D9722E0080E653 /* DiagBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagBuilder.swift; sourceTree = "<group>"; };
 		F5FAACD829D02DB700A47C34 /* WorkoutTypeToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutTypeToggle.swift; sourceTree = "<group>"; };
 		F5FAACDA29D0308C00A47C34 /* WorkoutType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutType.swift; sourceTree = "<group>"; };
 		F5FAACDD29D0338600A47C34 /* View+roundedCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+roundedCorners.swift"; sourceTree = "<group>"; };
@@ -153,7 +141,6 @@
 				F51A739D29CEE3ED00079140 /* BlazePaceApp.swift */,
 				F51A73A129CEE3EE00079140 /* Assets.xcassets */,
 				F526A52329CF017E004EE912 /* Controllers */,
-				F5C3B14729D964780080E653 /* Diagnostics */,
 				F5FAACDC29D0337B00A47C34 /* Extensions */,
 				F526A51829CEF6BA004EE912 /* Helpers */,
 				F526A51029CEF395004EE912 /* Models */,
@@ -198,7 +185,6 @@
 				F526A52C29CF8F49004EE912 /* WorkoutManagementView.swift */,
 				F526A53029CFA553004EE912 /* SettingsView.swift */,
 				F5FAACE329D0525A00A47C34 /* SummaryView.swift */,
-				F5C3B14329D960880080E653 /* DebugView.swift */,
 				F52CDDC029EB4B06003C295F /* SpinnerView.swift */,
 			);
 			path = Views;
@@ -224,18 +210,6 @@
 				F532B69729D36AC500A947BA /* SpeechSynthesizer.swift */,
 			);
 			path = Controllers;
-			sourceTree = "<group>";
-		};
-		F5C3B14729D964780080E653 /* Diagnostics */ = {
-			isa = PBXGroup;
-			children = (
-				F5C3B14829D9648F0080E653 /* DiagReference.swift */,
-				F5C3B14A29D964B70080E653 /* DiagRepositoryProtocol.swift */,
-				F5C3B14C29D964DE0080E653 /* DiagSummary.swift */,
-				F5C3B14E29D9683E0080E653 /* DiagRepository.swift */,
-				F5C3B15029D9722E0080E653 /* DiagBuilder.swift */,
-			);
-			path = Diagnostics;
 			sourceTree = "<group>";
 		};
 		F5FAACD729D02D0A00A47C34 /* ComponentViews */ = {
@@ -357,7 +331,6 @@
 				F51A73A029CEE3ED00079140 /* MainView.swift in Sources */,
 				F532B69829D36AC500A947BA /* SpeechSynthesizer.swift in Sources */,
 				F526A52929CF0A47004EE912 /* MetricOverview.swift in Sources */,
-				F5C3B14F29D9683E0080E653 /* DiagRepository.swift in Sources */,
 				F526A52729CF0591004EE912 /* Log.swift in Sources */,
 				F526A52029CEFEBE004EE912 /* PermissionHelper.swift in Sources */,
 				F5FAACE429D0525A00A47C34 /* SummaryView.swift in Sources */,
@@ -367,7 +340,6 @@
 				F526A51C29CEF91D004EE912 /* Navigation.swift in Sources */,
 				F5FAACE229D04C1E00A47C34 /* WorkoutSummary.swift in Sources */,
 				F526A52D29CF8F49004EE912 /* WorkoutManagementView.swift in Sources */,
-				F5C3B14B29D964B70080E653 /* DiagRepositoryProtocol.swift in Sources */,
 				F526A50F29CEF378004EE912 /* WorkoutViewModel.swift in Sources */,
 				F5FAACDE29D0338600A47C34 /* View+roundedCorners.swift in Sources */,
 				F526A52F29CF9F0F004EE912 /* PaceAlertController.swift in Sources */,
@@ -375,17 +347,13 @@
 				F526A51E29CEF944004EE912 /* RootView.swift in Sources */,
 				F5FAACDB29D0308C00A47C34 /* WorkoutType.swift in Sources */,
 				F532B69529D358CF00A947BA /* LocationController.swift in Sources */,
-				F5C3B14D29D964DE0080E653 /* DiagSummary.swift in Sources */,
 				F526A51229CEF3A5004EE912 /* TargetPace.swift in Sources */,
 				F5FAACE029D038AA00A47C34 /* WorkoutStartData.swift in Sources */,
-				F5C3B14929D9648F0080E653 /* DiagReference.swift in Sources */,
 				F526A53329CFA5B7004EE912 /* AppStorageKey.swift in Sources */,
 				F526A51A29CEF6C3004EE912 /* PaceFormatter.swift in Sources */,
 				F5FAACD929D02DB700A47C34 /* WorkoutTypeToggle.swift in Sources */,
-				F5C3B14429D960880080E653 /* DebugView.swift in Sources */,
 				F526A52B29CF8E00004EE912 /* WorkoutTabView.swift in Sources */,
 				F526A51429CEF3F8004EE912 /* Pace.swift in Sources */,
-				F5C3B15129D9722E0080E653 /* DiagBuilder.swift in Sources */,
 				F533841029D36E50007503AD /* PaceAlertType.swift in Sources */,
 				F52CDDC329EBE7CD003C295F /* HKWorkoutBuilder+startData.swift in Sources */,
 			);

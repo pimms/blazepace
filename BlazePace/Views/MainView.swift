@@ -16,11 +16,6 @@ struct MainView: View {
                     NavigationLink("Settings", value: Navigation.settings)
                         .background(Color.secondary.cornerRadius(8))
                         .foregroundColor(.black)
-                    #if DEBUG
-                    NavigationLink("Debug", value: Navigation.debug)
-                        .background(Color.secondary.cornerRadius(8))
-                        .foregroundColor(.black)
-                    #endif
                 }
             }
         }
