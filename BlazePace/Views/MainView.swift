@@ -5,10 +5,10 @@ struct MainView: View {
         GeometryReader { geo in
             ScrollView {
                 VStack {
-                    Text("🔥BlazePace🔥")
-                        .lineLimit(1)
-                        .font(.title3)
-                        .allowsTightening(true)
+                    Image("icon-small")
+                        .resizable()
+                        .frame(width: 50, height: 50)
+                        .cornerRadius(999, corners: .allCorners)
                     Spacer(minLength: 10)
                     NavigationLink("Start", value: Navigation.setup)
                         .background(Color.green.cornerRadius(8))
