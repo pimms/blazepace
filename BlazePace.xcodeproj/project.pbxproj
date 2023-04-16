@@ -29,6 +29,7 @@
 		F526A53129CFA553004EE912 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F526A53029CFA553004EE912 /* SettingsView.swift */; };
 		F526A53329CFA5B7004EE912 /* AppStorageKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = F526A53229CFA5B7004EE912 /* AppStorageKey.swift */; };
 		F52CDDC129EB4B06003C295F /* SpinnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F52CDDC029EB4B06003C295F /* SpinnerView.swift */; };
+		F52CDDC329EBE7CD003C295F /* HKWorkoutBuilder+startData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F52CDDC229EBE7CD003C295F /* HKWorkoutBuilder+startData.swift */; };
 		F532B69529D358CF00A947BA /* LocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F532B69429D358CF00A947BA /* LocationController.swift */; };
 		F532B69829D36AC500A947BA /* SpeechSynthesizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F532B69729D36AC500A947BA /* SpeechSynthesizer.swift */; };
 		F533841029D36E50007503AD /* PaceAlertType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F533840F29D36E50007503AD /* PaceAlertType.swift */; };
@@ -96,6 +97,7 @@
 		F526A53029CFA553004EE912 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		F526A53229CFA5B7004EE912 /* AppStorageKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStorageKey.swift; sourceTree = "<group>"; };
 		F52CDDC029EB4B06003C295F /* SpinnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerView.swift; sourceTree = "<group>"; };
+		F52CDDC229EBE7CD003C295F /* HKWorkoutBuilder+startData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HKWorkoutBuilder+startData.swift"; sourceTree = "<group>"; };
 		F532B69429D358CF00A947BA /* LocationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationController.swift; sourceTree = "<group>"; };
 		F532B69629D364F600A947BA /* Oslo_maraton_.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Oslo_maraton_.gpx; sourceTree = "<group>"; };
 		F532B69729D36AC500A947BA /* SpeechSynthesizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechSynthesizer.swift; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 			isa = PBXGroup;
 			children = (
 				F5FAACDD29D0338600A47C34 /* View+roundedCorners.swift */,
+				F52CDDC229EBE7CD003C295F /* HKWorkoutBuilder+startData.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -384,6 +387,7 @@
 				F526A51429CEF3F8004EE912 /* Pace.swift in Sources */,
 				F5C3B15129D9722E0080E653 /* DiagBuilder.swift in Sources */,
 				F533841029D36E50007503AD /* PaceAlertType.swift in Sources */,
+				F52CDDC329EBE7CD003C295F /* HKWorkoutBuilder+startData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

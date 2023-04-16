@@ -2,6 +2,15 @@ import Foundation
 import HealthKit
 
 enum WorkoutType: String, Hashable {
+    static var `default`: WorkoutType {
+        if let rawValue = UserDefaults.standard.string(forKey: AppStorageKey.defaultWorkoutType),
+           let workoutType = WorkoutType(rawValue: rawValue) {
+            return workoutType
+        }
+
+        return .running
+    }
+
     case running = "Running"
     case walking = "Walking"
 

@@ -5,9 +5,9 @@ struct SetupView: View {
     var onStart: (WorkoutStartData) -> Void
 
     @AppStorage(AppStorageKey.defaultPace)
-    private var pace: Int = 300
+    private var pace: Int = TargetPace.default.secondsPerKilometer
     @AppStorage(AppStorageKey.defaultPaceRange)
-    private var delta: Int = 10
+    private var delta: Int = TargetPace.default.range
     @State
     private var workoutType: WorkoutType
     @State
@@ -15,12 +15,10 @@ struct SetupView: View {
 
     init(onStart: @escaping (WorkoutStartData) -> Void) {
         self.onStart = onStart
-        let defaultWorkoutType = UserDefaults.standard.string(forKey: AppStorageKey.defaultWorkoutType) ?? ""
-        _workoutType = .init(initialValue: WorkoutType(rawValue: defaultWorkoutType) ?? .running)
+        _workoutType = .init(initialValue: WorkoutType.default)
     }
 
     var body: some View {
-        let _ = print("rendering: \(hasStarted)")
         if !hasStarted {
             ScrollView {
                 VStack {
@@ -49,7 +47,6 @@ struct SetupView: View {
 
     private func startButtonClicked() {
         hasStarted = true
-        print("STARTING (\(hasStarted))")
         UserDefaults.standard.set(workoutType.rawValue, forKey: AppStorageKey.defaultWorkoutType)
         let targetPace = TargetPace(secondsPerKilometer: pace, range: delta)
         let startData = WorkoutStartData(workoutType: workoutType, targetPace: targetPace)

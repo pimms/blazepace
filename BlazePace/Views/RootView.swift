@@ -5,8 +5,9 @@ import AVFoundation
 struct RootView: View {
     @ObservedObject var workoutController = WorkoutController.shared
     @State var navigation: [Navigation] = []
-    @State var healthKitError: Bool = false
-    @State var coreLocationError: Bool = false
+    @State var healthKitError = false
+    @State var coreLocationError = false
+    @State var hasInitialized = false
 
     var body: some View {
         NavigationStack(path: $navigation) {
@@ -52,6 +53,9 @@ struct RootView: View {
                 if await !permissionHelper.requestLocationPermission() {
                     coreLocationError = true
                 }
+
+                await workoutController.restoreWorkoutSession()
+                hasInitialized = true
             }
         })
     }
@@ -70,7 +74,9 @@ struct RootView: View {
 
     @ViewBuilder
     func contentView() -> some View {
-        if let viewModel = workoutController.viewModel {
+        if !hasInitialized {
+            SpinnerView(text: nil)
+        } else if let viewModel = workoutController.viewModel {
             WorkoutTabView(viewModel: viewModel, navigationStack: $navigation)
         } else {
             MainView()

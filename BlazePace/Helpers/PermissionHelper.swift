@@ -45,6 +45,13 @@ class PermissionHelper: NSObject {
     }
 
     func requestLocationPermission() async -> Bool {
+        switch locationManager.authorizationStatus {
+        case .authorizedAlways, .authorizedWhenInUse:
+            return true
+        default:
+            break
+        }
+
         return await withCheckedContinuation { continuation in
             locationPermissionClosure = { result in
                 continuation.resume(returning: result)

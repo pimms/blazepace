@@ -93,6 +93,9 @@ struct EditTargetPaceMidWorkoutView: View {
     private func valueChanged() {
         let targetPace = TargetPace(secondsPerKilometer: pace, range: delta)
         viewModel.targetPace = targetPace
+
+        UserDefaults.standard.set(pace, forKey: AppStorageKey.defaultPace)
+        UserDefaults.standard.set(delta, forKey: AppStorageKey.defaultPaceRange)
     }
 }
 

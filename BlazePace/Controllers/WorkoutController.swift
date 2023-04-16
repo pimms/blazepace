@@ -20,10 +20,22 @@ class WorkoutController: NSObject, ObservableObject {
     private let log = Log(name: "WorkoutController")
     private var activeSessionObjects: ActiveSessionObjects?
 
-
     private override init() {}
 
     // MARK: - Internal methods
+
+    func restoreWorkoutSession() async {
+        let session = try? await healthStore.recoverActiveWorkoutSession()
+        guard let session else { return }
+
+        self.log.error("Recovering previous session")
+
+        if await self.startWorkout(with: session) {
+            self.log.error("Successfully restored prior session")
+        } else {
+            self.log.error("Failed to recover prior session")
+        }
+    }
 
     func startWorkout(_ startData: WorkoutStartData) async -> Bool {
         guard activeSessionObjects == nil else { fatalError("A workout is already active") }
@@ -33,30 +45,33 @@ class WorkoutController: NSObject, ObservableObject {
         configuration.locationType = .outdoor
 
         let session: HKWorkoutSession
-        let builder: HKLiveWorkoutBuilder
-
         do {
             session = try HKWorkoutSession(healthStore: healthStore, configuration: configuration)
-            builder = session.associatedWorkoutBuilder()
+
+            let startDate = Date()
+            session.startActivity(with: startDate)
+
+            let builder = session.associatedWorkoutBuilder()
+            try await builder.beginCollection(at: startDate)
+            builder.startData = startData
         } catch {
             log.error("Failed to start workout: \(error)")
             return false
         }
+        log.info("Workout setup OK")
+
+        return await startWorkout(with: session)
+    }
+
+    // MARK: - Private methods
+
+    private func startWorkout(with session: HKWorkoutSession) async -> Bool {
+        let builder = session.associatedWorkoutBuilder()
+        let startData = builder.startData
 
         session.delegate = self
         builder.delegate = self
-        builder.dataSource = HKLiveWorkoutDataSource(healthStore: healthStore, workoutConfiguration: configuration)
-
-        do {
-            let startDate = Date()
-            session.startActivity(with: startDate)
-            try await builder.beginCollection(at: startDate)
-        } catch {
-            log.error("Failed to begin collection: \(error)")
-            return false
-        }
-
-        log.info("Workout setup OK")
+        builder.dataSource = HKLiveWorkoutDataSource(healthStore: healthStore, workoutConfiguration: session.workoutConfiguration)
 
         await MainActor.run {
             viewModel = WorkoutViewModel(
@@ -84,8 +99,6 @@ class WorkoutController: NSObject, ObservableObject {
         log.info("Starting workout")
         return true
     }
-
-    // MARK: - Private methods
 
     private func endWorkout() async -> WorkoutSummary? {
         log.info("Ending workout")
