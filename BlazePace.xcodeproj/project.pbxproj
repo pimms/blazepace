@@ -93,7 +93,6 @@
 		F52CDDC029EB4B06003C295F /* SpinnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerView.swift; sourceTree = "<group>"; };
 		F52CDDC229EBE7CD003C295F /* HKWorkoutBuilder+startData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HKWorkoutBuilder+startData.swift"; sourceTree = "<group>"; };
 		F532B69429D358CF00A947BA /* LocationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationController.swift; sourceTree = "<group>"; };
-		F532B69629D364F600A947BA /* Oslo_maraton_.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Oslo_maraton_.gpx; sourceTree = "<group>"; };
 		F532B69729D36AC500A947BA /* SpeechSynthesizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechSynthesizer.swift; sourceTree = "<group>"; };
 		F533840F29D36E50007503AD /* PaceAlertType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaceAlertType.swift; sourceTree = "<group>"; };
 		F5FAACD829D02DB700A47C34 /* WorkoutTypeToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutTypeToggle.swift; sourceTree = "<group>"; };
@@ -118,7 +117,6 @@
 		F51A738B29CEE3ED00079140 = {
 			isa = PBXGroup;
 			children = (
-				F532B69629D364F600A947BA /* Oslo_maraton_.gpx */,
 				F51A739C29CEE3ED00079140 /* BlazePace */,
 				F51A739329CEE3ED00079140 /* Products */,
 			);
