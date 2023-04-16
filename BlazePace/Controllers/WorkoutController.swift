@@ -101,24 +101,30 @@ class WorkoutController: NSObject, ObservableObject {
             fatalError("Workout not active")
         }
 
+        self.viewModel = nil
+        self.activeSessionObjects = nil
         activeSessionObjects.session.end()
+
+        let summary = buildSummary(from: viewModel, elapsedTime: activeSessionObjects.builder.elapsedTime)
 
         do {
             try await activeSessionObjects.builder.endCollection(at: Date())
-            if let workout = try await activeSessionObjects.builder.finishWorkout() {
+
+            if summary.distance.converted(to: .meters).value < 50 {
+                log.info("Too short distance, discarding workout")
+                activeSessionObjects.builder.discardWorkout()
+                return nil
+            } else if let workout = try await activeSessionObjects.builder.finishWorkout() {
                 try await activeSessionObjects.locationController.saveRoute(to: workout)
+                return summary
             } else {
                 log.error("Failed to retrieve HKWorkout from workout builder")
+                return nil
             }
         } catch {
             log.error("Failed to finish workout: \(error)")
+            return nil
         }
-
-        self.viewModel = nil
-        self.activeSessionObjects = nil
-
-        let summary = buildSummary(from: viewModel, elapsedTime: activeSessionObjects.builder.elapsedTime)
-        return summary
     }
 
     private func buildSummary(from viewModel: WorkoutViewModel, elapsedTime: TimeInterval) -> WorkoutSummary {
