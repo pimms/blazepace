@@ -1,7 +1,20 @@
 import Foundation
 import CoreLocation
 
-class DiagBuilder {
+protocol DiagBuilderProtocol {
+    func addLocation(_ loc: CLLocation)
+    func finalize(with workoutSummary: WorkoutSummary)
+}
+
+typealias DiagBuilder = NoopDiagBuilder
+
+class NoopDiagBuilder: DiagBuilderProtocol {
+    func addLocation(_ loc: CLLocation) {}
+    func finalize(with workoutSummary: WorkoutSummary) {}
+}
+
+#if DEBUG
+class RealDiagBuilder: DiagBuilderProtocol {
     private let log = Log(name: "DiagBuilder")
     private let repository = DiagRepository()
     private var summary = DiagSummary()
@@ -34,3 +47,4 @@ class DiagBuilder {
         }
     }
 }
+#endif
