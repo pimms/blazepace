@@ -13,7 +13,7 @@ struct MainView: View {
                     NavigationLink("Start", value: Navigation.setup)
                         .background(Color.green.cornerRadius(8))
                         .foregroundColor(.black)
-                    NavigationLink("Settings", value: Navigation.settings)
+                    NavigationLink("Settings", value: Navigation.settings(.workoutNotActive))
                         .background(Color.secondary.cornerRadius(8))
                         .foregroundColor(.black)
                 }

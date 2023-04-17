@@ -10,4 +10,6 @@ struct AppStorageKey {
     static let defaultWorkoutType = "defaultWorkoutType"
 
     static let measurementSystem = "measurementSystem"
+
+    static let duckOthersOnAlert = "duckOthersOnAlert"
 }

@@ -9,18 +9,12 @@ class PaceAlertController {
     private let viewModel: WorkoutViewModel
     private var subscriptions: Set<AnyCancellable> = []
     private var timer: Timer?
-    private lazy var speechSynthesizer = SpeechSynthesizer()
 
     @AppStorage(AppStorageKey.paceAlertInterval)
-    private var paceNotificationInterval: Int = 2
+    private var paceNotificationInterval: TimeInterval = 5
 
-    private var paceAlertType: PaceAlertType {
-        if let stringValue = UserDefaults.standard.string(forKey: AppStorageKey.paceAlertType),
-           let paceAlertType = PaceAlertType(rawValue: stringValue) {
-            return paceAlertType
-        }
-        return .ding
-    }
+    private var paceAlertType: PaceAlertType = .beep
+    private var paceAlertPlayer: AlertPlayer = BeepAlertPlayer()
 
     init(viewModel: WorkoutViewModel) {
         self.viewModel = viewModel
@@ -55,30 +49,31 @@ class PaceAlertController {
             return
         }
 
-        switch paceAlert {
-        case .tooSlowAlert:
-            switch paceAlertType {
-            case .ding:
-                WKInterfaceDevice.current().play(.directionDown)
-            case .speech:
-                speechSynthesizer.speak("Too slow.")
-            }
-            startTimer()
-        case .tooFastAlert:
-            switch paceAlertType {
-            case .ding:
-                WKInterfaceDevice.current().play(.directionUp)
-            case .speech:
-                speechSynthesizer.speak("Too fast.")
-            }
-            startTimer()
-        }
+        reloadPaceAlertType()
+        paceAlertPlayer.playAlert(paceAlert)
+        startTimer()
     }
 
     private func startTimer() {
         let interval = TimeInterval(paceNotificationInterval)
         timer = Timer.scheduledTimer(withTimeInterval: interval, repeats: false) { [weak self] _ in
             self?.triggerPaceNotification()
+        }
+    }
+
+
+    private func reloadPaceAlertType() {
+        let paceAlertType: PaceAlertType
+        if let stringValue = UserDefaults.standard.string(forKey: AppStorageKey.paceAlertType),
+           let type = PaceAlertType(rawValue: stringValue) {
+            paceAlertType = type
+        } else {
+            paceAlertType = .beep
+        }
+
+        if paceAlertType != self.paceAlertType {
+            self.paceAlertType = paceAlertType
+            paceAlertPlayer = paceAlertType.makeAlertPlayer()
         }
     }
 }

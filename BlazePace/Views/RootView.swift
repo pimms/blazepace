@@ -16,8 +16,8 @@ struct RootView: View {
                     switch navigation {
                     case .setup:
                         SetupView(onStart: startWorkout(with:))
-                    case .settings:
-                        SettingsView()
+                    case .settings(let context):
+                        SettingsView(context: context)
                     case .editTargetPace:
                         if let viewModel = workoutController.viewModel {
                             EditTargetPaceMidWorkoutView(viewModel: viewModel)

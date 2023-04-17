@@ -36,7 +36,7 @@ struct WorkoutManagementView: View {
                     WorkoutButton(
                         sfSymbol: "gearshape.fill",
                         color: .gray,
-                        onClick: { navigationStack.append(.settings) })
+                        onClick: { navigationStack.append(.settings(.workoutActive)) })
                 }
 
                 NavigationLink(value: Navigation.editTargetPace) {
