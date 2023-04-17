@@ -4,7 +4,7 @@ import SwiftUI
 
 class SpeechAlertPlayer: NSObject, AlertPlayer {
     private let synthesizer = AVSpeechSynthesizer()
-    private let voice = AVSpeechSynthesisVoice(language: "en-GB")
+    private let voice = AVSpeechSynthesisVoice(language: "en-US")
 
     @AppStorage(AppStorageKey.duckOthersOnAlert)
     private var duckOthersOnAlert: Bool = true
