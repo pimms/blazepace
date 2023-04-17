@@ -82,6 +82,10 @@ extension WorkoutViewModel {
         guard let recentRollingAveragePace else { return nil }
         guard let currentPace else { return nil }
 
+        if currentPace.secondsPerKilometer > 1800 {
+            return nil
+        }
+
         if recentRollingAveragePace.secondsPerKilometer < targetPace.lowerBound && currentPace.secondsPerKilometer < targetPace.lowerBound {
             return .tooFastAlert
         } else if recentRollingAveragePace.secondsPerKilometer > targetPace.upperBound && currentPace.secondsPerKilometer > targetPace.upperBound {
