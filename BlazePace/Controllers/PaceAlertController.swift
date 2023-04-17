@@ -46,9 +46,9 @@ class PaceAlertController {
     }
 
     private func triggerPaceNotification() {
-        guard viewModel.isActive, viewModel.playNotifications else { return }
-
-        guard let paceAlert = viewModel.currentPaceAlert,
+        guard viewModel.isActive,
+              viewModel.playNotifications,
+              let paceAlert = viewModel.currentPaceAlert,
               paceAlert == viewModel.paceRelativeToTarget else {
             timer?.invalidate()
             timer = nil
