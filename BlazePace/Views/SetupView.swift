@@ -27,7 +27,7 @@ struct SetupView: View {
                     WorkoutTypeToggle(workoutType: $workoutType)
 
                     Spacer(minLength: 16)
-                    Text("\(workoutType.rawValue)\n\(PaceFormatter.paceString(fromSecondsPerKilometer: pace - delta)) - \(PaceFormatter.paceString(fromSecondsPerKilometer: pace + delta))")
+                    Text(summaryString)
                         .multilineTextAlignment(.center)
                     Spacer(minLength: 12)
                     Text("You can change the target pace in the middle of the workout.")
@@ -51,6 +51,30 @@ struct SetupView: View {
         let targetPace = TargetPace(secondsPerKilometer: pace, range: delta)
         let startData = WorkoutStartData(workoutType: workoutType, targetPace: targetPace)
         onStart(startData)
+    }
+
+    private var summaryString: String {
+        let lowPace = PaceFormatter.paceString(fromSecondsPerKilometer: pace - delta)
+        let highPace = PaceFormatter.paceString(fromSecondsPerKilometer: pace + delta)
+
+        let speedUnit: String
+
+        // Start with km/h, adulterate to mph if needed
+        var lowSpeed = 3600.0 / Double(pace + delta)
+        var highSpeed = 3600.0 / Double(pace - delta)
+
+        switch MeasurementSystem.current {
+        case .metric:
+            speedUnit = "km/h"
+        case .freedomUnits🇺🇸🔫:
+            lowSpeed /= 1.609344
+            highSpeed /= 1.609344
+            speedUnit = "mph"
+        }
+
+        return "\(workoutType.rawValue)\n" +
+            "\(lowPace) - \(highPace)\n" +
+            "\(String(format: "%0.1f", lowSpeed)) - \(String(format: "%.1f", highSpeed)) \(speedUnit)"
     }
 }
 
