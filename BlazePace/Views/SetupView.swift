@@ -92,7 +92,7 @@ struct EditTargetPaceView: View {
 
             Spacer(minLength: 12)
 
-            Text("Delta").bold()
+            Text("Range").bold()
             Stepper(value: $delta, in: 1...45) {
                 Text("± \(delta)s").font(.title3)
             }
