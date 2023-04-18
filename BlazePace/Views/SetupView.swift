@@ -85,7 +85,7 @@ struct EditTargetPaceView: View {
     var body: some View {
         VStack {
             Text("Pace").bold()
-            Stepper(value: $pace, in: 120...900, step: 5) {
+            Stepper(value: $pace, in: TargetPace.minValue...TargetPace.maxValue, step: TargetPace.paceIncrement) {
                 Text(PaceFormatter.paceString(fromSecondsPerKilometer: pace))
                     .font(.title3)
             }

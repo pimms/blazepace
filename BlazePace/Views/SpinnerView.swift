@@ -33,5 +33,6 @@ struct SpinnerView: View {
 struct SpinnerViewPreviews: PreviewProvider {
     static var previews: some View {
         SpinnerView(text: "starting")
+        SpinnerView(text: nil)
     }
 }

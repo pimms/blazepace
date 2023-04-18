@@ -73,7 +73,7 @@ struct RootView: View {
     @ViewBuilder
     func contentView() -> some View {
         if !hasInitialized {
-            SpinnerView(text: nil)
+            SpinnerView(text: "hi mom")
         } else if let viewModel = workoutController.viewModel {
             WorkoutTabView(viewModel: viewModel, navigationStack: $navigation)
         } else {
@@ -85,5 +85,6 @@ struct RootView: View {
 struct RootViewPreview: PreviewProvider {
     static var previews: some View {
         RootView()
+            .environment(\.compact, WKInterfaceDevice.current().screenBounds.width < 160)
     }
 }

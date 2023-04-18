@@ -3,7 +3,7 @@ import SwiftUI
 
 struct MetricOverview: View {
     @ObservedObject var viewModel: WorkoutViewModel
-    @State private var compactEnvironment = false
+    @Environment(\.compact) private var isCompact
 
     var body: some View {
         GeometryReader { geo in
@@ -11,9 +11,7 @@ struct MetricOverview: View {
                 metricsView()
             }
             .overlay(alignment: .bottom, content: { pauseToast })
-            .onAppear {
-                compactEnvironment = geo.size.width < 160
-            }
+            .digitalCrownTargetPaceAdjuster(viewModel)
         }
     }
 
@@ -82,7 +80,7 @@ struct MetricOverview: View {
                 color: viewModel.isInTargetPace ? .green : .primary)
         }
         .scenePadding()
-        .font(compactEnvironment ? .title3 : .largeTitle)
+        .font(isCompact ? .title3 : .largeTitle)
         .dynamicTypeSize(.medium)
     }
 

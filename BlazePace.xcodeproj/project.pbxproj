@@ -38,6 +38,8 @@
 		F54586CE29EDC74400E4C168 /* BeepAlertPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54586CD29EDC74400E4C168 /* BeepAlertPlayer.swift */; };
 		F54586D229EDC79700E4C168 /* alarm-fast.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F54586D029EDC79700E4C168 /* alarm-fast.mp3 */; };
 		F54586D329EDC79700E4C168 /* alarm-slow.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F54586D129EDC79700E4C168 /* alarm-slow.mp3 */; };
+		F56851B229EF231700B02366 /* DigitalCrownTargetPaceModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56851B129EF231700B02366 /* DigitalCrownTargetPaceModifier.swift */; };
+		F56851B429EF299800B02366 /* Environment+Compact.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56851B329EF299800B02366 /* Environment+Compact.swift */; };
 		F5AAD91A29EBF64300FC7CC3 /* MetricType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AAD91929EBF64300FC7CC3 /* MetricType.swift */; };
 		F5FAACD929D02DB700A47C34 /* WorkoutTypeToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5FAACD829D02DB700A47C34 /* WorkoutTypeToggle.swift */; };
 		F5FAACDB29D0308C00A47C34 /* WorkoutType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5FAACDA29D0308C00A47C34 /* WorkoutType.swift */; };
@@ -106,6 +108,8 @@
 		F54586CD29EDC74400E4C168 /* BeepAlertPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeepAlertPlayer.swift; sourceTree = "<group>"; };
 		F54586D029EDC79700E4C168 /* alarm-fast.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "alarm-fast.mp3"; sourceTree = "<group>"; };
 		F54586D129EDC79700E4C168 /* alarm-slow.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "alarm-slow.mp3"; sourceTree = "<group>"; };
+		F56851B129EF231700B02366 /* DigitalCrownTargetPaceModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitalCrownTargetPaceModifier.swift; sourceTree = "<group>"; };
+		F56851B329EF299800B02366 /* Environment+Compact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Environment+Compact.swift"; sourceTree = "<group>"; };
 		F5AAD91929EBF64300FC7CC3 /* MetricType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricType.swift; sourceTree = "<group>"; };
 		F5FAACD829D02DB700A47C34 /* WorkoutTypeToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutTypeToggle.swift; sourceTree = "<group>"; };
 		F5FAACDA29D0308C00A47C34 /* WorkoutType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutType.swift; sourceTree = "<group>"; };
@@ -198,6 +202,7 @@
 				F526A53029CFA553004EE912 /* SettingsView.swift */,
 				F5FAACE329D0525A00A47C34 /* SummaryView.swift */,
 				F52CDDC029EB4B06003C295F /* SpinnerView.swift */,
+				F56851B129EF231700B02366 /* DigitalCrownTargetPaceModifier.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -257,6 +262,7 @@
 			children = (
 				F5FAACDD29D0338600A47C34 /* View+roundedCorners.swift */,
 				F52CDDC229EBE7CD003C295F /* HKWorkoutBuilder+startData.swift */,
+				F56851B329EF299800B02366 /* Environment+Compact.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -378,6 +384,7 @@
 				F54586CE29EDC74400E4C168 /* BeepAlertPlayer.swift in Sources */,
 				F526A52D29CF8F49004EE912 /* WorkoutManagementView.swift in Sources */,
 				F54586CA29EDC2FE00E4C168 /* SpeechAlertPlayer.swift in Sources */,
+				F56851B229EF231700B02366 /* DigitalCrownTargetPaceModifier.swift in Sources */,
 				F526A50F29CEF378004EE912 /* WorkoutViewModel.swift in Sources */,
 				F5FAACDE29D0338600A47C34 /* View+roundedCorners.swift in Sources */,
 				F526A52F29CF9F0F004EE912 /* PaceAlertController.swift in Sources */,
@@ -387,6 +394,7 @@
 				F532B69529D358CF00A947BA /* LocationController.swift in Sources */,
 				F526A51229CEF3A5004EE912 /* TargetPace.swift in Sources */,
 				F5FAACE029D038AA00A47C34 /* WorkoutStartData.swift in Sources */,
+				F56851B429EF299800B02366 /* Environment+Compact.swift in Sources */,
 				F526A53329CFA5B7004EE912 /* AppStorageKey.swift in Sources */,
 				F526A51A29CEF6C3004EE912 /* PaceFormatter.swift in Sources */,
 				F5FAACD929D02DB700A47C34 /* WorkoutTypeToggle.swift in Sources */,
