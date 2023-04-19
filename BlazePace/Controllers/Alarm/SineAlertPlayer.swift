@@ -5,9 +5,6 @@ import SwiftUI
 class SineAlertPlayer: AlertPlayer {
     private let avplayer = AVPlayer()
 
-    @AppStorage(AppStorageKey.duckOthersOnAlert)
-    private var duckOthersOnAlert: Bool = true
-
     private lazy var tooSlowItem = makeAVPlayerItem("330")
     private lazy var tooFastItem = makeAVPlayerItem("440")
 

@@ -11,6 +11,7 @@ struct SetupView: View {
     @State private var workoutType: WorkoutType
     @State private var hasStarted = false
     @State private var presentStartError = false
+    @State private var airplayConnected = false
 
     init(onStart: @escaping (WorkoutStartData) async -> Bool) {
         self.onStart = onStart
@@ -33,8 +34,24 @@ struct SetupView: View {
                         .multilineTextAlignment(.center)
                     Spacer(minLength: 12)
 
+                    if !airplayConnected {
+                        VStack(spacing: 8) {
+                            Text("No headphones")
+                                .font(.title3)
+                                .bold()
+                                .multilineTextAlignment(.center)
+                            Text("It seems like you have no headphones connected to the watch. You may not notice the pace alerts.")
+                                .multilineTextAlignment(.center)
+                        }
+                        .padding()
+                        .background(Color.yellow)
+                        .foregroundColor(.black)
+                        .cornerRadius(8)
+                        Spacer(minLength: 16)
+                    }
+
                     Button(action: { startButtonClicked() }) {
-                        Text("🔥 Start! 🔥")
+                        Text("Start")
                     }
                 }
             }
@@ -42,6 +59,9 @@ struct SetupView: View {
                 Alert(
                     title: Text("Failed to start workout"),
                     message: Text("Did you not grant HealthKit permissions? These can be reviewed in the Settings app on your watch."))
+            }
+            .onAppear {
+                airplayConnected = AVHelper.airPlayConnected()
             }
             .navigationTitle("Setup")
         } else {

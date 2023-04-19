@@ -6,10 +6,6 @@ class SpeechAlertPlayer: AlertPlayer {
     private let synthesizer = AVSpeechSynthesizer()
     private let voice = AVSpeechSynthesisVoice(language: "en-US")
 
-    @AppStorage(AppStorageKey.duckOthersOnAlert)
-    private var duckOthersOnAlert: Bool = true
-    private var isDucking = false
-
     private lazy var tooSlowUtterance = makeUtterance(for: "Too slow.")
     private lazy var tooFastUtterance = makeUtterance(for: "Too fast.")
 

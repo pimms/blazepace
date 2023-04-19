@@ -4,9 +4,6 @@ import AVFoundation
 import SwiftUI
 
 class DingAlertPlayer: AlertPlayer {
-    @AppStorage(AppStorageKey.duckOthersOnAlert)
-    private var duckOthersOnAlert: Bool = true
-
     override func playAlert(_ alert: WorkoutViewModel.PaceAlert) {
         duckOthers(autoUnduck: true)
 

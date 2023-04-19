@@ -92,6 +92,9 @@ struct SettingsView: View {
                         }
                     }
                     .toggleStyle(.button)
+                    .onChange(of: duckOthersOnAlert) { _ in
+                        AVHelper.updateAudioCategory()
+                    }
                 }
 
                 // Measurement system

@@ -38,6 +38,7 @@
 		F54586CE29EDC74400E4C168 /* SineAlertPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54586CD29EDC74400E4C168 /* SineAlertPlayer.swift */; };
 		F56851B229EF231700B02366 /* DigitalCrownTargetPaceModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56851B129EF231700B02366 /* DigitalCrownTargetPaceModifier.swift */; };
 		F56851B429EF299800B02366 /* Environment+Compact.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56851B329EF299800B02366 /* Environment+Compact.swift */; };
+		F59FFAFA29F0789E007D1EB1 /* AVHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59FFAF929F0789E007D1EB1 /* AVHelper.swift */; };
 		F5AAD91A29EBF64300FC7CC3 /* MetricType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AAD91929EBF64300FC7CC3 /* MetricType.swift */; };
 		F5D2A03729F0666C0079754D /* 440.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F5D2A03529F0666C0079754D /* 440.mp3 */; };
 		F5D2A03829F0666C0079754D /* 330.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F5D2A03629F0666C0079754D /* 330.mp3 */; };
@@ -108,6 +109,7 @@
 		F54586CD29EDC74400E4C168 /* SineAlertPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SineAlertPlayer.swift; sourceTree = "<group>"; };
 		F56851B129EF231700B02366 /* DigitalCrownTargetPaceModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitalCrownTargetPaceModifier.swift; sourceTree = "<group>"; };
 		F56851B329EF299800B02366 /* Environment+Compact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Environment+Compact.swift"; sourceTree = "<group>"; };
+		F59FFAF929F0789E007D1EB1 /* AVHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVHelper.swift; sourceTree = "<group>"; };
 		F5AAD91929EBF64300FC7CC3 /* MetricType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricType.swift; sourceTree = "<group>"; };
 		F5D2A03529F0666C0079754D /* 440.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 440.mp3; sourceTree = "<group>"; };
 		F5D2A03629F0666C0079754D /* 330.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 330.mp3; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 				F526A52429CF018F004EE912 /* WorkoutController.swift */,
 				F526A52E29CF9F0F004EE912 /* PaceAlertController.swift */,
 				F532B69429D358CF00A947BA /* LocationController.swift */,
+				F59FFAF929F0789E007D1EB1 /* AVHelper.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -367,6 +370,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F59FFAFA29F0789E007D1EB1 /* AVHelper.swift in Sources */,
 				F526A51729CEF4A0004EE912 /* SetupView.swift in Sources */,
 				F51A73A029CEE3ED00079140 /* MainView.swift in Sources */,
 				F526A52929CF0A47004EE912 /* MetricOverview.swift in Sources */,

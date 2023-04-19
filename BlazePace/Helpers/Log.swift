@@ -14,21 +14,21 @@ struct Log {
     func debug(_ text: @autoclosure () -> String) {
         #if DEBUG
         guard Self.threshold.rawValue >= Level.debug.rawValue else { return }
-        print("[🐛][\(name)] \(text())")
+        print("[BP][🐛][\(name)] \(text())")
         #endif
     }
 
     func info(_ text: @autoclosure () -> String) {
         #if DEBUG
         guard Self.threshold.rawValue >= Level.info.rawValue else { return }
-        print("[ℹ️][\(name)] \(text())")
+        print("[BP][ℹ️][\(name)] \(text())")
         #endif
     }
 
     func error(_ text: @autoclosure () -> String) {
         #if DEBUG
         guard Self.threshold.rawValue >= Level.error.rawValue else { return }
-        print("[🚨][\(name)] \(text())")
+        print("[BP][🚨][\(name)] \(text())")
         #endif
     }
 }

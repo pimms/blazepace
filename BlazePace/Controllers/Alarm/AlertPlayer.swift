@@ -18,7 +18,7 @@ class AlertPlayer: NSObject {
     func duckOthers(autoUnduck: Bool) {
         if duckOthersOnAlert {
             isDucking = true
-            try? AVAudioSession.sharedInstance().setActive(true)
+            AVHelper.duckOthers()
 
             if autoUnduck {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
@@ -30,7 +30,7 @@ class AlertPlayer: NSObject {
 
     func unduckOthers() {
         if isDucking {
-            try? AVAudioSession.sharedInstance().setActive(false)
+            AVHelper.unduckOthers()
             isDucking = false
         }
     }

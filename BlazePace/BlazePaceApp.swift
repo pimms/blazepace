@@ -29,8 +29,7 @@ struct BlazePace_Watch_AppApp: App {
             }
             .onAppear(perform: {
                 guard !hasInitialized else { return }
-
-                try? AVAudioSession.sharedInstance().setCategory(.playback, options: .duckOthers)
+                AVHelper.updateAudioCategory()
 
                 Task {
                     let permissionHelper = PermissionHelper()
