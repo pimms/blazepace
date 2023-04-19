@@ -2,12 +2,18 @@ import Foundation
 import SwiftUI
 
 struct DigitalCrownTargetPaceModifier: ViewModifier {
+    private enum CrownState: Equatable {
+        case idle
+        case active
+        case idling
+    }
+
     @ObservedObject var viewModel: WorkoutViewModel
 
     @State private var digitalCrown: Double = 0
     @State private var crownStartValue: Double = 0
     @State private var paceTicks = 0
-    @State private var isRotating = false
+    @State private var crownState = CrownState.idle
     @State private var newPace: TargetPace
 
     init(_ viewModel: WorkoutViewModel) {
@@ -19,10 +25,10 @@ struct DigitalCrownTargetPaceModifier: ViewModifier {
         content
             .focusable()
             .digitalCrownRotation($digitalCrown, onChange: { event in
-                if !self.isRotating {
+                if self.crownState == .idle {
                     self.crownStartValue = digitalCrown
                     self.paceTicks = 0
-                    self.isRotating = true
+                    self.crownState = .active
                 }
 
                 let relative = digitalCrown - crownStartValue
@@ -31,16 +37,20 @@ struct DigitalCrownTargetPaceModifier: ViewModifier {
                     secondsPerKilometer: viewModel.targetPace.secondsPerKilometer + (TargetPace.paceIncrement * paceTicks),
                     range: viewModel.targetPace.range)
             }, onIdle: {
-                self.isRotating = false
-                if self.paceTicks != 0 {
-                    viewModel.targetPace = newPace
+                self.crownState = .idling
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    guard self.crownState == .idling else { return }
+                    self.crownState = .idle
+                    if self.paceTicks != 0 {
+                        viewModel.targetPace = newPace
+                    }
                 }
             })
             .digitalCrownAccessory(.hidden)
             .overlay {
                 ChangePaceView(newPace: newPace)
-                    .opacity(isRotating ? 1 : 0)
-                    .animation(.linear, value: isRotating)
+                    .opacity(crownState == .idle ? 0 : 1)
+                    .animation(.linear, value: crownState)
             }
     }
 }
