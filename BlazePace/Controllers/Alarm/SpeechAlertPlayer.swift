@@ -2,7 +2,7 @@ import Foundation
 import AVFAudio
 import SwiftUI
 
-class SpeechAlertPlayer: NSObject, AlertPlayer {
+class SpeechAlertPlayer: AlertPlayer {
     private let synthesizer = AVSpeechSynthesizer()
     private let voice = AVSpeechSynthesisVoice(language: "en-US")
 
@@ -18,7 +18,7 @@ class SpeechAlertPlayer: NSObject, AlertPlayer {
         synthesizer.delegate = self
     }
 
-    func playAlert(_ alert: WorkoutViewModel.PaceAlert) {
+    override func playAlert(_ alert: WorkoutViewModel.PaceAlert) {
         switch alert {
         case .tooSlowAlert:
             synthesizer.speak(tooSlowUtterance)
@@ -38,16 +38,10 @@ class SpeechAlertPlayer: NSObject, AlertPlayer {
 
 extension SpeechAlertPlayer: AVSpeechSynthesizerDelegate {
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didStart utterance: AVSpeechUtterance) {
-        if duckOthersOnAlert {
-            isDucking = false
-            try? AVAudioSession.sharedInstance().setActive(true)
-        }
+        duckOthers(autoUnduck: false)
     }
 
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
-        if isDucking {
-            try? AVAudioSession.sharedInstance().setActive(false)
-            isDucking = false
-        }
+        unduckOthers()
     }
 }

@@ -7,13 +7,8 @@ class DingAlertPlayer: AlertPlayer {
     @AppStorage(AppStorageKey.duckOthersOnAlert)
     private var duckOthersOnAlert: Bool = true
 
-    func playAlert(_ alert: WorkoutViewModel.PaceAlert) {
-        if duckOthersOnAlert {
-            try? AVAudioSession.sharedInstance().setActive(true)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                try? AVAudioSession.sharedInstance().setActive(false)
-            }
-        }
+    override func playAlert(_ alert: WorkoutViewModel.PaceAlert) {
+        duckOthers(autoUnduck: true)
 
         switch alert {
         case .tooSlowAlert:
