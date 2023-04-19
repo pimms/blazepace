@@ -1,7 +1,7 @@
 import Foundation
 import HealthKit
 import CoreLocation
-import AVFoundation
+import SwiftUI
 
 class PermissionHelper: NSObject {
     private let log = Log(name: "PermissionHelper")
@@ -9,6 +9,9 @@ class PermissionHelper: NSObject {
     private let locationManager = CLLocationManager()
 
     private var locationPermissionClosure: ((Bool) -> Void)?
+
+    @AppStorage(AppStorageKey.hasRequestedLocationPermission)
+    private var hasRequestedLocationPermission = false
 
     func requestHealthKitPermissions() async -> Bool {
         let typesToShare: Set = [
@@ -53,12 +56,19 @@ class PermissionHelper: NSObject {
         }
 
         return await withCheckedContinuation { continuation in
-            locationPermissionClosure = { result in
-                continuation.resume(returning: result)
+            if hasRequestedLocationPermission {
+                // If we have already requested location permission, we are under watchOS' mercy
+                // of when the user will be prompted again. Assume that the dialog won't be shown.
+                continuation.resume(returning: false)
+            } else {
+                locationPermissionClosure = { result in
+                    continuation.resume(returning: result)
+                }
             }
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.delegate = self
             locationManager.requestWhenInUseAuthorization()
+            hasRequestedLocationPermission = true
         }
     }
 }
@@ -79,5 +89,9 @@ extension PermissionHelper: CLLocationManagerDelegate {
             log.error("CoreLocation authorization status: unknown (\(manager.authorizationStatus))")
             locationPermissionClosure?(false)
         }
+    }
+
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("wtf")
     }
 }

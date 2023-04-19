@@ -12,4 +12,6 @@ struct AppStorageKey {
     static let measurementSystem = "measurementSystem"
 
     static let duckOthersOnAlert = "duckOthersOnAlert"
+
+    static let hasRequestedLocationPermission = "hasRequestedLocationPermission"
 }

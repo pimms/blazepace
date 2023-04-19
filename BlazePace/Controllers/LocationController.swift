@@ -57,7 +57,7 @@ class LocationController: NSObject {
         }
     }
 
-    private func pace(for entries: [Entry]) -> Pace {
+    private func pace(for entries: [Entry]) -> Pace? {
         let sum = entries.map({ $0.pace }).reduce(0, +)
         let pace: Double
 
@@ -65,6 +65,11 @@ class LocationController: NSObject {
             pace = sum / Double(entries.count)
         } else {
             pace = 0
+        }
+
+        if pace > 3600 {
+            // The user is effectively standing still
+            return nil
         }
 
         return Pace(secondsPerKilometer: Int(pace))
@@ -84,7 +89,7 @@ class LocationController: NSObject {
 extension LocationController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let filtered = locations.filter({ location in
-            return location.speed > 0 && location.speedAccuracy >= 0 && location.horizontalAccuracy <= 50
+            return location.speed >= 0 && location.speedAccuracy >= 0 && location.horizontalAccuracy <= 50
         })
 
         guard filtered.count > 0 else { return }
@@ -98,7 +103,12 @@ extension LocationController: CLLocationManagerDelegate {
         }
 
         entries.append(contentsOf: filtered.map({
-            let pace = 1 / ($0.speed / 1000)
+            let pace: Double
+            if $0.speed > 0 {
+                pace = 1 / ($0.speed / 1000)
+            } else {
+                pace = .infinity
+            }
             return Entry(date: $0.timestamp, pace: pace)
         }))
 

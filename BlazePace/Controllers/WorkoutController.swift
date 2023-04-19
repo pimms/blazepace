@@ -195,7 +195,7 @@ extension WorkoutController: HKLiveWorkoutBuilderDelegate {
         let heartRateType = HKQuantityType(.heartRate)
 
         if collectedTypes.contains(distanceType) {
-            let startDate = Date().addingTimeInterval(-30)
+            let startDate = Date().addingTimeInterval(-15)
             let endDate = Date()
             let predicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: [])
 

@@ -3,11 +3,8 @@ import SwiftUI
 import AVFoundation
 
 struct RootView: View {
-    @ObservedObject var workoutController = WorkoutController.shared
-    @State var navigation: [Navigation] = []
-    @State var healthKitError = false
-    @State var coreLocationError = false
-    @State var hasInitialized = false
+    @ObservedObject private var workoutController = WorkoutController.shared
+    @State private var navigation: [Navigation] = []
 
     var body: some View {
         NavigationStack(path: $navigation) {
@@ -28,34 +25,7 @@ struct RootView: View {
                         SummaryView(summary: summary, navigationStack: $navigation)
                     }
                 }
-                .alert("Failed to acquire HealthKit permissions", isPresented: $healthKitError) {
-                    Button("OK", role: .cancel) {
-                        healthKitError = false
-                    }
-                }
-                .alert("Failed to acquire location permissions. Workout data will be imprecise.", isPresented: $coreLocationError) {
-                    Button("OK", role: .cancel) {
-                        coreLocationError = false
-                    }
-                }
         }
-        .onAppear(perform: {
-            try? AVAudioSession.sharedInstance().setCategory(.playback, options: .duckOthers)
-
-            Task {
-                let permissionHelper = PermissionHelper()
-                if await !permissionHelper.requestHealthKitPermissions() {
-                    healthKitError = true
-                }
-
-                if await !permissionHelper.requestLocationPermission() {
-                    coreLocationError = true
-                }
-
-                await workoutController.restoreWorkoutSession()
-                hasInitialized = true
-            }
-        })
     }
 
     private func startWorkout(with startData: WorkoutStartData) {
@@ -72,9 +42,7 @@ struct RootView: View {
 
     @ViewBuilder
     func contentView() -> some View {
-        if !hasInitialized {
-            SpinnerView(text: "hi mom")
-        } else if let viewModel = workoutController.viewModel {
+        if let viewModel = workoutController.viewModel {
             WorkoutTabView(viewModel: viewModel, navigationStack: $navigation)
         } else {
             MainView()
