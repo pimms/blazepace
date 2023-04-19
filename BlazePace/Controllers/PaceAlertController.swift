@@ -61,7 +61,6 @@ class PaceAlertController {
         }
     }
 
-
     private func reloadPaceAlertType() {
         let paceAlertType: PaceAlertType
         if let stringValue = UserDefaults.standard.string(forKey: AppStorageKey.paceAlertType),

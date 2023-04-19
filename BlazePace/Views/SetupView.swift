@@ -10,7 +10,7 @@ struct SetupView: View {
     private var delta: Int = TargetPace.default.range
     @State private var workoutType: WorkoutType
     @State private var hasStarted = false
-    @State private var startError = false
+    @State private var presentStartError = false
 
     init(onStart: @escaping (WorkoutStartData) async -> Bool) {
         self.onStart = onStart
@@ -38,7 +38,7 @@ struct SetupView: View {
                     }
                 }
             }
-            .alert(isPresented: $startError) {
+            .alert(isPresented: $presentStartError) {
                 Alert(
                     title: Text("Failed to start workout"),
                     message: Text("Did you not grant HealthKit permissions? These can be reviewed in the Settings app on your watch."))
@@ -58,7 +58,7 @@ struct SetupView: View {
         Task {
             if await !onStart(startData) {
                 hasStarted = false
-                startError = true
+                presentStartError = true
             }
         }
     }
