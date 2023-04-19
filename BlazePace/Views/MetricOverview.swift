@@ -41,8 +41,9 @@ struct MetricOverview: View {
         }
         .font(.title)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .ignoresSafeArea()
         .background(Color.red)
+        .cornerRadius(8)
+        .padding()
     }
 
     private func defaultMetricsView() -> some View {
