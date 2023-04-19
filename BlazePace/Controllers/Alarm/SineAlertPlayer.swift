@@ -2,14 +2,14 @@ import Foundation
 import AVFoundation
 import SwiftUI
 
-class BeepAlertPlayer: AlertPlayer {
+class SineAlertPlayer: AlertPlayer {
     private let avplayer = AVPlayer()
 
     @AppStorage(AppStorageKey.duckOthersOnAlert)
     private var duckOthersOnAlert: Bool = true
 
-    private lazy var tooSlowItem = makeAVPlayerItem("alarm-slow")
-    private lazy var tooFastItem = makeAVPlayerItem("alarm-fast")
+    private lazy var tooSlowItem = makeAVPlayerItem("330")
+    private lazy var tooFastItem = makeAVPlayerItem("440")
 
     override func playAlert(_ alert: WorkoutViewModel.PaceAlert) {
         duckOthers(autoUnduck: true)

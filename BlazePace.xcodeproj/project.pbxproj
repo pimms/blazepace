@@ -35,12 +35,12 @@
 		F54586C829EDC2AC00E4C168 /* AlertPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54586C729EDC2AC00E4C168 /* AlertPlayer.swift */; };
 		F54586CA29EDC2FE00E4C168 /* SpeechAlertPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54586C929EDC2FE00E4C168 /* SpeechAlertPlayer.swift */; };
 		F54586CC29EDC32A00E4C168 /* DingAlertPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54586CB29EDC32A00E4C168 /* DingAlertPlayer.swift */; };
-		F54586CE29EDC74400E4C168 /* BeepAlertPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54586CD29EDC74400E4C168 /* BeepAlertPlayer.swift */; };
-		F54586D229EDC79700E4C168 /* alarm-fast.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F54586D029EDC79700E4C168 /* alarm-fast.mp3 */; };
-		F54586D329EDC79700E4C168 /* alarm-slow.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F54586D129EDC79700E4C168 /* alarm-slow.mp3 */; };
+		F54586CE29EDC74400E4C168 /* SineAlertPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54586CD29EDC74400E4C168 /* SineAlertPlayer.swift */; };
 		F56851B229EF231700B02366 /* DigitalCrownTargetPaceModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56851B129EF231700B02366 /* DigitalCrownTargetPaceModifier.swift */; };
 		F56851B429EF299800B02366 /* Environment+Compact.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56851B329EF299800B02366 /* Environment+Compact.swift */; };
 		F5AAD91A29EBF64300FC7CC3 /* MetricType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AAD91929EBF64300FC7CC3 /* MetricType.swift */; };
+		F5D2A03729F0666C0079754D /* 440.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F5D2A03529F0666C0079754D /* 440.mp3 */; };
+		F5D2A03829F0666C0079754D /* 330.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F5D2A03629F0666C0079754D /* 330.mp3 */; };
 		F5FAACD929D02DB700A47C34 /* WorkoutTypeToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5FAACD829D02DB700A47C34 /* WorkoutTypeToggle.swift */; };
 		F5FAACDB29D0308C00A47C34 /* WorkoutType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5FAACDA29D0308C00A47C34 /* WorkoutType.swift */; };
 		F5FAACDE29D0338600A47C34 /* View+roundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5FAACDD29D0338600A47C34 /* View+roundedCorners.swift */; };
@@ -105,12 +105,12 @@
 		F54586C729EDC2AC00E4C168 /* AlertPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPlayer.swift; sourceTree = "<group>"; };
 		F54586C929EDC2FE00E4C168 /* SpeechAlertPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechAlertPlayer.swift; sourceTree = "<group>"; };
 		F54586CB29EDC32A00E4C168 /* DingAlertPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DingAlertPlayer.swift; sourceTree = "<group>"; };
-		F54586CD29EDC74400E4C168 /* BeepAlertPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeepAlertPlayer.swift; sourceTree = "<group>"; };
-		F54586D029EDC79700E4C168 /* alarm-fast.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "alarm-fast.mp3"; sourceTree = "<group>"; };
-		F54586D129EDC79700E4C168 /* alarm-slow.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "alarm-slow.mp3"; sourceTree = "<group>"; };
+		F54586CD29EDC74400E4C168 /* SineAlertPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SineAlertPlayer.swift; sourceTree = "<group>"; };
 		F56851B129EF231700B02366 /* DigitalCrownTargetPaceModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitalCrownTargetPaceModifier.swift; sourceTree = "<group>"; };
 		F56851B329EF299800B02366 /* Environment+Compact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Environment+Compact.swift"; sourceTree = "<group>"; };
 		F5AAD91929EBF64300FC7CC3 /* MetricType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricType.swift; sourceTree = "<group>"; };
+		F5D2A03529F0666C0079754D /* 440.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 440.mp3; sourceTree = "<group>"; };
+		F5D2A03629F0666C0079754D /* 330.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 330.mp3; sourceTree = "<group>"; };
 		F5FAACD829D02DB700A47C34 /* WorkoutTypeToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutTypeToggle.swift; sourceTree = "<group>"; };
 		F5FAACDA29D0308C00A47C34 /* WorkoutType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutType.swift; sourceTree = "<group>"; };
 		F5FAACDD29D0338600A47C34 /* View+roundedCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+roundedCorners.swift"; sourceTree = "<group>"; };
@@ -235,7 +235,7 @@
 				F54586C729EDC2AC00E4C168 /* AlertPlayer.swift */,
 				F54586C929EDC2FE00E4C168 /* SpeechAlertPlayer.swift */,
 				F54586CB29EDC32A00E4C168 /* DingAlertPlayer.swift */,
-				F54586CD29EDC74400E4C168 /* BeepAlertPlayer.swift */,
+				F54586CD29EDC74400E4C168 /* SineAlertPlayer.swift */,
 			);
 			path = Alarm;
 			sourceTree = "<group>";
@@ -243,8 +243,8 @@
 		F54586CF29EDC78A00E4C168 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				F54586D029EDC79700E4C168 /* alarm-fast.mp3 */,
-				F54586D129EDC79700E4C168 /* alarm-slow.mp3 */,
+				F5D2A03629F0666C0079754D /* 330.mp3 */,
+				F5D2A03529F0666C0079754D /* 440.mp3 */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -353,10 +353,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5D2A03729F0666C0079754D /* 440.mp3 in Resources */,
 				F51A73A529CEE3EE00079140 /* Preview Assets.xcassets in Resources */,
 				F51A73A229CEE3EE00079140 /* Assets.xcassets in Resources */,
-				F54586D229EDC79700E4C168 /* alarm-fast.mp3 in Resources */,
-				F54586D329EDC79700E4C168 /* alarm-slow.mp3 in Resources */,
+				F5D2A03829F0666C0079754D /* 330.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -381,7 +381,7 @@
 				F5AAD91A29EBF64300FC7CC3 /* MetricType.swift in Sources */,
 				F54586C829EDC2AC00E4C168 /* AlertPlayer.swift in Sources */,
 				F5FAACE229D04C1E00A47C34 /* WorkoutSummary.swift in Sources */,
-				F54586CE29EDC74400E4C168 /* BeepAlertPlayer.swift in Sources */,
+				F54586CE29EDC74400E4C168 /* SineAlertPlayer.swift in Sources */,
 				F526A52D29CF8F49004EE912 /* WorkoutManagementView.swift in Sources */,
 				F54586CA29EDC2FE00E4C168 /* SpeechAlertPlayer.swift in Sources */,
 				F56851B229EF231700B02366 /* DigitalCrownTargetPaceModifier.swift in Sources */,

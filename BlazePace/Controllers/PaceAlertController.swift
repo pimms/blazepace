@@ -13,8 +13,8 @@ class PaceAlertController {
     @AppStorage(AppStorageKey.paceAlertInterval)
     private var paceNotificationInterval: TimeInterval = 5
 
-    private var paceAlertType: PaceAlertType = .beep
-    private var paceAlertPlayer: AlertPlayer = BeepAlertPlayer()
+    private var paceAlertType: PaceAlertType = .sine
+    private var paceAlertPlayer: AlertPlayer = SineAlertPlayer()
 
     init(viewModel: WorkoutViewModel) {
         self.viewModel = viewModel
@@ -68,7 +68,7 @@ class PaceAlertController {
            let type = PaceAlertType(rawValue: stringValue) {
             paceAlertType = type
         } else {
-            paceAlertType = .beep
+            paceAlertType = .sine
         }
 
         if paceAlertType != self.paceAlertType {

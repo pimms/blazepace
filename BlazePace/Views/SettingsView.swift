@@ -21,7 +21,7 @@ struct SettingsView: View {
     init(context: Context) {
         self.context = context
         let alertString = UserDefaults.standard.string(forKey: AppStorageKey.paceAlertType) ?? ""
-        _paceAlertType = .init(initialValue: PaceAlertType(rawValue: alertString) ?? .beep)
+        _paceAlertType = .init(initialValue: PaceAlertType(rawValue: alertString) ?? .sine)
         _measurementSystem = .init(initialValue: MeasurementSystem.current)
     }
 
@@ -47,7 +47,7 @@ struct SettingsView: View {
                 // Alert type
                 VStack {
                     Picker(selection: $paceAlertType, content: {
-                        Text("Beep").tag(PaceAlertType.beep)
+                        Text("Sine wave").tag(PaceAlertType.sine)
                         Text("Speech").tag(PaceAlertType.speech)
                         Text("Ding").tag(PaceAlertType.ding)
                     }, label: {
