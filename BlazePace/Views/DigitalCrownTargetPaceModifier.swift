@@ -54,13 +54,17 @@ private struct ChangePaceView: View {
             Rectangle()
                 .fill(.blue)
                 .frame(width: 100, height: 60)
+            let target = PaceFormatter.paceString(fromSecondsPerKilometer: newPace.secondsPerKilometer)
             let lowBound = PaceFormatter.paceString(fromSecondsPerKilometer: newPace.lowerBound)
             let highBound = PaceFormatter.paceString(fromSecondsPerKilometer: newPace.upperBound)
             VStack {
                 Spacer()
                 Text("New target:")
+                Text(target)
+                    .font(.title)
+                Spacer()
                 Text("\(lowBound)-\(highBound)")
-                    .font(compact ? .title2 : .title)
+                    .font(.title3)
                 Spacer()
             }
             .foregroundColor(.black)
