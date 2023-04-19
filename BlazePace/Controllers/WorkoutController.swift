@@ -101,8 +101,11 @@ class WorkoutController: NSObject, ObservableObject {
             fatalError("Workout not active")
         }
 
-        self.viewModel = nil
-        self.activeSessionObjects = nil
+        defer {
+            self.viewModel = nil
+            self.activeSessionObjects = nil
+        }
+
         activeSessionObjects.session.end()
 
         let summary = buildSummary(from: viewModel, elapsedTime: activeSessionObjects.builder.elapsedTime)
