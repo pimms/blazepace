@@ -28,16 +28,15 @@ struct RootView: View {
         }
     }
 
-    private func startWorkout(with startData: WorkoutStartData) {
-        Task {
-            let didStart = await workoutController.startWorkout(startData)
-            guard didStart else { return }
-            guard let viewModel = workoutController.viewModel else {
-                fatalError("Inconsistency: no view model on WorkoutController")
-            }
-            viewModel.targetPace = startData.targetPace
-            navigation = []
+    private func startWorkout(with startData: WorkoutStartData) async -> Bool {
+        let didStart = await workoutController.startWorkout(startData)
+        guard didStart else { return false }
+        guard let viewModel = workoutController.viewModel else {
+            fatalError("Inconsistency: no view model on WorkoutController")
         }
+        viewModel.targetPace = startData.targetPace
+        navigation = []
+        return true
     }
 
     @ViewBuilder

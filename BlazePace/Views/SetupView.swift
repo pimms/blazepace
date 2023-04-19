@@ -2,18 +2,17 @@ import Foundation
 import SwiftUI
 
 struct SetupView: View {
-    var onStart: (WorkoutStartData) -> Void
+    var onStart: (WorkoutStartData) async -> Bool
 
     @AppStorage(AppStorageKey.defaultPace)
     private var pace: Int = TargetPace.default.secondsPerKilometer
     @AppStorage(AppStorageKey.defaultPaceRange)
     private var delta: Int = TargetPace.default.range
-    @State
-    private var workoutType: WorkoutType
-    @State
-    private var hasStarted = false
+    @State private var workoutType: WorkoutType
+    @State private var hasStarted = false
+    @State private var startError = false
 
-    init(onStart: @escaping (WorkoutStartData) -> Void) {
+    init(onStart: @escaping (WorkoutStartData) async -> Bool) {
         self.onStart = onStart
         _workoutType = .init(initialValue: WorkoutType.default)
     }
@@ -39,6 +38,11 @@ struct SetupView: View {
                     }
                 }
             }
+            .alert(isPresented: $startError) {
+                Alert(
+                    title: Text("Failed to start workout"),
+                    message: Text("Did you not grant HealthKit permissions? These can be reviewed in the Settings app on your watch."))
+            }
             .navigationTitle("Setup")
         } else {
             SpinnerView(text: "Starting")
@@ -50,7 +54,13 @@ struct SetupView: View {
         UserDefaults.standard.set(workoutType.rawValue, forKey: AppStorageKey.defaultWorkoutType)
         let targetPace = TargetPace(secondsPerKilometer: pace, range: delta)
         let startData = WorkoutStartData(workoutType: workoutType, targetPace: targetPace)
-        onStart(startData)
+
+        Task {
+            if await !onStart(startData) {
+                hasStarted = false
+                startError = true
+            }
+        }
     }
 
     private var summaryString: String {
@@ -102,6 +112,6 @@ struct EditTargetPaceView: View {
 
 struct ConfigViewPreviews: PreviewProvider {
     static var previews: some View {
-        SetupView(onStart: { _ in })
+        SetupView(onStart: { _ in false })
     }
 }
