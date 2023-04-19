@@ -8,9 +8,6 @@ class AlertPlayer: NSObject {
     private var isDucking = false
 
     deinit {
-        if isDucking {
-            print("------ WOULD HAVE FUCKED UP -------")
-        }
         unduckOthers()
     }
 
@@ -22,6 +19,12 @@ class AlertPlayer: NSObject {
         if duckOthersOnAlert {
             isDucking = true
             try? AVAudioSession.sharedInstance().setActive(true)
+
+            if autoUnduck {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+                    self?.unduckOthers()
+                }
+            }
         }
     }
 
