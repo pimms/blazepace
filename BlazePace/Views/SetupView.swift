@@ -30,7 +30,7 @@ struct SetupView: View {
                     Text(summaryString)
                         .multilineTextAlignment(.center)
                     Spacer(minLength: 12)
-                    Text("You can change the target pace in the middle of the workout.")
+                    Text("You can change the target pace in the middle of the workout by rotating the digital crown.")
                         .multilineTextAlignment(.center)
                     Spacer(minLength: 12)
 
