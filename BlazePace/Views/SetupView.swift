@@ -21,18 +21,15 @@ struct SetupView: View {
     var body: some View {
         if !hasStarted {
             ScrollView {
-                VStack {
+                VStack(spacing: 12) {
                     EditTargetPaceView(pace: $pace, delta: $delta)
-                    Spacer(minLength: 12)
                     WorkoutTypeToggle(workoutType: $workoutType)
 
-                    Spacer(minLength: 16)
                     Text(summaryString)
                         .multilineTextAlignment(.center)
-                    Spacer(minLength: 12)
+                        .padding(.top, 4)
                     Text("You can change the target pace in the middle of the workout by rotating the digital crown.")
                         .multilineTextAlignment(.center)
-                    Spacer(minLength: 12)
 
                     if !airplayConnected {
                         VStack(spacing: 8) {
@@ -47,7 +44,7 @@ struct SetupView: View {
                         .background(Color.yellow)
                         .foregroundColor(.black)
                         .cornerRadius(8)
-                        Spacer(minLength: 16)
+                        .padding(.bottom, 4)
                     }
 
                     Button(action: { startButtonClicked() }) {
